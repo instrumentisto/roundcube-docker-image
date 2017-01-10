@@ -20,6 +20,6 @@ indent_size = 4
 indent_style = space
 indent_size = 4
 
-[*.sh]
+[{*.sh,post_push}]
 indent_style = space
 indent_size = 2
