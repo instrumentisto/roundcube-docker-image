@@ -83,3 +83,24 @@
   [ "$status" -eq 0 ]
   [ "$output" == "1" ]
 }
+
+
+@test "PHP OPcache is enabled" {
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'php -i | grep -Fx "opcache.enable => On => On"'
+  [ "$status" -eq 0 ]
+}
+
+@test "PHP_OPCACHE_REVALIDATION=0 disables timestamps validation" {
+  run docker run --rm -e PHP_OPCACHE_REVALIDATION=0 \
+                      --entrypoint /start.sh $IMAGE sh -c \
+    'php -i | grep -Fx "opcache.validate_timestamps => Off => Off"'
+  [ "$status" -eq 0 ]
+}
+
+@test "PHP_OPCACHE_REVALIDATION=1 enables timestamps validation" {
+  run docker run --rm -e PHP_OPCACHE_REVALIDATION=1 \
+                      --entrypoint /start.sh $IMAGE sh -c \
+    'php -i | grep -Fx "opcache.validate_timestamps => On => On"'
+  [ "$status" -eq 0 ]
+}

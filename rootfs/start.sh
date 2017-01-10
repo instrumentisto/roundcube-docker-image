@@ -8,7 +8,7 @@ logMsg() {
 
 rm -f /usr/local/etc/php/conf.d/zz-opcache-revalidation.ini
 if [ "$PHP_OPCACHE_REVALIDATION" == "1" ]; then
-  echo "opcache.validate_timestamps = 1" \
+  echo "opcache.validate_timestamps = On" \
     > /usr/local/etc/php/conf.d/zz-opcache-revalidation.ini
   logMsg "STARTUP: PHP OPcache revalidation is enabled"
 fi
