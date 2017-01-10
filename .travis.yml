@@ -5,8 +5,10 @@ sudo: required
 services:
   - docker
 
-script:
+before_script:
   - make image no-cache=yes VERSION=testing
+
+script:
   - make test VERSION=testing
 
 notifications:
