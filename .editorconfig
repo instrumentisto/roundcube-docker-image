@@ -20,7 +20,7 @@ indent_size = 4
 indent_style = space
 indent_size = 4
 
-[{*.sh,post_push}]
+[{*.sh,*.bats,post_push}]
 indent_style = space
 indent_size = 2
 
