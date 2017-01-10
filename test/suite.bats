@@ -68,20 +68,10 @@
     sh -c 'test -d /var/www && ls -A /var/www/ | wc -l | tr -d "\n "'
   [ "$status" -eq 0 ]
   [ "$output" != "0" ]
-}
-
-@test "APP_MOVE_INSTEAD_LINK=1 makes /app link to /var/www folder" {
   run docker run --rm -e APP_MOVE_INSTEAD_LINK=1 --entrypoint /start.sh $IMAGE \
-    sh -c 'test -L /app && readlink -f /app | tr -d "\n"'
+    sh -c 'ls -A /app/ | wc -l | tr -d "\n "'
   [ "$status" -eq 0 ]
-  [ "$output" == "/var/www" ]
-}
-
-@test "APP_MOVE_INSTEAD_LINK=1 sets correct owner of /app link" {
-  run docker run --rm -e APP_MOVE_INSTEAD_LINK=1 --entrypoint /start.sh $IMAGE \
-    sh -c 'ls -l /app | tr -d "\n " | grep nobodynobody | wc -l'
-  [ "$status" -eq 0 ]
-  [ "$output" == "1" ]
+  [ "$output" == "0" ]
 }
 
 
