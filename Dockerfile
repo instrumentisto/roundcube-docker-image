@@ -95,6 +95,6 @@ ENV PHP_OPCACHE_REVALIDATION=0 \
 
 WORKDIR /app
 
-ENTRYPOINT ["/init"]
+ENTRYPOINT ["/init", "/start.sh"]
 
-CMD ["/start.sh"]
+CMD ["php-fpm"]

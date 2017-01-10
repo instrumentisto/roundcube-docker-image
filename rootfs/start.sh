@@ -17,8 +17,13 @@ fi
 if [ "$APP_MOVE_INSTEAD_LINK" == "1" ]; then
   [ -L /var/www ] && rm -f /var/www
   [ -d /var/www ] || mkdir -p /var/www
-  mv /app/* /var/www/
+  if [ ! -L /app ]; then
+    mv -f /app/* /app/.h* /var/www/
+    rmdir /app
+    ln -s /var/www /app
+    chown -R nobody:nobody /app
+  fi
 fi
 
 
-exec php-fpm
+exec "$@"
