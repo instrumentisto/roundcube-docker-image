@@ -1,23 +1,29 @@
 # This Makefile automates possible operations of this project.
 #
 # Images and description on Docker Hub will be automatically rebuilt on
-# pushes to `master` branch of this repo and on updates of
-# parent `php` image.
+# pushes to `master` branch of this repo and on updates of parent images.
 #
 # Note! Docker Hub `post_push` hook must be always up-to-date with default
 # values of current Makefile. To update it just use:
-#	make post-push-hook
+#	make post-push-hook-all
 #
 # It's still possible to build, tag and push images manually. Just use:
-#	make release
+#	make release-all
 
 
 IMAGE_NAME := instrumentisto/roundcube
-VERSION ?= 1.2.2
-TAGS ?= 1.2.2,1.2,1,latest
+ALL_IMAGES := \
+	1.2/fpm:1.2.2-fpm,1.2-fpm,1-fpm,fpm,latest
+#	<Dockerfile>:<version>,<tag1>,<tag2>,...
+
+
+# Default is first image from ALL_IMAGES list.
+DOCKERFILE ?= $(word 1,$(subst :, ,$(word 1,$(ALL_IMAGES))))
+VERSION ?=  $(word 1,$(subst $(comma), ,\
+                     $(word 2,$(subst :, ,$(word 1,$(ALL_IMAGES))))))
+TAGS ?= $(word 2,$(subst :, ,$(word 1,$(ALL_IMAGES))))
 
 no-cache ?= no
-
 
 
 comma := ,
@@ -31,12 +37,12 @@ eq = $(if $(or $(1),$(2)),$(and $(findstring $(1),$(2)),\
 # Build Docker image.
 #
 # Usage:
-#	make image [no-cache=(yes|no)] [VERSION=]
+#	make image [no-cache=(yes|no)] [DOCKERFILE=] [VERSION=]
 
 no-cache-arg = $(if $(call eq, $(no-cache), yes), --no-cache, $(empty))
 
 image:
-	docker build $(no-cache-arg) -t $(IMAGE_NAME):$(VERSION) .
+	docker build $(no-cache-arg) -t $(IMAGE_NAME):$(VERSION) $(DOCKERFILE)
 
 
 
@@ -68,9 +74,25 @@ push:
 # Make manual release of Docker images to Docker Hub.
 #
 # Usage:
-#	make release [no-cache=(yes|no)] [VERSION=] [TAGS=t1,t2,...]
+#	make release [no-cache=(yes|no)] [DOCKERFILE=] [VERSION=] [TAGS=t1,t2,...]
 
 release: | image tags push
+
+
+
+# Make manual release of all supported Docker images to Docker Hub.
+#
+# Usage:
+#	make release-all [no-cache=(yes|no)]
+
+release-all:
+	(set -e ; $(foreach img,$(ALL_IMAGES), \
+		make release no-cache=$(no-cache) \
+			DOCKERFILE=$(word 1,$(subst :, ,$(img))) \
+			VERSION=$(word 1,$(subst $(comma), ,\
+			                 $(word 2,$(subst :, ,$(img))))) \
+			TAGS=$(word 2,$(subst :, ,$(img))) ; \
+	))
 
 
 
@@ -83,26 +105,66 @@ release: | image tags push
 # http://windsock.io/automated-docker-image-builds-with-multiple-tags
 #
 # Usage:
-#	make post-push-hook [TAGS=t1,t2,...]
+#	make post-push-hook [DOCKERFILE=] [TAGS=t1,t2,...]
 
 post-push-hook:
-	mkdir -p $(PWD)/hooks
+	mkdir -p $(DOCKERFILE)/hooks
 	docker run --rm -i \
 		-v $(PWD)/post_push.j2:/data/post_push.j2:ro \
 		-e TEMPLATE=post_push.j2 \
 		pinterb/jinja2 \
 			image_tags='$(TAGS)' \
-		> $(PWD)/hooks/post_push
+		> $(DOCKERFILE)/hooks/post_push
+
+
+
+# Create `post_push` Docker Hub hook for all supported Docker images.
+#
+# Usage:
+#	make post-push-hook-all
+
+post-push-hook-all:
+	(set -e ; $(foreach img,$(ALL_IMAGES), \
+		make post-push-hook \
+			DOCKERFILE=$(word 1,$(subst :, ,$(img))) \
+			TAGS=$(word 2,$(subst :, ,$(img))) ; \
+	))
 
 
 
 # Run tests for Docker image.
 #
 # Usage:
-#	make test [VERSION=]
+#	make test [DOCKERFILE=] [VERSION=]
 
 test: deps.bats
-	IMAGE=$(IMAGE_NAME):$(VERSION) ./test/bats/bats test/suite.bats
+	DOCKERFILE=$(DOCKERFILE) IMAGE=$(IMAGE_NAME):$(VERSION) \
+		./test/bats/bats test/suite.bats
+
+
+
+# Run tests for all supported Docker images.
+#
+# Usage:
+#	make test-all [prepare-images=(no|yes)]
+
+prepare-images ?= no
+
+test-all:
+ifeq ($(prepare-images),yes)
+	(set -e ; $(foreach img,$(ALL_IMAGES), \
+		make image no-cache=$(no-cache) \
+			DOCKERFILE=$(word 1,$(subst :, ,$(img))) \
+			VERSION=$(word 1,$(subst $(comma), ,\
+			                 $(word 2,$(subst :, ,$(img))))) ; \
+	))
+endif
+	(set -e ; $(foreach img,$(ALL_IMAGES), \
+		make test \
+			DOCKERFILE=$(word 1,$(subst :, ,$(img))) \
+			VERSION=$(word 1,$(subst $(comma), ,\
+			                 $(word 2,$(subst :, ,$(img))))) ; \
+	))
 
 
 
@@ -127,4 +189,7 @@ endif
 
 
 
-.PHONY: image tags push release post-push-hook test deps.bats
+.PHONY: image tags push \
+        release release-all \
+        post-push-hook post-push-hook-all \
+        test test-all deps.bats

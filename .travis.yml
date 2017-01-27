@@ -5,11 +5,14 @@ sudo: required
 services:
   - docker
 
+env:
+  - Dockerfile=1.2/fpm
+
 before_script:
-  - make image no-cache=yes VERSION=testing
+  - make image DOCKERFILE=$Dockerfile VERSION=test
 
 script:
-  - make test VERSION=testing
+  - make test DOCKERFILE=$Dockerfile VERSION=test
 
 notifications:
   email:

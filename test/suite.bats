@@ -2,20 +2,23 @@
 
 
 @test "post_push hook is up-to-date" {
-  run sh -c "cat Makefile | grep 'TAGS ?= ' \
-                          | cut -d ' ' -f 3"
+  run sh -c "cat Makefile | grep $DOCKERFILE: \
+                          | cut -d ':' -f 2 \
+                          | cut -d '\\' -f 1 \
+                          | tr -d ' '"
   [ "$status" -eq 0 ]
-  [ ! "$output" = '' ]
+  [ "$output" != '' ]
   expected="$output"
 
-  run sh -c "cat hooks/post_push | grep 'for tag in' \
-                                 | cut -d '{' -f 2 \
-                                 | cut -d '}' -f 1"
+  run sh -c "cat '$DOCKERFILE/hooks/post_push' \
+               | grep 'for tag in' \
+               | cut -d '{' -f 2 \
+               | cut -d '}' -f 1"
   [ "$status" -eq 0 ]
-  [ ! "$output" = '' ]
+  [ "$output" != '' ]
   actual="$output"
 
-  [ "$actual" = "$expected" ]
+  [ "$actual" == "$expected" ]
 }
 
 
