@@ -1,6 +1,24 @@
 #!/usr/bin/env bats
 
 
+@test "post_push hook is up-to-date" {
+  run sh -c "cat Makefile | grep 'TAGS ?= ' \
+                          | cut -d ' ' -f 3"
+  [ "$status" -eq 0 ]
+  [ ! "$output" = '' ]
+  expected="$output"
+
+  run sh -c "cat hooks/post_push | grep 'for tag in' \
+                                 | cut -d '{' -f 2 \
+                                 | cut -d '}' -f 1"
+  [ "$status" -eq 0 ]
+  [ ! "$output" = '' ]
+  actual="$output"
+
+  [ "$actual" = "$expected" ]
+}
+
+
 @test "PHP ext 'dom' is installed" {
   run docker run --rm --entrypoint sh $IMAGE -c 'php -m | grep -Fx dom'
   [ "$status" -eq 0 ]
@@ -108,21 +126,49 @@
 }
 
 
-@test "post_push hook is up-to-date" {
-  run sh -c "cat Makefile | grep 'TAGS ?= ' \
-                          | cut -d ' ' -f 3"
+@test "PHP error_reporting level is E_ALL & ~E_NOTICE & ~E_STRICT" {
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'php -i | grep -Fx "error_reporting => 30711 => 30711"'
   [ "$status" -eq 0 ]
-  [ ! "$output" = '' ]
-  expected="$output"
+}
 
-  run sh -c "cat hooks/post_push | grep 'for tag in' \
-                                 | cut -d '{' -f 2 \
-                                 | cut -d '}' -f 1"
+@test "PHP file_uploads enabled" {
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'php -i | grep -Fx "file_uploads => On => On"'
   [ "$status" -eq 0 ]
-  [ ! "$output" = '' ]
-  actual="$output"
+}
 
-  [ "$actual" = "$expected" ]
+@test "PHP session.auto_start disabled" {
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'php -i | grep -Fx "session.auto_start => Off => Off"'
+  [ "$status" -eq 0 ]
+}
+
+@test "PHP mbstring.func_overload disabled" {
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'php -i | grep -Fx "mbstring.func_overload => 0 => 0"'
+  [ "$status" -eq 0 ]
+}
+
+@test "PHP OPcache enabled" {
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'php -i | grep -Fx "opcache.enable => On => On"'
+  [ "$status" -eq 0 ]
+}
+
+
+@test "PHP_OPCACHE_REVALIDATION=0 disables OPcache timestamps validation" {
+  run docker run --rm -e PHP_OPCACHE_REVALIDATION=0 \
+                      --entrypoint /start.sh $IMAGE sh -c \
+    'php -i | grep -Fx "opcache.validate_timestamps => Off => Off"'
+  [ "$status" -eq 0 ]
+}
+
+@test "PHP_OPCACHE_REVALIDATION=1 enables OPcache timestamps validation" {
+  run docker run --rm -e PHP_OPCACHE_REVALIDATION=1 \
+                      --entrypoint /start.sh $IMAGE sh -c \
+    'php -i | grep -Fx "opcache.validate_timestamps => On => On"'
+  [ "$status" -eq 0 ]
 }
 
 
@@ -149,25 +195,4 @@
 #    sh -c 'ls -A /app/ | wc -l | tr -d "\n "'
 #  [ "$status" -eq 0 ]
 #  [ "$output" == "0" ]
-#}
-
-
-#@test "PHP OPcache is enabled" {
-#  run docker run --rm --entrypoint sh $IMAGE -c \
-#    'php -i | grep -Fx "opcache.enable => On => On"'
-#  [ "$status" -eq 0 ]
-#}
-
-#@test "PHP_OPCACHE_REVALIDATION=0 disables timestamps validation" {
-#  run docker run --rm -e PHP_OPCACHE_REVALIDATION=0 \
-#                      --entrypoint /start.sh $IMAGE sh -c \
-#    'php -i | grep -Fx "opcache.validate_timestamps => Off => Off"'
-#  [ "$status" -eq 0 ]
-#}
-
-#@test "PHP_OPCACHE_REVALIDATION=1 enables timestamps validation" {
-#  run docker run --rm -e PHP_OPCACHE_REVALIDATION=1 \
-#                      --entrypoint /start.sh $IMAGE sh -c \
-#    'php -i | grep -Fx "opcache.validate_timestamps => On => On"'
-#  [ "$status" -eq 0 ]
 #}
