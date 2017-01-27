@@ -101,7 +101,7 @@ post-push-hook:
 # Usage:
 #	make test [VERSION=]
 
-test: deps-test
+test: deps.bats
 	IMAGE=$(IMAGE_NAME):$(VERSION) ./test/bats/bats test/suite.bats
 
 
@@ -109,15 +109,15 @@ test: deps-test
 # Resolve project dependencies for running tests.
 #
 # Usage:
-#	make deps-test [BATS_VER=]
+#	make deps.bats [BATS_VER=]
 
 BATS_VER ?= 0.4.0
 
-deps-test:
+deps.bats:
 ifeq ($(wildcard $(PWD)/test/bats),)
 	mkdir -p $(PWD)/test/bats/vendor
-	wget https://github.com/sstephenson/bats/archive/v$(BATS_VER).tar.gz \
-		-O $(PWD)/test/bats/vendor/bats.tar.gz
+	curl -L -o $(PWD)/test/bats/vendor/bats.tar.gz \
+		https://github.com/sstephenson/bats/archive/v$(BATS_VER).tar.gz
 	tar -xzf $(PWD)/test/bats/vendor/bats.tar.gz \
 		-C $(PWD)/test/bats/vendor
 	rm -f $(PWD)/test/bats/vendor/bats.tar.gz
@@ -127,4 +127,4 @@ endif
 
 
 
-.PHONY: image tags push release post-push-hook test deps-test
+.PHONY: image tags push release post-push-hook test deps.bats
