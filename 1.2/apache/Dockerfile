@@ -48,6 +48,10 @@ RUN apt-get update \
            sockets \
            zip \
 
+ && a2enmod expires \
+            headers \
+            rewrite \
+
  && apt-get purge -y --auto-remove \
                   -o APT::AutoRemove::RecommendsImportant=false \
                   $buildDeps \

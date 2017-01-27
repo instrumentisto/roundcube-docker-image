@@ -1,5 +1,7 @@
 #!/usr/bin/env bats
 
+IMAGE_TYPE=$(echo "$DOCKERFILE" | cut -d '/' -f 2 | tr -d ' ')
+
 
 @test "post_push hook is up-to-date" {
   run sh -c "cat Makefile | grep $DOCKERFILE: \
@@ -125,6 +127,42 @@
 @test "PHP ext 'Zend OPcache' is installed" {
   run docker run --rm --entrypoint sh $IMAGE -c \
                                               'php -m | grep -Fx "Zend OPcache"'
+  [ "$status" -eq 0 ]
+}
+
+
+@test "Apache 'autoindex' module is loaded" {
+  [ "$IMAGE_TYPE" != "apache" ] && skip "no Apache"
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'apache2ctl -M | grep -F autoindex_module'
+  [ "$status" -eq 0 ]
+}
+
+@test "Apache 'deflate' module is loaded" {
+  [ "$IMAGE_TYPE" != "apache" ] && skip "no Apache"
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'apache2ctl -M | grep -F deflate_module'
+  [ "$status" -eq 0 ]
+}
+
+@test "Apache 'expires' module is loaded" {
+  [ "$IMAGE_TYPE" != "apache" ] && skip "no Apache"
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'apache2ctl -M | grep -F expires_module'
+  [ "$status" -eq 0 ]
+}
+
+@test "Apache 'headers' module is loaded" {
+  [ "$IMAGE_TYPE" != "apache" ] && skip "no Apache"
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'apache2ctl -M | grep -F headers_module'
+  [ "$status" -eq 0 ]
+}
+
+@test "Apache 'rewrite' module is loaded" {
+  [ "$IMAGE_TYPE" != "apache" ] && skip "no Apache"
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'apache2ctl -M | grep -F rewrite_module'
   [ "$status" -eq 0 ]
 }
 
