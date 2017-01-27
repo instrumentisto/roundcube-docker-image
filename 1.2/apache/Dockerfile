@@ -1,5 +1,5 @@
 # https://github.com/docker-library/php/blob/master/7.0/fpm/alpine/Dockerfile
-FROM php:7.0-fpm-alpine
+FROM php:7.0-apache
 
 MAINTAINER Instrumentisto Team <developer@instrumentisto.com>
 
@@ -15,24 +15,29 @@ ENV S6_KEEP_ENV=1 \
 
 
 # Install required libraries and PHP extensions
-RUN apk update \
- && apk upgrade \
+RUN apt-get update \
+ && apt-get upgrade -y \
  && update-ca-certificates \
- && apk add --no-cache --virtual .php-ext-deps \
-        libpq unixodbc freetds \
-        aspell-libs \
-        icu-libs \
-        libldap \
-        zlib \
+ && apt-get install -y --no-install-recommends \
+            rsyslog \
+ && apt-get install -y --no-install-recommends \
+            libpq5 libodbc1 libsybdb5 \
+            libaspell15 \
+            libicu52 \
+            libldap-2.4-2 libsasl2-2 \
 
- && apk add --no-cache --virtual .build-deps \
-        postgresql-dev unixodbc-dev freetds-dev \
-        aspell-dev \
-        icu-dev \
-        openldap-dev \
-        zlib-dev \
+ && buildDeps=" \
+      libpq-dev unixodbc-dev freetds-dev \
+      libpspell-dev \
+      libicu-dev \
+      libldap2-dev \
+      libzip-dev \
+    " \
+ && apt-get install -y $buildDeps --no-install-recommends \
 
+ && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu \
  && docker-php-ext-configure pdo_odbc --with-pdo-odbc=unixODBC,/usr \
+ && docker-php-ext-configure pdo_dblib --with-libdir=lib/x86_64-linux-gnu \
  && docker-php-ext-install \
            exif \
            intl \
@@ -43,8 +48,10 @@ RUN apk update \
            sockets \
            zip \
 
- && apk del .build-deps \
- && rm -rf /var/cache/apk/*
+ && apt-get purge -y --auto-remove \
+                  -o APT::AutoRemove::RecommendsImportant=false \
+                  $buildDeps \
+ && rm -rf /var/lib/apt/lists/*
 
 
 # Install Roundcube
@@ -63,8 +70,9 @@ RUN curl -L -o /tmp/roundcube.tar.gz \
  && php /tmp/composer-setup.php --install-dir=/tmp --filename=composer \
 
  # Resolve Roudcube dependencies
- && apk add --update --no-cache --virtual .composer-deps \
-        git \
+ && apt-get update \
+ && composerDeps="git" \
+ && apt-get install -y $composerDeps --no-install-recommends \
  && mv /var/www/composer.json-dist /var/www/composer.json \
  && cd /var/www \
  && /tmp/composer install --no-dev --optimize-autoloader \
@@ -74,10 +82,13 @@ RUN curl -L -o /tmp/roundcube.tar.gz \
         /var/www/config/defaults.inc.php \
 
  # Set correct owner
- && chown -R nobody:nobody /var/www \
+ && ln -s /var/www/public_html /var/www/html \
+ && chown -R www-data:www-data /var/www \
 
- && apk del .composer-deps \
- && rm -rf /var/cache/apk/* \
+ && apt-get purge -y --auto-remove \
+                  -o APT::AutoRemove::RecommendsImportant=false \
+                  $composerDeps \
+ && rm -rf /var/lib/apt/lists/* \
            /tmp/*
 
 
@@ -90,13 +101,11 @@ RUN chmod +x /etc/services.d/*/run \
 
  # Prepare directory for SQLite database
  && mkdir -p /var/db \
- && chown -R nobody:nobody /var/db
-
-ENV PHP_OPCACHE_REVALIDATION=0
+ && chown -R www-data:www-data /var/db
 
 
 WORKDIR /var/www
 
 ENTRYPOINT ["/init", "/start.sh"]
 
-CMD ["php-fpm"]
+CMD ["apache2-foreground"]

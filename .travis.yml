@@ -6,6 +6,7 @@ services:
   - docker
 
 env:
+  - Dockerfile=1.2/apache
   - Dockerfile=1.2/fpm
 
 before_script:

@@ -13,7 +13,8 @@
 
 IMAGE_NAME := instrumentisto/roundcube
 ALL_IMAGES := \
-	1.2/fpm:1.2.2-fpm,1.2-fpm,1-fpm,fpm,latest
+	1.2/apache:1.2.2-apache,1.2-apache,1-apache,apache,latest \
+	1.2/fpm:1.2.2-fpm,1.2-fpm,1-fpm,fpm
 #	<Dockerfile>:<version>,<tag1>,<tag2>,...
 
 
