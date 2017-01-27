@@ -14,11 +14,11 @@ if [ "$PHP_OPCACHE_REVALIDATION" == "1" ]; then
 fi
 
 
-if [ "$APP_MOVE_INSTEAD_LINK" == "1" ]; then
-  [ -L /var/www ] && rm -f /var/www
-  [ -d /var/www ] || mkdir -p /var/www
-  mv -f /app/* /app/.h* /var/www/
-fi
+#if [ "$APP_MOVE_INSTEAD_LINK" == "1" ]; then
+#  [ -L /var/www ] && rm -f /var/www
+#  [ -d /var/www ] || mkdir -p /var/www
+#  mv -f /app/* /app/.h* /var/www/
+#fi
 
 
 exec "$@"

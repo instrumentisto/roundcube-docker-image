@@ -52,8 +52,8 @@ RUN apk update \
 RUN curl -L -o /tmp/roundcube.tar.gz \
          https://github.com/roundcube/roundcubemail/releases/download/1.2.2/roundcubemail-1.2.2.tar.gz \
  && tar -xzf /tmp/roundcube.tar.gz -C /tmp/ \
- && rm -rf /app \
- && mv /tmp/roundcubemail-1.2.2 /app \
+ && rm -rf /var/www \
+ && mv /tmp/roundcubemail-1.2.2 /var/www \
 
  # Install Composer to resolve Roundcube dependencies
  && curl -L -o /tmp/composer-setup.php \
@@ -66,14 +66,12 @@ RUN curl -L -o /tmp/roundcube.tar.gz \
  # Resolve Roudcube dependencies
  && apk add --update --no-cache --virtual .composer-deps \
         git \
- && mv /app/composer.json-dist /app/composer.json \
- && cd /app \
+ && mv /var/www/composer.json-dist /var/www/composer.json \
+ && cd /var/www \
  && /tmp/composer install --no-dev --optimize-autoloader \
 
- # Set symlink and correct owner
- && rm -rf /var/www \
- && ln -s /app /var/www \
- && chown -R nobody:nobody /app /var/www \
+ # Set correct owner
+ && chown -R nobody:nobody /var/www \
 
  && apk del .composer-deps \
  && rm -rf /var/cache/apk/* \
@@ -93,13 +91,12 @@ RUN chmod +x /etc/services.d/*/run \
 
  # Make default Roudcube configuration log to syslog
  && sed -i -r 's/^([^\s]{9}log_driver[^\s]{2} =) [^\s]+$/\1 "syslog";/g' \
-        /app/config/defaults.inc.php
+        /var/www/config/defaults.inc.php
 
-ENV PHP_OPCACHE_REVALIDATION=0 \
-    APP_MOVE_INSTEAD_LINK=0
+ENV PHP_OPCACHE_REVALIDATION=0
 
 
-WORKDIR /app
+WORKDIR /var/www
 
 ENTRYPOINT ["/init", "/start.sh"]
 
