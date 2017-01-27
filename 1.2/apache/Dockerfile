@@ -85,6 +85,12 @@ RUN curl -L -o /tmp/roundcube.tar.gz \
  && sed -i -r 's/^([^\s]{9}log_driver[^\s]{2} =) [^\s]+$/\1 "syslog";/g' \
         /var/www/config/defaults.inc.php \
 
+ # Fix Roundcube .htaccess for PHP7
+ && sed -i -r 's/^(<IfModule mod)_php5/\1_php7/g' \
+        /var/www/.htaccess \
+ && sed -i -r 's/^(php_flag[ ]+(register_globals|magic_quotes|suhosin))/#\1/g' \
+        /var/www/.htaccess \
+
  # Set correct owner
  && ln -s /var/www/public_html /var/www/html \
  && chown -R www-data:www-data /var/www \

@@ -131,41 +131,17 @@ IMAGE_TYPE=$(echo "$DOCKERFILE" | cut -d '/' -f 2 | tr -d ' ')
 }
 
 
-@test "Apache 'autoindex' module is loaded" {
-  [ "$IMAGE_TYPE" != "apache" ] && skip "no Apache"
+@test "PHP display_errors disabled" {
   run docker run --rm --entrypoint sh $IMAGE -c \
-    'apache2ctl -M | grep -F autoindex_module'
+    'php -i | grep -Fx "display_errors => Off => Off"'
   [ "$status" -eq 0 ]
 }
 
-@test "Apache 'deflate' module is loaded" {
-  [ "$IMAGE_TYPE" != "apache" ] && skip "no Apache"
+@test "PHP log_errors enabled" {
   run docker run --rm --entrypoint sh $IMAGE -c \
-    'apache2ctl -M | grep -F deflate_module'
+    'php -i | grep -Fx "log_errors => On => On"'
   [ "$status" -eq 0 ]
 }
-
-@test "Apache 'expires' module is loaded" {
-  [ "$IMAGE_TYPE" != "apache" ] && skip "no Apache"
-  run docker run --rm --entrypoint sh $IMAGE -c \
-    'apache2ctl -M | grep -F expires_module'
-  [ "$status" -eq 0 ]
-}
-
-@test "Apache 'headers' module is loaded" {
-  [ "$IMAGE_TYPE" != "apache" ] && skip "no Apache"
-  run docker run --rm --entrypoint sh $IMAGE -c \
-    'apache2ctl -M | grep -F headers_module'
-  [ "$status" -eq 0 ]
-}
-
-@test "Apache 'rewrite' module is loaded" {
-  [ "$IMAGE_TYPE" != "apache" ] && skip "no Apache"
-  run docker run --rm --entrypoint sh $IMAGE -c \
-    'apache2ctl -M | grep -F rewrite_module'
-  [ "$status" -eq 0 ]
-}
-
 
 @test "PHP error_reporting level is E_ALL & ~E_NOTICE & ~E_STRICT" {
   run docker run --rm --entrypoint sh $IMAGE -c \
@@ -179,15 +155,57 @@ IMAGE_TYPE=$(echo "$DOCKERFILE" | cut -d '/' -f 2 | tr -d ' ')
   [ "$status" -eq 0 ]
 }
 
-@test "PHP session.auto_start disabled" {
+@test "PHP upload_max_filesize is 5M" {
   run docker run --rm --entrypoint sh $IMAGE -c \
-    'php -i | grep -Fx "session.auto_start => Off => Off"'
+    'php -i | grep -Fx "upload_max_filesize => 5M => 5M"'
+  [ "$status" -eq 0 ]
+}
+
+@test "PHP post_max_size is 6M" {
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'php -i | grep -Fx "post_max_size => 6M => 6M"'
+  [ "$status" -eq 0 ]
+}
+
+@test "PHP memory_limit is 64M" {
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'php -i | grep -Fx "memory_limit => 64M => 64M"'
   [ "$status" -eq 0 ]
 }
 
 @test "PHP mbstring.func_overload disabled" {
   run docker run --rm --entrypoint sh $IMAGE -c \
     'php -i | grep -Fx "mbstring.func_overload => 0 => 0"'
+  [ "$status" -eq 0 ]
+}
+
+@test "PHP session.auto_start disabled" {
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'php -i | grep -Fx "session.auto_start => Off => Off"'
+  [ "$status" -eq 0 ]
+}
+
+@test "PHP session.gc_maxlifetime is 21600" {
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'php -i | grep -Fx "session.gc_maxlifetime => 21600 => 21600"'
+  [ "$status" -eq 0 ]
+}
+
+@test "PHP session.gc_divisor is 500" {
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'php -i | grep -Fx "session.gc_divisor => 500 => 500"'
+  [ "$status" -eq 0 ]
+}
+
+@test "PHP session.gc_probability is 1" {
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'php -i | grep -Fx "session.gc_probability => 1 => 1"'
+  [ "$status" -eq 0 ]
+}
+
+@test "PHP zlib.output_compression disabled" {
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'php -i | grep -Fx "zlib.output_compression => Off => Off"'
   [ "$status" -eq 0 ]
 }
 
@@ -237,3 +255,78 @@ IMAGE_TYPE=$(echo "$DOCKERFILE" | cut -d '/' -f 2 | tr -d ' ')
 #  [ "$status" -eq 0 ]
 #  [ "$output" == "0" ]
 #}
+
+
+@test "Apache 'autoindex' module is loaded" {
+  [ "$IMAGE_TYPE" != "apache" ] && skip "no Apache"
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'apache2ctl -M | grep -F autoindex_module'
+  [ "$status" -eq 0 ]
+}
+
+@test "Apache 'deflate' module is loaded" {
+  [ "$IMAGE_TYPE" != "apache" ] && skip "no Apache"
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'apache2ctl -M | grep -F deflate_module'
+  [ "$status" -eq 0 ]
+}
+
+@test "Apache 'expires' module is loaded" {
+  [ "$IMAGE_TYPE" != "apache" ] && skip "no Apache"
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'apache2ctl -M | grep -F expires_module'
+  [ "$status" -eq 0 ]
+}
+
+@test "Apache 'headers' module is loaded" {
+  [ "$IMAGE_TYPE" != "apache" ] && skip "no Apache"
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'apache2ctl -M | grep -F headers_module'
+  [ "$status" -eq 0 ]
+}
+
+@test "Apache 'php7' module is loaded" {
+  [ "$IMAGE_TYPE" != "apache" ] && skip "no Apache"
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'apache2ctl -M | grep -F php7_module'
+  [ "$status" -eq 0 ]
+}
+
+@test "Apache 'rewrite' module is loaded" {
+  [ "$IMAGE_TYPE" != "apache" ] && skip "no Apache"
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'apache2ctl -M | grep -F rewrite_module'
+  [ "$status" -eq 0 ]
+}
+
+
+@test "Roundcube .htaccess uses correct 'mod_php'" {
+  [ "$IMAGE_TYPE" != "apache" ] && skip "no .htaccess used"
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'cat /var/www/.htaccess | grep -F mod_php7'
+  [ "$status" -eq 0 ]
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'cat /var/www/.htaccess | grep -F mod_php5 | wc -l'
+  [ "$status" -eq 0 ]
+  [ "$output" == "0" ]
+}
+
+@test "Roundcube .htaccess has unexistent PHP options being commented" {
+  [ "$IMAGE_TYPE" != "apache" ] && skip "no .htaccess used"
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'cat /var/www/.htaccess | grep -F register_globals | head -c 1'
+  [ "$status" -eq 0 ]
+  [ "$output"  == "#" ]
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'cat /var/www/.htaccess | grep -F magic_quotes_gpc | head -c 1'
+  [ "$status" -eq 0 ]
+  [ "$output"  == "#" ]
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'cat /var/www/.htaccess | grep -F magic_quotes_runtime | head -c 1'
+  [ "$status" -eq 0 ]
+  [ "$output"  == "#" ]
+  run docker run --rm --entrypoint sh $IMAGE -c \
+    'cat /var/www/.htaccess | grep -F suhosin.session.encrypt | head -c 1'
+  [ "$status" -eq 0 ]
+  [ "$output"  == "#" ]
+}
