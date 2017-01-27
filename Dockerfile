@@ -1,3 +1,4 @@
+# https://github.com/docker-library/php/blob/master/7.0/fpm/alpine/Dockerfile
 FROM php:7.0-fpm-alpine
 
 MAINTAINER Instrumentisto Team <developer@instrumentisto.com>
@@ -16,29 +17,34 @@ ENV S6_KEEP_ENV=1 \
 # Install required libraries and PHP extensions
 RUN apk update \
  && apk upgrade \
- && apk add --no-cache \
-        ca-certificates \
+ && update-ca-certificates \
  && apk add --no-cache --virtual .php-ext-deps \
-        libpq \
+        libpq unixodbc freetds \
         aspell-libs \
+        icu-libs \
+        libldap \
+        zlib \
 
- && apk add --no-cache --virtual .pecl-deps \
-        autoconf g++ libtool make \
  && apk add --no-cache --virtual .build-deps \
-        zlib-dev \
-        postgresql-dev \
+        postgresql-dev unixodbc-dev freetds-dev \
         aspell-dev \
+        icu-dev \
+        openldap-dev \
+        zlib-dev \
 
+ && docker-php-ext-configure \
+           pdo_odbc --with-pdo-odbc=unixODBC,/usr \
  && docker-php-ext-install \
+           exif \
+           intl \
+           ldap \
            opcache \
-           pdo_pgsql pdo_mysql \
+           pdo_mysql pdo_pgsql pdo_odbc pdo_dblib \
            pspell \
- && pecl install \
-         zip \
- && docker-php-ext-enable \
+           sockets \
            zip \
 
- && apk del .pecl-deps .build-deps \
+ && apk del .build-deps \
  && rm -rf /var/cache/apk/*
 
 
