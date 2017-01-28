@@ -74,7 +74,8 @@ RUN curl -L -o /tmp/roundcube.tar.gz \
         /var/www/config/defaults.inc.php \
 
  # Set correct owner
- && chown -R nobody:nobody /var/www \
+ && ln -s /var/www/public_html /var/www/html \
+ && chown -R www-data:www-data /var/www \
 
  && apk del .composer-deps \
  && rm -rf /var/cache/apk/* \
@@ -90,7 +91,7 @@ RUN chmod +x /etc/services.d/*/run \
 
  # Prepare directory for SQLite database
  && mkdir -p /var/db \
- && chown -R nobody:nobody /var/db
+ && chown -R www-data:www-data /var/db
 
 ENV PHP_OPCACHE_REVALIDATION=0
 
