@@ -97,6 +97,61 @@ release-all:
 
 
 
+# Generate Docker image sources.
+#
+# Usage:
+#	make src [DOCKERFILE=] [VERSION=] [TAGS=t1,t2,...]
+
+src: dockerfile post-push-hook
+
+
+
+# Generate sources for all supported Docker images.
+#
+# Usage:
+#	make src-all
+
+src-all:
+	(set -e ; $(foreach img,$(ALL_IMAGES), \
+		make src \
+			DOCKERFILE=$(word 1,$(subst :, ,$(img))) \
+			VERSION=$(word 1,$(subst $(comma), ,\
+			                 $(word 2,$(subst :, ,$(img))))) \
+			TAGS=$(word 2,$(subst :, ,$(img))) ; \
+	))
+
+
+
+# Generate Dockerfile from template.
+#
+# Usage:
+#	make dockerfile [DOCKERFILE=] [VERSION=]
+
+dockerfile:
+	mkdir -p $(DOCKERFILE)
+	docker run --rm -i -v $(PWD)/Dockerfile.tmpl.php:/Dockerfile.php:ro \
+		php:alpine php -f /Dockerfile.php -- \
+			--dockerfile='$(DOCKERFILE)' \
+			--version='$(VERSION)' \
+		> $(DOCKERFILE)/Dockerfile
+
+
+
+# Generate Dockerfile from template for all supported Docker images.
+#
+# Usage:
+#	make dockerfile-all
+
+dockerfile-all:
+	(set -e ; $(foreach img,$(ALL_IMAGES), \
+		make dockerfile \
+			DOCKERFILE=$(word 1,$(subst :, ,$(img))) \
+			VERSION=$(word 1,$(subst $(comma), ,\
+			                 $(word 2,$(subst :, ,$(img))))) ; \
+	))
+
+
+
 # Create `post_push` Docker Hub hook.
 #
 # When Docker Hub triggers automated build all the tags defined in `post_push`
@@ -110,11 +165,9 @@ release-all:
 
 post-push-hook:
 	mkdir -p $(DOCKERFILE)/hooks
-	docker run --rm -i \
-		-v $(PWD)/post_push.j2:/data/post_push.j2:ro \
-		-e TEMPLATE=post_push.j2 \
-		pinterb/jinja2 \
-			image_tags='$(TAGS)' \
+	docker run --rm -i -v $(PWD)/post_push.tmpl.php:/post_push.php:ro \
+		php:alpine php -f /post_push.php -- \
+			--image_tags='$(TAGS)' \
 		> $(DOCKERFILE)/hooks/post_push
 
 
@@ -192,5 +245,7 @@ endif
 
 .PHONY: image tags push \
         release release-all \
+        src src-all \
+        dockerfile dockerfile-all \
         post-push-hook post-push-hook-all \
         test test-all deps.bats
