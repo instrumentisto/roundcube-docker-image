@@ -231,30 +231,39 @@ IMAGE_TYPE=$(echo "$DOCKERFILE" | cut -d '/' -f 2 | tr -d ' ')
 }
 
 
-#@test "APP_MOVE_INSTEAD_LINK=0 makes /var/www link to /app folder" {
-#  run docker run --rm -e APP_MOVE_INSTEAD_LINK=0 --entrypoint /start.sh $IMAGE \
-#    sh -c 'test -L /var/www && readlink -f /var/www | tr -d "\n"'
-#  [ "$status" -eq 0 ]
-#  [ "$output" == "/app" ]
-#}
+@test "SHARE_APP=0 makes /var/www link to /app/ dir" {
+  run docker run --rm -e SHARE_APP=0 --entrypoint /start.sh $IMAGE sh -c \
+    'test -L /var/www && readlink -f /var/www | tr -d "\n"'
+  [ "$status" -eq 0 ]
+  [ "$output" == "/app" ]
+}
 
-#@test "APP_MOVE_INSTEAD_LINK=0 sets correct owner of /var/www link" {
-#  run docker run --rm -e APP_MOVE_INSTEAD_LINK=0 --entrypoint /start.sh $IMAGE \
-#    sh -c 'ls -l /var/www | tr -d "\n " | grep nobodynobody | wc -l'
-#  [ "$status" -eq 0 ]
-#  [ "$output" == "1" ]
-#}
+@test "SHARE_APP=1 makes /var/www link to /shared/ dir" {
+  run docker run --rm -e SHARE_APP=1 --entrypoint /start.sh $IMAGE sh -c \
+    'test -L /var/www && readlink -f /var/www | tr -d "\n"'
+  [ "$status" -eq 0 ]
+  [ "$output" == "/shared" ]
+}
 
-#@test "APP_MOVE_INSTEAD_LINK=1 moves /app folder to /var/www" {
-#  run docker run --rm -e APP_MOVE_INSTEAD_LINK=1 --entrypoint /start.sh $IMAGE \
-#    sh -c 'test -d /var/www && ls -A /var/www/ | wc -l | tr -d "\n "'
-#  [ "$status" -eq 0 ]
-#  [ "$output" != "0" ]
-#  run docker run --rm -e APP_MOVE_INSTEAD_LINK=1 --entrypoint /start.sh $IMAGE \
-#    sh -c 'ls -A /app/ | wc -l | tr -d "\n "'
-#  [ "$status" -eq 0 ]
-#  [ "$output" == "0" ]
-#}
+@test "SHARE_APP=1 copies all files from /app/ to /shared/" {
+  run docker run --rm -e SHARE_APP=0 --entrypoint /start.sh $IMAGE sh -c \
+    'cd /app && find . | sort'
+  [ "$status" -eq 0 ]
+  expected="$output"
+
+  run docker run --rm -e SHARE_APP=1 --entrypoint /start.sh $IMAGE sh -c \
+    'cd /app && find . | sort'
+  [ "$status" -eq 0 ]
+  preserved="$output"
+
+  run docker run --rm -e SHARE_APP=1 --entrypoint /start.sh $IMAGE sh -c \
+    'cd /shared && find . | sort'
+  [ "$status" -eq 0 ]
+  actual="$output"
+
+  [ "$actual" == "$expected" ]
+  [ "$preserved" == "$expected" ]
+}
 
 
 @test "Apache 'autoindex' module is loaded" {

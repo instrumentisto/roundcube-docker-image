@@ -14,11 +14,16 @@ if [ "$PHP_OPCACHE_REVALIDATION" == "1" ]; then
 fi
 
 
-#if [ "$APP_MOVE_INSTEAD_LINK" == "1" ]; then
-#  [ -L /var/www ] && rm -f /var/www
-#  [ -d /var/www ] || mkdir -p /var/www
-#  mv -f /app/* /app/.h* /var/www/
-#fi
+appDir=/app
+if [ "$SHARE_APP" == "1" ]; then
+  mkdir -p /shared
+  cp -rf /app/* /app/.htaccess /shared/
+  chown -R www-data:www-data /shared/* /shared/.htaccess
+  appDir=/shared
+fi
+rm -f /var/www
+ln -s $appDir /var/www
+chown -R www-data:www-data /var/www
 
 
 exec "$@"

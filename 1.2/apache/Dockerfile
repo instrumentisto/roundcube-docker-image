@@ -1,4 +1,4 @@
-# https://github.com/docker-library/php/blob/master/7.0/fpm/alpine/Dockerfile
+# https://github.com/docker-library/php/blob/master/7.0/apache/Dockerfile
 FROM php:7.0-apache
 
 MAINTAINER Instrumentisto Team <developer@instrumentisto.com>
@@ -62,8 +62,8 @@ RUN apt-get update \
 RUN curl -L -o /tmp/roundcube.tar.gz \
          https://github.com/roundcube/roundcubemail/releases/download/1.2.2/roundcubemail-1.2.2.tar.gz \
  && tar -xzf /tmp/roundcube.tar.gz -C /tmp/ \
- && rm -rf /var/www \
- && mv /tmp/roundcubemail-1.2.2 /var/www \
+ && rm -rf /app \
+ && mv /tmp/roundcubemail-1.2.2 /app \
 
  # Install Composer to resolve Roundcube dependencies
  && curl -L -o /tmp/composer-setup.php \
@@ -77,23 +77,28 @@ RUN curl -L -o /tmp/roundcube.tar.gz \
  && apt-get update \
  && composerDeps="git" \
  && apt-get install -y $composerDeps --no-install-recommends \
- && mv /var/www/composer.json-dist /var/www/composer.json \
- && cd /var/www \
+ && mv /app/composer.json-dist /app/composer.json \
+ && cd /app \
  && /tmp/composer install --no-dev --optimize-autoloader \
 
  # Make default Roudcube configuration log to syslog
  && sed -i -r 's/^([^\s]{9}log_driver[^\s]{2} =) [^\s]+$/\1 "syslog";/g' \
-        /var/www/config/defaults.inc.php \
+        /app/config/defaults.inc.php \
 
  # Fix Roundcube .htaccess for PHP7
  && sed -i -r 's/^(<IfModule mod)_php5/\1_php7/g' \
-        /var/www/.htaccess \
+        /app/.htaccess \
  && sed -i -r 's/^(php_flag[ ]+(register_globals|magic_quotes|suhosin))/#\1/g' \
-        /var/www/.htaccess \
+        /app/.htaccess \
+
+ # Setup serve directories
+ && cd /app \
+ && ln -sn ./public_html /app/html \
+ && rm -rf /var/www \
+ && ln -s /app /var/www \
 
  # Set correct owner
- && ln -s /var/www/public_html /var/www/html \
- && chown -R www-data:www-data /var/www \
+ && chown -R www-data:www-data /app /var/www \
 
  && apt-get purge -y --auto-remove \
                   -o APT::AutoRemove::RecommendsImportant=false \
@@ -112,6 +117,9 @@ RUN chmod +x /etc/services.d/*/run \
  # Prepare directory for SQLite database
  && mkdir -p /var/db \
  && chown -R www-data:www-data /var/db
+
+ENV PHP_OPCACHE_REVALIDATION=0 \
+    SHARE_APP=0
 
 
 WORKDIR /var/www

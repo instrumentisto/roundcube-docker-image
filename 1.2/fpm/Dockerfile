@@ -51,8 +51,8 @@ RUN apk update \
 RUN curl -L -o /tmp/roundcube.tar.gz \
          https://github.com/roundcube/roundcubemail/releases/download/1.2.2/roundcubemail-1.2.2.tar.gz \
  && tar -xzf /tmp/roundcube.tar.gz -C /tmp/ \
- && rm -rf /var/www \
- && mv /tmp/roundcubemail-1.2.2 /var/www \
+ && rm -rf /app \
+ && mv /tmp/roundcubemail-1.2.2 /app \
 
  # Install Composer to resolve Roundcube dependencies
  && curl -L -o /tmp/composer-setup.php \
@@ -65,17 +65,22 @@ RUN curl -L -o /tmp/roundcube.tar.gz \
  # Resolve Roudcube dependencies
  && apk add --update --no-cache --virtual .composer-deps \
         git \
- && mv /var/www/composer.json-dist /var/www/composer.json \
- && cd /var/www \
+ && mv /app/composer.json-dist /app/composer.json \
+ && cd /app \
  && /tmp/composer install --no-dev --optimize-autoloader \
 
  # Make default Roudcube configuration log to syslog
  && sed -i -r 's/^([^\s]{9}log_driver[^\s]{2} =) [^\s]+$/\1 "syslog";/g' \
-        /var/www/config/defaults.inc.php \
+        /app/config/defaults.inc.php \
+
+ # Setup serve directories
+ && cd /app \
+ && ln -sn ./public_html /app/html \
+ && rm -rf /var/www \
+ && ln -s /app /var/www \
 
  # Set correct owner
- && ln -s /var/www/public_html /var/www/html \
- && chown -R www-data:www-data /var/www \
+ && chown -R www-data:www-data /app /var/www \
 
  && apk del .composer-deps \
  && rm -rf /var/cache/apk/* \
@@ -93,7 +98,8 @@ RUN chmod +x /etc/services.d/*/run \
  && mkdir -p /var/db \
  && chown -R www-data:www-data /var/db
 
-ENV PHP_OPCACHE_REVALIDATION=0
+ENV PHP_OPCACHE_REVALIDATION=0 \
+    SHARE_APP=0
 
 
 WORKDIR /var/www
