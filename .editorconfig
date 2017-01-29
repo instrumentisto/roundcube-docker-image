@@ -27,3 +27,11 @@ indent_size = 2
 [*.{yml,yaml}]
 indent_style = space
 indent_size = 2
+
+[nginx.conf]
+indent_style = space
+indent_size = 4
+
+[*.php]
+indent_style = space
+indent_size = 4

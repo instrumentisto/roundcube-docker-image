@@ -1,0 +1,21 @@
+version: '3'
+services:
+  roundcube:
+    image: instrumentisto/roundcube:fpm
+    expose:
+      - "9000"
+    volumes:
+      - app-volume:/app
+      - ./roundcube.config.php:/app/config/config.inc.php:ro
+  nginx:
+    image: nginx:stable-alpine
+    depends_on:
+      - roundcube
+    ports:
+      - "80:80"
+    volumes:
+      - app-volume:/var/www
+      - ./fpm.nginx.conf:/etc/nginx/conf.d/default.conf:ro
+
+volumes:
+  app-volume:

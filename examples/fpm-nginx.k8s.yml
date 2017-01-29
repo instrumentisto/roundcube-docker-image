@@ -1,0 +1,125 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: roundcube
+  labels:
+    app: roundcube
+spec:
+  selector:
+    app: roundcube
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+
+---
+
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: roundcube.config
+  labels:
+    app: roundcube
+data:
+  roundcube.config.php: |
+    <?php
+    $config = [];
+    $config['db_dsnw'] = 'sqlite:////var/db/roundcube.db?mode=0640';
+
+    $config['des_key'] = 'Change_me_I_am_example!!';
+    $config['plugins'] = [
+        'archive',
+        'zipdownload',
+    ];
+
+  nginx.vh.conf:
+    server {
+        listen   80;
+        root     /var/www/html;
+        index    index.php;
+        charset  utf-8;
+
+        location = /favicon.ico {
+            root /var/www/html/skins/larry/images;
+            access_log     off;
+            log_not_found  off;
+            expires        max;
+        }
+
+        location = /robots.txt {
+            allow          all;
+            access_log     off;
+            log_not_found  off;
+        }
+
+        location / {
+            try_files $uri $uri/ index.php;
+        }
+
+        location ~ /\.ht {
+            deny           all;
+            access_log     off;
+            log_not_found  off;
+        }
+
+        location ~* \.php$ {
+            try_files      $uri =404;
+            include        fastcgi_params;
+            fastcgi_split_path_info ^(.+\.php)(/.+)$;
+            fastcgi_pass   localhost:9000;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            fastcgi_index  index.php;
+
+        }
+    }
+
+---
+
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: roundcube
+  labels:
+    app: roundcube
+spec:
+  selector:
+    matchLabels:
+      app: roundcube
+  template:
+    metadata:
+      labels:
+        app: roundcube
+        version: 'fpm'
+    spec:
+      containers:
+        - name: roundcube
+          image: instrumentisto/roundcube:fpm
+          env:
+            - name: SHARE_APP
+              value: '1'
+          volumeMounts:
+            - name: config
+              subPath: roundcube.config.php
+              mountPath: /app/config/config.inc.php
+              readOnly: true
+            - name: src
+              mountPath: /shared
+        - name: nginx
+          image: nginx:stable-alpine
+          ports:
+            - name: http
+              containerPort: 80
+          volumeMounts:
+            - name: config
+              subPath: nginx.vh.conf
+              mountPath: /etc/nginx/conf.d/default.conf
+              readOnly: true
+            - name: src
+              mountPath: /var/www
+              readOnly: true
+      volumes:
+        - name: config
+          configMap:
+            name: roundcube.config
+        - name: src
+          emptyDir: {}
