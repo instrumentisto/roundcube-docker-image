@@ -52,10 +52,10 @@ RUN apk update \
 
 # Install Roundcube
 RUN curl -L -o /tmp/roundcube.tar.gz \
-         https://github.com/roundcube/roundcubemail/releases/download/1.2.2/roundcubemail-1.2.2.tar.gz \
+         https://github.com/roundcube/roundcubemail/releases/download/1.2.3/roundcubemail-1.2.3.tar.gz \
  && tar -xzf /tmp/roundcube.tar.gz -C /tmp/ \
  && rm -rf /app \
- && mv /tmp/roundcubemail-1.2.2 /app \
+ && mv /tmp/roundcubemail-1.2.3 /app \
 
  # Install Composer to resolve Roundcube dependencies
  && curl -L -o /tmp/composer-setup.php \
