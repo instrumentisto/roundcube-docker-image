@@ -7,10 +7,10 @@ $RoundcubeVer = reset(explode('-', $var['version']))
 
 <? if ($isApacheImage) {
 ?># https://github.com/docker-library/php/blob/master/7.0/apache/Dockerfile
-FROM php:7.0-apache
+FROM php:7.1-apache
 <? } else {
 ?># https://github.com/docker-library/php/blob/master/7.0/fpm/alpine/Dockerfile
-FROM php:7.0-fpm-alpine
+FROM php:7.1-fpm-alpine
 <? } ?>
 
 MAINTAINER Instrumentisto Team <developer@instrumentisto.com>
