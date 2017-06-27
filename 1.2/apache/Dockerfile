@@ -8,10 +8,10 @@ MAINTAINER Instrumentisto Team <developer@instrumentisto.com>
 
 
 # Install s6-overlay
-RUN curl -L -o /tmp/s6-overlay.tar.gz \
+RUN curl -fL -o /tmp/s6-overlay.tar.gz \
          https://github.com/just-containers/s6-overlay/releases/download/v1.19.1.1/s6-overlay-amd64.tar.gz \
  && tar -xzf /tmp/s6-overlay.tar.gz -C / \
- && rm -rf /tmp/s6-overlay.tar.gz
+ && rm -rf /tmp/*
 
 ENV S6_KEEP_ENV=1 \
     S6_CMD_WAIT_FOR_SERVICES=1
@@ -21,9 +21,9 @@ ENV S6_KEEP_ENV=1 \
 RUN apt-get update \
  && apt-get upgrade -y \
  && update-ca-certificates \
- && apt-get install -y --no-install-recommends \
-            rsyslog \
- && apt-get install -y --no-install-recommends \
+ && apt-get install -y --no-install-recommends --no-install-suggests \
+            inetutils-syslogd \
+ && apt-get install -y --no-install-recommends --no-install-suggests \
             libpq5 libodbc1 libsybdb5 \
             libaspell15 \
             libicu52 \
@@ -36,11 +36,12 @@ RUN apt-get update \
       libldap2-dev \
       libzip-dev \
     " \
- && apt-get install -y $buildDeps --no-install-recommends \
+ && apt-get install -y --no-install-recommends --no-install-suggests \
+            $buildDeps \
 
  && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu \
- && docker-php-ext-configure pdo_odbc --with-pdo-odbc=unixODBC,/usr \
  && docker-php-ext-configure pdo_dblib --with-libdir=lib/x86_64-linux-gnu \
+ && docker-php-ext-configure pdo_odbc --with-pdo-odbc=unixODBC,/usr \
  && docker-php-ext-install \
            exif \
            intl \
@@ -57,29 +58,35 @@ RUN apt-get update \
 
  && apt-get purge -y --auto-remove \
                   -o APT::AutoRemove::RecommendsImportant=false \
-                  $buildDeps \
+            $buildDeps \
  && rm -rf /var/lib/apt/lists/*
 
 
 # Install Roundcube
-RUN curl -L -o /tmp/roundcube.tar.gz \
+RUN curl -fL -o /tmp/roundcube.tar.gz \
          https://github.com/roundcube/roundcubemail/releases/download/1.2.5/roundcubemail-1.2.5.tar.gz \
  && tar -xzf /tmp/roundcube.tar.gz -C /tmp/ \
  && rm -rf /app \
  && mv /tmp/roundcubemail-1.2.5 /app \
 
  # Install Composer to resolve Roundcube dependencies
- && curl -L -o /tmp/composer-setup.php \
+ && curl -fL -o /tmp/composer-setup.php \
           https://getcomposer.org/installer \
- && curl -L -o /tmp/composer-setup.sig \
+ && curl -fL -o /tmp/composer-setup.sig \
           https://composer.github.io/installer.sig \
  && php -r "if (hash('SHA384', file_get_contents('/tmp/composer-setup.php')) !== trim(file_get_contents('/tmp/composer-setup.sig'))) { echo 'Invalid installer' . PHP_EOL; exit(1); }" \
  && php /tmp/composer-setup.php --install-dir=/tmp --filename=composer \
 
- # Resolve Roudcube dependencies
+ # Install tools for building
  && apt-get update \
- && composerDeps="git" \
- && apt-get install -y $composerDeps --no-install-recommends \
+ && toolDeps=" \
+        git \
+        unzip \
+    " \
+ && apt-get install -y --no-install-recommends --no-install-suggests \
+            $toolDeps \
+
+ # Resolve Roudcube Composer dependencies
  && mv /app/composer.json-dist /app/composer.json \
  && cd /app \
  && /tmp/composer install --no-dev --optimize-autoloader \
@@ -105,8 +112,9 @@ RUN curl -L -o /tmp/roundcube.tar.gz \
 
  && apt-get purge -y --auto-remove \
                   -o APT::AutoRemove::RecommendsImportant=false \
-                  $composerDeps \
+            $toolDeps \
  && rm -rf /var/lib/apt/lists/* \
+           /app/temp/* \
            /tmp/*
 
 
@@ -116,6 +124,9 @@ COPY rootfs /
 # Fix executable rights
 RUN chmod +x /etc/services.d/*/run \
              /start.sh \
+
+ # Fix container entrypoint shell usage
+ && sed -i -e 's,^#!/bin/sh,#!/bin/bash,' /start.sh \
 
  # Prepare directory for SQLite database
  && mkdir -p /var/db \

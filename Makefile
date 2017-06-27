@@ -4,8 +4,9 @@
 # pushes to `master` branch of this repo and on updates of parent images.
 #
 # Note! Docker Hub `post_push` hook must be always up-to-date with default
-# values of current Makefile. To update it just use:
+# values of current Makefile. To update it just use one of:
 #	make post-push-hook-all
+#	make src-all
 #
 # It's still possible to build, tag and push images manually. Just use:
 #	make release-all
@@ -13,8 +14,10 @@
 
 IMAGE_NAME := instrumentisto/roundcube
 ALL_IMAGES := \
-	1.2/apache:1.2.5-apache,1.2-apache,1-apache,apache,latest \
-	1.2/fpm:1.2.5-fpm,1.2-fpm,1-fpm,fpm
+	1.3/apache:1.3.0-apache,1.3-apache,1-apache,apache,latest \
+	1.3/fpm:1.3.0-fpm,1.3-fpm,1-fpm,fpm \
+	1.2/apache:1.2.5-apache,1.2-apache \
+	1.2/fpm:1.2.5-fpm,1.2-fpm
 #	<Dockerfile>:<version>,<tag1>,<tag2>,...
 
 
@@ -135,6 +138,9 @@ dockerfile:
 			--dockerfile='$(DOCKERFILE)' \
 			--version='$(VERSION)' \
 		> $(DOCKERFILE)/Dockerfile
+	rm -rf $(DOCKERFILE)/rootfs
+	cp -rf rootfs $(DOCKERFILE)/
+	git add $(DOCKERFILE)/rootfs
 
 
 

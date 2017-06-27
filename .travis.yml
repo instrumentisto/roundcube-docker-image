@@ -6,6 +6,8 @@ services:
   - docker
 
 env:
+  - Dockerfile=1.3/apache
+  - Dockerfile=1.3/fpm
   - Dockerfile=1.2/apache
   - Dockerfile=1.2/fpm
 

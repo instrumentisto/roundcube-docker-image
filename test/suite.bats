@@ -1,6 +1,7 @@
 #!/usr/bin/env bats
 
 IMAGE_TYPE=$(echo "$DOCKERFILE" | cut -d '/' -f 2 | tr -d ' ')
+ROUNDCUBE_MINOR_VER=$(echo "$DOCKERFILE" | cut -d '/' -f 1 | tr -d ' ')
 
 
 @test "post_push hook is up-to-date" {
@@ -36,6 +37,12 @@ IMAGE_TYPE=$(echo "$DOCKERFILE" | cut -d '/' -f 2 | tr -d ' ')
 
 @test "PHP ext 'fileinfo' is installed" {
   run docker run --rm --entrypoint sh $IMAGE -c 'php -m | grep -Fx fileinfo'
+  [ "$status" -eq 0 ]
+}
+
+@test "PHP ext 'gd' is installed" {
+  [ "$ROUNDCUBE_MINOR_VER" == "1.2" ] && skip "no gd required"
+  run docker run --rm --entrypoint sh $IMAGE -c 'php -m | grep -Fx gd'
   [ "$status" -eq 0 ]
 }
 
@@ -322,18 +329,20 @@ IMAGE_TYPE=$(echo "$DOCKERFILE" | cut -d '/' -f 2 | tr -d ' ')
 
 @test "Roundcube .htaccess has unexistent PHP options being commented" {
   [ "$IMAGE_TYPE" != "apache" ] && skip "no .htaccess used"
-  run docker run --rm --entrypoint sh $IMAGE -c \
-    'cat /var/www/.htaccess | grep -F register_globals | head -c 1'
-  [ "$status" -eq 0 ]
-  [ "$output"  == "#" ]
-  run docker run --rm --entrypoint sh $IMAGE -c \
-    'cat /var/www/.htaccess | grep -F magic_quotes_gpc | head -c 1'
-  [ "$status" -eq 0 ]
-  [ "$output"  == "#" ]
-  run docker run --rm --entrypoint sh $IMAGE -c \
-    'cat /var/www/.htaccess | grep -F magic_quotes_runtime | head -c 1'
-  [ "$status" -eq 0 ]
-  [ "$output"  == "#" ]
+  if [ "$ROUNDCUBE_MINOR_VER" == "1.2" ]; then
+    run docker run --rm --entrypoint sh $IMAGE -c \
+      'cat /var/www/.htaccess | grep -F register_globals | head -c 1'
+    [ "$status" -eq 0 ]
+    [ "$output"  == "#" ]
+    run docker run --rm --entrypoint sh $IMAGE -c \
+      'cat /var/www/.htaccess | grep -F magic_quotes_gpc | head -c 1'
+    [ "$status" -eq 0 ]
+    [ "$output"  == "#" ]
+    run docker run --rm --entrypoint sh $IMAGE -c \
+      'cat /var/www/.htaccess | grep -F magic_quotes_runtime | head -c 1'
+    [ "$status" -eq 0 ]
+    [ "$output"  == "#" ]
+  fi
   run docker run --rm --entrypoint sh $IMAGE -c \
     'cat /var/www/.htaccess | grep -F suhosin.session.encrypt | head -c 1'
   [ "$status" -eq 0 ]

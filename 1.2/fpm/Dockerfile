@@ -8,10 +8,10 @@ MAINTAINER Instrumentisto Team <developer@instrumentisto.com>
 
 
 # Install s6-overlay
-RUN curl -L -o /tmp/s6-overlay.tar.gz \
+RUN curl -fL -o /tmp/s6-overlay.tar.gz \
          https://github.com/just-containers/s6-overlay/releases/download/v1.19.1.1/s6-overlay-amd64.tar.gz \
  && tar -xzf /tmp/s6-overlay.tar.gz -C / \
- && rm -rf /tmp/s6-overlay.tar.gz
+ && rm -rf /tmp/*
 
 ENV S6_KEEP_ENV=1 \
     S6_CMD_WAIT_FOR_SERVICES=1
@@ -51,23 +51,26 @@ RUN apk update \
 
 
 # Install Roundcube
-RUN curl -L -o /tmp/roundcube.tar.gz \
+RUN curl -fL -o /tmp/roundcube.tar.gz \
          https://github.com/roundcube/roundcubemail/releases/download/1.2.5/roundcubemail-1.2.5.tar.gz \
  && tar -xzf /tmp/roundcube.tar.gz -C /tmp/ \
  && rm -rf /app \
  && mv /tmp/roundcubemail-1.2.5 /app \
 
  # Install Composer to resolve Roundcube dependencies
- && curl -L -o /tmp/composer-setup.php \
+ && curl -fL -o /tmp/composer-setup.php \
           https://getcomposer.org/installer \
- && curl -L -o /tmp/composer-setup.sig \
+ && curl -fL -o /tmp/composer-setup.sig \
           https://composer.github.io/installer.sig \
  && php -r "if (hash('SHA384', file_get_contents('/tmp/composer-setup.php')) !== trim(file_get_contents('/tmp/composer-setup.sig'))) { echo 'Invalid installer' . PHP_EOL; exit(1); }" \
  && php /tmp/composer-setup.php --install-dir=/tmp --filename=composer \
 
- # Resolve Roudcube dependencies
- && apk add --update --no-cache --virtual .composer-deps \
+ # Install tools for building
+ && apk add --update --no-cache --virtual .tool-deps \
         git \
+        file \
+
+ # Resolve Roudcube Composer dependencies
  && mv /app/composer.json-dist /app/composer.json \
  && cd /app \
  && /tmp/composer install --no-dev --optimize-autoloader \
@@ -85,8 +88,9 @@ RUN curl -L -o /tmp/roundcube.tar.gz \
  # Set correct owner
  && chown -R www-data:www-data /app /var/www \
 
- && apk del .composer-deps \
+ && apk del .tool-deps \
  && rm -rf /var/cache/apk/* \
+           /app/temp/* \
            /tmp/*
 
 
