@@ -13,6 +13,7 @@ env:
 
 before_script:
   - make image DOCKERFILE=$Dockerfile VERSION=test
+  - make deps.bats
 
 script:
   - make test DOCKERFILE=$Dockerfile VERSION=test
