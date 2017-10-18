@@ -112,7 +112,7 @@ COPY rootfs /
 
 # Fix executable rights
 RUN chmod +x /etc/services.d/*/run \
-             /start.sh \
+             /docker-entrypoint.sh \
     \
  # Prepare directory for SQLite database
  && mkdir -p /var/db \
@@ -124,6 +124,6 @@ ENV PHP_OPCACHE_REVALIDATION=0 \
 
 WORKDIR /var/www
 
-ENTRYPOINT ["/init", "/start.sh"]
+ENTRYPOINT ["/init", "/docker-entrypoint.sh"]
 
 CMD ["php-fpm"]

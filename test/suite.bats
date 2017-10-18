@@ -225,45 +225,50 @@ ROUNDCUBE_MINOR_VER=$(echo "$DOCKERFILE" | cut -d '/' -f 1 | tr -d ' ')
 
 @test "PHP_OPCACHE_REVALIDATION=0 disables OPcache timestamps validation" {
   run docker run --rm -e PHP_OPCACHE_REVALIDATION=0 \
-                      --entrypoint /start.sh $IMAGE sh -c \
+                      --entrypoint /docker-entrypoint.sh $IMAGE sh -c \
     'php -i | grep -Fx "opcache.validate_timestamps => Off => Off"'
   [ "$status" -eq 0 ]
 }
 
 @test "PHP_OPCACHE_REVALIDATION=1 enables OPcache timestamps validation" {
   run docker run --rm -e PHP_OPCACHE_REVALIDATION=1 \
-                      --entrypoint /start.sh $IMAGE sh -c \
+                      --entrypoint /docker-entrypoint.sh $IMAGE sh -c \
     'php -i | grep -Fx "opcache.validate_timestamps => On => On"'
   [ "$status" -eq 0 ]
 }
 
 
 @test "SHARE_APP=0 makes /var/www link to /app/ dir" {
-  run docker run --rm -e SHARE_APP=0 --entrypoint /start.sh $IMAGE sh -c \
+  run docker run --rm -e SHARE_APP=0 \
+                      --entrypoint /docker-entrypoint.sh $IMAGE sh -c \
     'test -L /var/www && readlink -f /var/www | tr -d "\n"'
   [ "$status" -eq 0 ]
   [ "$output" == "/app" ]
 }
 
 @test "SHARE_APP=1 makes /var/www link to /shared/ dir" {
-  run docker run --rm -e SHARE_APP=1 --entrypoint /start.sh $IMAGE sh -c \
+  run docker run --rm -e SHARE_APP=1 \
+                      --entrypoint /docker-entrypoint.sh $IMAGE sh -c \
     'test -L /var/www && readlink -f /var/www | tr -d "\n"'
   [ "$status" -eq 0 ]
   [ "$output" == "/shared" ]
 }
 
 @test "SHARE_APP=1 copies all files from /app/ to /shared/" {
-  run docker run --rm -e SHARE_APP=0 --entrypoint /start.sh $IMAGE sh -c \
+  run docker run --rm -e SHARE_APP=0 \
+                      --entrypoint /docker-entrypoint.sh $IMAGE sh -c \
     'cd /app && find . | sort'
   [ "$status" -eq 0 ]
   expected="$output"
 
-  run docker run --rm -e SHARE_APP=1 --entrypoint /start.sh $IMAGE sh -c \
+  run docker run --rm -e SHARE_APP=1 \
+                      --entrypoint /docker-entrypoint.sh $IMAGE sh -c \
     'cd /app && find . | sort'
   [ "$status" -eq 0 ]
   preserved="$output"
 
-  run docker run --rm -e SHARE_APP=1 --entrypoint /start.sh $IMAGE sh -c \
+  run docker run --rm -e SHARE_APP=1 \
+                      --entrypoint /docker-entrypoint.sh $IMAGE sh -c \
     'cd /shared && find . | sort'
   [ "$status" -eq 0 ]
   actual="$output"

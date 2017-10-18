@@ -123,10 +123,10 @@ COPY rootfs /
 
 # Fix executable rights
 RUN chmod +x /etc/services.d/*/run \
-             /start.sh \
+             /docker-entrypoint.sh \
     \
  # Fix container entrypoint shell usage
- && sed -i -e 's,^#!/bin/sh,#!/bin/bash,' /start.sh \
+ && sed -i -e 's,^#!/bin/sh,#!/bin/bash,' /docker-entrypoint.sh \
     \
  # Prepare directory for SQLite database
  && mkdir -p /var/db \
@@ -138,6 +138,6 @@ ENV PHP_OPCACHE_REVALIDATION=0 \
 
 WORKDIR /var/www
 
-ENTRYPOINT ["/init", "/start.sh"]
+ENTRYPOINT ["/init", "/docker-entrypoint.sh"]
 
 CMD ["apache2-foreground"]
