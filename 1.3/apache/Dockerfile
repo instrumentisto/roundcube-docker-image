@@ -29,7 +29,7 @@ RUN apt-get update \
             libicu52 \
             libldap-2.4-2 libsasl2-2 \
             libjpeg62-turbo libpng12-0 libfreetype6 \
-
+    \
  && buildDeps=" \
       libpq-dev unixodbc-dev freetds-dev \
       libpspell-dev \
@@ -40,7 +40,7 @@ RUN apt-get update \
     " \
  && apt-get install -y --no-install-recommends --no-install-suggests \
             $buildDeps \
-
+    \
  && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu \
  && docker-php-ext-configure pdo_dblib --with-libdir=lib/x86_64-linux-gnu \
  && docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ \
@@ -56,11 +56,11 @@ RUN apt-get update \
            pspell \
            sockets \
            zip \
-
+    \
  && a2enmod expires \
             headers \
             rewrite \
-
+    \
  && apt-get purge -y --auto-remove \
                   -o APT::AutoRemove::RecommendsImportant=false \
             $buildDeps \
@@ -73,7 +73,7 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
  && tar -xzf /tmp/roundcube.tar.gz -C /tmp/ \
  && rm -rf /app \
  && mv /tmp/roundcubemail-1.3.1 /app \
-
+    \
  # Install Composer to resolve Roundcube dependencies
  && curl -fL -o /tmp/composer-setup.php \
           https://getcomposer.org/installer \
@@ -81,7 +81,7 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
           https://composer.github.io/installer.sig \
  && php -r "if (hash('SHA384', file_get_contents('/tmp/composer-setup.php')) !== trim(file_get_contents('/tmp/composer-setup.sig'))) { echo 'Invalid installer' . PHP_EOL; exit(1); }" \
  && php /tmp/composer-setup.php --install-dir=/tmp --filename=composer \
-
+    \
  # Install tools for building
  && apt-get update \
  && toolDeps=" \
@@ -90,38 +90,38 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
     " \
  && apt-get install -y --no-install-recommends --no-install-suggests \
             $toolDeps \
-
+    \
  # Resolve Roudcube Composer dependencies
  && mv /app/composer.json-dist /app/composer.json \
  && cd /app \
  && /tmp/composer install --no-dev --optimize-autoloader \
-
+    \
  # Resolve Roudcube JS dependencies
  # Temp fix install script,
  # details: https://github.com/roundcube/roundcubemail/pull/5819
  && sed -i -e 's/^\( \+\$extract = \$CACHEDIR .\+;\)$/\1 mkdir(\$extract, 0774, true);/' \
         /app/bin/install-jsdeps.sh \
  && /app/bin/install-jsdeps.sh \
-
+    \
  # Make default Roudcube configuration log to syslog
  && sed -i -r 's/^([^\s]{9}log_driver[^\s]{2} =) [^\s]+$/\1 "syslog";/g' \
         /app/config/defaults.inc.php \
-
+    \
  # Fix Roundcube .htaccess for PHP7
  && sed -i -r 's/^(<IfModule mod)_php5/\1_php7/g' \
         /app/.htaccess \
  && sed -i -r 's/^(php_flag[ ]+(register_globals|magic_quotes|suhosin))/#\1/g' \
         /app/.htaccess \
-
+    \
  # Setup serve directories
  && cd /app \
  && ln -sn ./public_html /app/html \
  && rm -rf /var/www \
  && ln -s /app /var/www \
-
+    \
  # Set correct owner
  && chown -R www-data:www-data /app /var/www \
-
+    \
  && apt-get purge -y --auto-remove \
                   -o APT::AutoRemove::RecommendsImportant=false \
             $toolDeps \
@@ -136,10 +136,10 @@ COPY rootfs /
 # Fix executable rights
 RUN chmod +x /etc/services.d/*/run \
              /start.sh \
-
+    \
  # Fix container entrypoint shell usage
  && sed -i -e 's,^#!/bin/sh,#!/bin/bash,' /start.sh \
-
+    \
  # Prepare directory for SQLite database
  && mkdir -p /var/db \
  && chown -R www-data:www-data /var/db

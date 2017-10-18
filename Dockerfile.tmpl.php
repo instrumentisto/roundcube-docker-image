@@ -59,7 +59,7 @@ RUN apk update \
 <? } ?>
         zlib \
 <? } ?>
-
+    \
 <? if ($isApacheImage) { ?>
  && buildDeps=" \
       libpq-dev unixodbc-dev freetds-dev \
@@ -84,7 +84,7 @@ RUN apk update \
 <? } ?>
         zlib-dev \
 <? } ?>
-
+    \
 <? if ($isApacheImage) { ?>
  && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu \
  && docker-php-ext-configure pdo_dblib --with-libdir=lib/x86_64-linux-gnu \
@@ -113,12 +113,12 @@ RUN apk update \
            sockets \
            zip \
 <? if ($isApacheImage) { ?>
-
+    \
  && a2enmod expires \
             headers \
             rewrite \
 <? } ?>
-
+    \
 <? if ($isApacheImage) { ?>
  && apt-get purge -y --auto-remove \
                   -o APT::AutoRemove::RecommendsImportant=false \
@@ -136,7 +136,7 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
  && tar -xzf /tmp/roundcube.tar.gz -C /tmp/ \
  && rm -rf /app \
  && mv /tmp/roundcubemail-<?= $RoundcubeVer; ?> /app \
-
+    \
  # Install Composer to resolve Roundcube dependencies
  && curl -fL -o /tmp/composer-setup.php \
           https://getcomposer.org/installer \
@@ -144,7 +144,7 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
           https://composer.github.io/installer.sig \
  && php -r "if (hash('SHA384', file_get_contents('/tmp/composer-setup.php')) !== trim(file_get_contents('/tmp/composer-setup.sig'))) { echo 'Invalid installer' . PHP_EOL; exit(1); }" \
  && php /tmp/composer-setup.php --install-dir=/tmp --filename=composer \
-
+    \
  # Install tools for building
 <? if ($isApacheImage) { ?>
  && apt-get update \
@@ -159,13 +159,13 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
         git \
         file \
 <? } ?>
-
+    \
  # Resolve Roudcube Composer dependencies
  && mv /app/composer.json-dist /app/composer.json \
  && cd /app \
  && /tmp/composer install --no-dev --optimize-autoloader \
 <? if (!$isMinorVerLt3) { ?>
-
+    \
  # Resolve Roudcube JS dependencies
  # Temp fix install script,
  # details: https://github.com/roundcube/roundcubemail/pull/5819
@@ -173,28 +173,28 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
         /app/bin/install-jsdeps.sh \
  && /app/bin/install-jsdeps.sh \
 <? } ?>
-
+    \
  # Make default Roudcube configuration log to syslog
  && sed -i -r 's/^([^\s]{9}log_driver[^\s]{2} =) [^\s]+$/\1 "syslog";/g' \
         /app/config/defaults.inc.php \
-
+    \
 <? if ($isApacheImage) { ?>
  # Fix Roundcube .htaccess for PHP7
  && sed -i -r 's/^(<IfModule mod)_php5/\1_php7/g' \
         /app/.htaccess \
  && sed -i -r 's/^(php_flag[ ]+(register_globals|magic_quotes|suhosin))/#\1/g' \
         /app/.htaccess \
-
+    \
 <? } ?>
  # Setup serve directories
  && cd /app \
  && ln -sn ./public_html /app/html \
  && rm -rf /var/www \
  && ln -s /app /var/www \
-
+    \
  # Set correct owner
  && chown -R www-data:www-data /app /var/www \
-
+    \
 <? if ($isApacheImage) { ?>
  && apt-get purge -y --auto-remove \
                   -o APT::AutoRemove::RecommendsImportant=false \
@@ -215,11 +215,11 @@ COPY rootfs /
 RUN chmod +x /etc/services.d/*/run \
              /start.sh \
 <? if ($isApacheImage) { ?>
-
+    \
  # Fix container entrypoint shell usage
  && sed -i -e 's,^#!/bin/sh,#!/bin/bash,' /start.sh \
 <? } ?>
-
+    \
  # Prepare directory for SQLite database
  && mkdir -p /var/db \
  && chown -R www-data:www-data /var/db

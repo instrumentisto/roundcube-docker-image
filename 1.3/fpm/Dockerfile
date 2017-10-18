@@ -28,7 +28,7 @@ RUN apk update \
         libldap \
         libjpeg-turbo libpng freetype \
         zlib \
-
+    \
  && apk add --no-cache --virtual .build-deps \
         postgresql-dev unixodbc-dev freetds-dev \
         aspell-dev \
@@ -36,7 +36,7 @@ RUN apk update \
         openldap-dev \
         libjpeg-turbo-dev libpng-dev freetype-dev \
         zlib-dev \
-
+    \
  && docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ \
                                 --with-png-dir=/usr/include/ \
                                 --with-freetype-dir=/usr/include/ \
@@ -51,7 +51,7 @@ RUN apk update \
            pspell \
            sockets \
            zip \
-
+    \
  && apk del .build-deps \
  && rm -rf /var/cache/apk/*
 
@@ -62,7 +62,7 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
  && tar -xzf /tmp/roundcube.tar.gz -C /tmp/ \
  && rm -rf /app \
  && mv /tmp/roundcubemail-1.3.1 /app \
-
+    \
  # Install Composer to resolve Roundcube dependencies
  && curl -fL -o /tmp/composer-setup.php \
           https://getcomposer.org/installer \
@@ -70,37 +70,37 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
           https://composer.github.io/installer.sig \
  && php -r "if (hash('SHA384', file_get_contents('/tmp/composer-setup.php')) !== trim(file_get_contents('/tmp/composer-setup.sig'))) { echo 'Invalid installer' . PHP_EOL; exit(1); }" \
  && php /tmp/composer-setup.php --install-dir=/tmp --filename=composer \
-
+    \
  # Install tools for building
  && apk add --update --no-cache --virtual .tool-deps \
         git \
         file \
-
+    \
  # Resolve Roudcube Composer dependencies
  && mv /app/composer.json-dist /app/composer.json \
  && cd /app \
  && /tmp/composer install --no-dev --optimize-autoloader \
-
+    \
  # Resolve Roudcube JS dependencies
  # Temp fix install script,
  # details: https://github.com/roundcube/roundcubemail/pull/5819
  && sed -i -e 's/^\( \+\$extract = \$CACHEDIR .\+;\)$/\1 mkdir(\$extract, 0774, true);/' \
         /app/bin/install-jsdeps.sh \
  && /app/bin/install-jsdeps.sh \
-
+    \
  # Make default Roudcube configuration log to syslog
  && sed -i -r 's/^([^\s]{9}log_driver[^\s]{2} =) [^\s]+$/\1 "syslog";/g' \
         /app/config/defaults.inc.php \
-
+    \
  # Setup serve directories
  && cd /app \
  && ln -sn ./public_html /app/html \
  && rm -rf /var/www \
  && ln -s /app /var/www \
-
+    \
  # Set correct owner
  && chown -R www-data:www-data /app /var/www \
-
+    \
  && apk del .tool-deps \
  && rm -rf /var/cache/apk/* \
            /app/temp/* \
@@ -113,7 +113,7 @@ COPY rootfs /
 # Fix executable rights
 RUN chmod +x /etc/services.d/*/run \
              /start.sh \
-
+    \
  # Prepare directory for SQLite database
  && mkdir -p /var/db \
  && chown -R www-data:www-data /var/db
