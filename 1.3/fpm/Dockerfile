@@ -9,7 +9,7 @@ MAINTAINER Instrumentisto Team <developer@instrumentisto.com>
 
 # Install s6-overlay
 RUN curl -fL -o /tmp/s6-overlay.tar.gz \
-         https://github.com/just-containers/s6-overlay/releases/download/v1.21.0.0/s6-overlay-amd64.tar.gz \
+         https://github.com/just-containers/s6-overlay/releases/download/v1.21.0.2/s6-overlay-amd64.tar.gz \
  && tar -xzf /tmp/s6-overlay.tar.gz -C / \
  && rm -rf /tmp/*
 
