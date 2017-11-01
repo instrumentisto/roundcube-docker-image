@@ -56,6 +56,7 @@ RUN apt-get update \
             headers \
             rewrite \
     \
+ # Cleanup stuff
  && apt-get purge -y --auto-remove \
                   -o APT::AutoRemove::RecommendsImportant=false \
             $buildDeps \
@@ -89,7 +90,7 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
  # Resolve Roudcube Composer dependencies
  && mv /app/composer.json-dist /app/composer.json \
  && cd /app \
- && /tmp/composer install --no-dev --optimize-autoloader \
+ && /tmp/composer install --no-dev --optimize-autoloader --no-progress \
     \
  # Make default Roudcube configuration log to syslog
  && sed -i -r 's/^([^\s]{9}log_driver[^\s]{2} =) [^\s]+$/\1 "syslog";/g' \
@@ -110,11 +111,19 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
  # Set correct owner
  && chown -R www-data:www-data /app /var/www \
     \
+ # Cleanup stuff
+ && (find /app/ -name .travis.yml -type f -prune | \
+        while read d; do rm -rf $d; done) \
+ && (find /app/ -name .gitignore -type f -prune | \
+        while read d; do rm -rf $d; done) \
+ && (find /app/ -name .git -type d -prune | \
+        while read d; do rm -rf $d; done) \
  && apt-get purge -y --auto-remove \
                   -o APT::AutoRemove::RecommendsImportant=false \
             $toolDeps \
  && rm -rf /var/lib/apt/lists/* \
            /app/temp/* \
+           /root/.composer \
            /tmp/*
 
 

@@ -119,6 +119,7 @@ RUN apk update \
             rewrite \
 <? } ?>
     \
+ # Cleanup stuff
 <? if ($isApacheImage) { ?>
  && apt-get purge -y --auto-remove \
                   -o APT::AutoRemove::RecommendsImportant=false \
@@ -163,14 +164,10 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
  # Resolve Roudcube Composer dependencies
  && mv /app/composer.json-dist /app/composer.json \
  && cd /app \
- && /tmp/composer install --no-dev --optimize-autoloader \
+ && /tmp/composer install --no-dev --optimize-autoloader --no-progress \
 <? if (!$isMinorVerLt3) { ?>
     \
  # Resolve Roudcube JS dependencies
- # Temp fix install script,
- # details: https://github.com/roundcube/roundcubemail/pull/5819
- && sed -i -e 's/^\( \+\$extract = \$CACHEDIR .\+;\)$/\1 mkdir(\$extract, 0774, true);/' \
-        /app/bin/install-jsdeps.sh \
  && /app/bin/install-jsdeps.sh \
 <? } ?>
     \
@@ -195,6 +192,13 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
  # Set correct owner
  && chown -R www-data:www-data /app /var/www \
     \
+ # Cleanup stuff
+ && (find /app/ -name .travis.yml -type f -prune | \
+        while read d; do rm -rf $d; done) \
+ && (find /app/ -name .gitignore -type f -prune | \
+        while read d; do rm -rf $d; done) \
+ && (find /app/ -name .git -type d -prune | \
+        while read d; do rm -rf $d; done) \
 <? if ($isApacheImage) { ?>
  && apt-get purge -y --auto-remove \
                   -o APT::AutoRemove::RecommendsImportant=false \
@@ -205,6 +209,7 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
  && rm -rf /var/cache/apk/* \
 <? } ?>
            /app/temp/* \
+           /root/.composer \
            /tmp/*
 
 
