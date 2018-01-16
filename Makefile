@@ -44,7 +44,8 @@ eq = $(if $(or $(1),$(2)),$(and $(findstring $(1),$(2)),\
 no-cache-arg = $(if $(call eq,$(no-cache),yes),--no-cache,)
 
 image:
-	docker build $(no-cache-arg) -t $(IMAGE_NAME):$(VERSION) $(DOCKERFILE)
+	docker build --network=host $(no-cache-arg) \
+		-t $(IMAGE_NAME):$(VERSION) $(DOCKERFILE)
 
 
 
