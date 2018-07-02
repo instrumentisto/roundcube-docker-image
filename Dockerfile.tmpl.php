@@ -44,11 +44,7 @@ RUN apk update \
  && apt-get install -y --no-install-recommends --no-install-suggests \
             libpq5 libodbc1 libsybdb5 \
             libaspell15 \
-<? if ($isMinorVerLt3) { ?>
-            libicu52 \
-<? } else { ?>
             libicu57 \
-<? } ?>
             libldap-2.4-2 libsasl2-2 \
 <? if (!$isMinorVerLt3) { ?>
             libjpeg62-turbo libpng16-16 libfreetype6 \
