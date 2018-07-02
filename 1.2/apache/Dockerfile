@@ -23,6 +23,7 @@ RUN apt-get update \
  && update-ca-certificates \
  && apt-get install -y --no-install-recommends --no-install-suggests \
             inetutils-syslogd \
+            gnupg \
  && apt-get install -y --no-install-recommends --no-install-suggests \
             libpq5 libodbc1 libsybdb5 \
             libaspell15 \

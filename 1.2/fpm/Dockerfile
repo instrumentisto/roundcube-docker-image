@@ -21,6 +21,8 @@ ENV S6_KEEP_ENV=1 \
 RUN apk update \
  && apk upgrade \
  && update-ca-certificates \
+ && apk add --no-cache --virtual .plugin-deps \
+        gnupg \
  && apk add --no-cache --virtual .php-ext-deps \
         libpq unixodbc freetds \
         aspell-libs \

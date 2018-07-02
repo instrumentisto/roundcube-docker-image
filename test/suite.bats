@@ -353,3 +353,14 @@ ROUNDCUBE_MINOR_VER=$(echo "$DOCKERFILE" | cut -d '/' -f 1 | tr -d ' ')
   [ "$status" -eq 0 ]
   [ "$output"  == "#" ]
 }
+
+
+@test "gpg is present" {
+  run docker run --rm --entrypoint sh $IMAGE -c 'which curl'
+  [ "$status" -eq 0 ]
+}
+
+@test "gpg runs ok" {
+  run docker run --rm --entrypoint sh $IMAGE -c 'gpg --help'
+  [ "$status" -eq 0 ]
+}

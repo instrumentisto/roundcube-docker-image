@@ -40,6 +40,7 @@ RUN apk update \
 <? if ($isApacheImage) { ?>
  && apt-get install -y --no-install-recommends --no-install-suggests \
             inetutils-syslogd \
+            gnupg \
  && apt-get install -y --no-install-recommends --no-install-suggests \
             libpq5 libodbc1 libsybdb5 \
             libaspell15 \
@@ -53,6 +54,8 @@ RUN apk update \
             libjpeg62-turbo libpng16-16 libfreetype6 \
 <? } ?>
 <? } else { ?>
+ && apk add --no-cache --virtual .plugin-deps \
+        gnupg \
  && apk add --no-cache --virtual .php-ext-deps \
         libpq unixodbc freetds \
         aspell-libs \
