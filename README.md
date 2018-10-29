@@ -8,8 +8,8 @@ Roundcube Webmail Docker Image
 
 ## Supported tags and respective `Dockerfile` links
 
-- `1.3.7-apache`, `1.3-apache`, `1-apache`, `apache`, `latest` [(1.3/apache/Dockerfile)][101]
-- `1.3.7-fpm`, `1.3-fpm`, `1-fpm`, `fpm` [(1.3/fpm/Dockerfile)][102]
+- `1.3.8-apache`, `1.3-apache`, `1-apache`, `apache`, `latest` [(1.3/apache/Dockerfile)][101]
+- `1.3.8-fpm`, `1.3-fpm`, `1-fpm`, `fpm` [(1.3/fpm/Dockerfile)][102]
 - `1.2.9-apache`, `1.2-apache` [(1.2/apache/Dockerfile)][103]
 - `1.2.9-fpm`, `1.2-fpm` [(1.2/fpm/Dockerfile)][104]
 

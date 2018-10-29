@@ -71,10 +71,10 @@ RUN apt-get update \
 
 # Install Roundcube
 RUN curl -fL -o /tmp/roundcube.tar.gz \
-         https://github.com/roundcube/roundcubemail/releases/download/1.3.7/roundcubemail-1.3.7.tar.gz \
+         https://github.com/roundcube/roundcubemail/releases/download/1.3.8/roundcubemail-1.3.8.tar.gz \
  && tar -xzf /tmp/roundcube.tar.gz -C /tmp/ \
  && rm -rf /app \
- && mv /tmp/roundcubemail-1.3.7 /app \
+ && mv /tmp/roundcubemail-1.3.8 /app \
     \
  # Install Composer to resolve Roundcube dependencies
  && curl -fL -o /tmp/composer-setup.php \
