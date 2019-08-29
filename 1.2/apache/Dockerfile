@@ -27,7 +27,7 @@ RUN apt-get update \
  && apt-get install -y --no-install-recommends --no-install-suggests \
             libpq5 libodbc1 libsybdb5 \
             libaspell15 \
-            libicu57 \
+            libicu63 \
             libldap-2.4-2 libsasl2-2 \
     \
  && buildDeps=" \
