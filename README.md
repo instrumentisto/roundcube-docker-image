@@ -8,10 +8,10 @@ Roundcube Webmail Docker Image
 
 ## Supported tags and respective `Dockerfile` links
 
-- `1.3.10-apache`, `1.3-apache`, `1-apache`, `apache`, `latest` [(1.3/apache/Dockerfile)][101]
-- `1.3.10-fpm`, `1.3-fpm`, `1-fpm`, `fpm` [(1.3/fpm/Dockerfile)][102]
-- `1.2.9-apache`, `1.2-apache` [(1.2/apache/Dockerfile)][103]
-- `1.2.9-fpm`, `1.2-fpm` [(1.2/fpm/Dockerfile)][104]
+- [`1.4.0-apache`, `1.4-apache`, `1-apache`, `apache`, `latest`][101]
+- [`1.4.0-fpm`, `1.4-fpm`, `1-fpm`, `fpm`][102]
+- [`1.3.10-apache`, `1.3-apache`][103]
+- [`1.3.10-fpm`, `1.3-fpm`][104]
 
 
 
@@ -162,7 +162,7 @@ If you have any problems with or questions about this image, please contact us t
 [91]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/LICENSE.md
 [92]: https://github.com/instrumentisto/roundcube-docker-image
 
-[101]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.3/apache/Dockerfile
-[102]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.3/fpm/Dockerfile
-[103]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.2/apache/Dockerfile
-[104]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.2/fpm/Dockerfile
+[101]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.4/apache/Dockerfile
+[102]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.4/fpm/Dockerfile
+[103]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.3/apache/Dockerfile
+[104]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.3/fpm/Dockerfile

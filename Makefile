@@ -12,51 +12,54 @@
 #	make release-all
 
 
-IMAGE_NAME := instrumentisto/roundcube
-ALL_IMAGES := \
-	1.3/apache:1.3.10-apache,1.3-apache,1-apache,apache,latest \
-	1.3/fpm:1.3.10-fpm,1.3-fpm,1-fpm,fpm \
-	1.2/apache:1.2.9-apache,1.2-apache \
-	1.2/fpm:1.2.9-fpm,1.2-fpm
-#	<Dockerfile>:<version>,<tag1>,<tag2>,...
-
-
-# Default is first image from ALL_IMAGES list.
-DOCKERFILE ?= $(word 1,$(subst :, ,$(word 1,$(ALL_IMAGES))))
-VERSION ?=  $(word 1,$(subst $(comma), ,\
-                     $(word 2,$(subst :, ,$(word 1,$(ALL_IMAGES))))))
-TAGS ?= $(word 2,$(subst :, ,$(word 1,$(ALL_IMAGES))))
-
-
 comma := ,
 eq = $(if $(or $(1),$(2)),$(and $(findstring $(1),$(2)),\
                                 $(findstring $(2),$(1))),1)
+
+IMAGE_NAME := instrumentisto/roundcube
+ALL_IMAGES := \
+	1.4/apache:1.4.0-apache,1.4-apache,1-apache,apache,latest \
+	1.4/fpm:1.4.0-fpm,1.4-fpm,1-fpm,fpm \
+	1.3/apache:1.3.10-apache,1.3-apache \
+	1.3/fpm:1.3.10-fpm,1.3-fpm
+#	<Dockerfile>:<version>,<tag1>,<tag2>,...
+
+# Default is first image from ALL_IMAGES list.
+DOCKERFILE ?= $(word 1,$(subst :, ,$(word 1,$(ALL_IMAGES))))
+VERSION ?= $(word 1,$(subst $(comma), ,\
+                    $(word 2,$(subst :, ,$(word 1,$(ALL_IMAGES))))))
+TAGS ?= $(word 2,$(subst :, ,$(word 1,$(ALL_IMAGES))))
 
 
 
 # Build Docker image.
 #
 # Usage:
-#	make image [DOCKERFILE=<dockerfile-dir>]
-#	           [VERSION=<image-version>]
-#	           [no-cache=(no|yes)]
+#	make image [tag=($(VERSION)|<docker-tag>)] [no-cache=(no|yes)]
+#	           [dockerfile=($(DOCKERFILE)|<dockerfile-dir>)]
+
+image-tag = $(if $(call eq,$(tag),),$(VERSION),$(tag))
+image-dir = $(if $(call eq,$(dockerfile),),$(DOCKERFILE),$(dockerfile))
 
 image:
 	docker build --network=host --force-rm \
 		$(if $(call eq,$(no-cache),yes),--no-cache --pull,) \
-		-t $(IMAGE_NAME):$(VERSION) $(DOCKERFILE)
+		-t $(IMAGE_NAME):$(image-tag) $(image-dir)
 
 
 
 # Tag Docker image with given tags.
 #
 # Usage:
-#	make tags [VERSION=<image-version>]
-#	          [TAGS=<docker-tag-1>[,<docker-tag-2>...]]
+#	make tags [for=($(VERSION)|<docker-tag>)]
+#	          [tags=($(TAGS)|<docker-tag-1>[,<docker-tag-2>...])]
+
+tags-for = $(if $(call eq,$(for),),$(VERSION),$(for))
+tags-tags = $(if $(call eq,$(tags),),$(TAGS),$(tags))
 
 tags:
-	$(foreach tag,$(subst $(comma), ,$(TAGS)),\
-		$(call tags.do,$(VERSION),$(tag)))
+	$(foreach tag, $(subst $(comma), ,$(tags-tags)),\
+		$(call tags.do,$(tags-for),$(tag)))
 define tags.do
 	$(eval from := $(strip $(1)))
 	$(eval to := $(strip $(2)))
@@ -68,11 +71,13 @@ endef
 # Manually push Docker images to Docker Hub.
 #
 # Usage:
-#	make push [TAGS=<docker-tag-1>[,<docker-tag-2>...]]
+#	make push [tags=($(TAGS)|<docker-tag-1>[,<docker-tag-2>...])]
+
+push-tags = $(if $(call eq,$(tags),),$(TAGS),$(tags))
 
 push:
-	$(foreach tag,$(subst $(comma), ,$(TAGS)),\
-		$(call push.do,$(tag)))
+	$(foreach tag, $(subst $(comma), ,$(push-tags)),\
+		$(call push.do, $(tag)))
 define push.do
 	$(eval tag := $(strip $(1)))
 	docker push $(IMAGE_NAME):$(tag)
@@ -83,11 +88,14 @@ endef
 # Make manual release of Docker images to Docker Hub.
 #
 # Usage:
-#	make release [DOCKERFILE=<dockerfile-dir>] [no-cache=(no|yes)]
-#	             [VERSION=<image-version>]
-#	             [TAGS=<docker-tag-1>[,<docker-tag-2>...]]
+#	make release [tag=($(VERSION)|<docker-tag>)] [no-cache=(no|yes)]
+#	             [dockerfile=($(DOCKERFILE)|<dockerfile-dir>)]
+#	             [tags=($(TAGS)|<docker-tag-1>[,<docker-tag-2>...])]
 
-release: | image tags push
+release:
+	@make image dockerfile=$(dockerfile) tag=$(tag) no-cache=$(no-cache)
+	@make tags for=$(tag) tags=$(tags)
+	@make push tags=$(tags)
 
 
 
@@ -101,10 +109,9 @@ release-all:
 define release-all.do
 	$(eval img := $(strip $(1)))
 	@make release no-cache=$(no-cache) \
-			DOCKERFILE=$(word 1,$(subst :, ,$(img))) \
-			VERSION=$(word 1,$(subst $(comma), ,\
-			                 $(word 2,$(subst :, ,$(img))))) \
-			TAGS=$(word 2,$(subst :, ,$(img)))
+		dockerfile=$(word 1,$(subst :, ,$(img))) \
+		tag=$(word 1,$(subst $(comma), ,$(word 2,$(subst :, ,$(img))))) \
+		tags=$(word 2,$(subst :, ,$(img)))
 endef
 
 
@@ -112,8 +119,9 @@ endef
 # Generate Docker image sources.
 #
 # Usage:
-#	make src [DOCKERFILE=<dockerfile-dir>] [VERSION=<roudcube-version>]
-#	         [TAGS=<docker-tag-1>[,<docker-tag-2>...]]
+#	make src [dir=($(DOCKERFILE)|<dockerfile-dir>)]
+#	         [tags=($(TAGS)|<docker-tag-1>[,<docker-tag-2>...])]
+#	         [ROUNDCUBE_VER=($(VERSION)|<roudcube-version>)]
 
 src: dockerfile post-push-hook
 
@@ -128,10 +136,10 @@ src-all:
 	$(foreach img,$(ALL_IMAGES),$(call src-all.do,$(img)))
 define src-all.do
 	$(eval img := $(strip $(1)))
-	@make src DOCKERFILE=$(word 1,$(subst :, ,$(img))) \
-	          VERSION=$(word 1,$(subst $(comma), ,\
-	                           $(word 2,$(subst :, ,$(img))))) \
-	          TAGS=$(word 2,$(subst :, ,$(img)))
+	@make src dir=$(word 1,$(subst :, ,$(img))) \
+	          tags=$(word 2,$(subst :, ,$(img))) \
+	          ROUNDCUBE_VER=$(word 1,$(subst $(comma), ,\
+	                                 $(word 2,$(subst :, ,$(img)))))
 endef
 
 
@@ -139,19 +147,22 @@ endef
 # Generate Dockerfile from template.
 #
 # Usage:
-#	make dockerfile [DOCKERFILE=<dockerfile-dir>]
-#	                [VERSION=<roudcube-version>]
+#	make dockerfile [dir=($(DOCKERFILE)|<dockerfile-dir>)]
+#	                [ROUNDCUBE_VER=($(VERSION)|<roudcube-version>)]
+
+dockerfile-dir = $(if $(call eq,$(dir),),$(DOCKERFILE),$(dir))
+dockerfile-ver = $(if $(call eq,$(ROUNDCUBE_VER),),$(VERSION),$(ROUNDCUBE_VER))
 
 dockerfile:
-	@mkdir -p $(DOCKERFILE)/
+	@mkdir -p $(dockerfile-dir)/
 	docker run --rm -v "$(PWD)/Dockerfile.tmpl.php":/Dockerfile.php:ro \
 		php:alpine php -f /Dockerfile.php -- \
-			--dockerfile='$(DOCKERFILE)' \
-			--version='$(VERSION)' \
-		> $(DOCKERFILE)/Dockerfile
-	@rm -rf $(DOCKERFILE)/rootfs
-	cp -rf rootfs $(DOCKERFILE)/
-	git add $(DOCKERFILE)/rootfs
+			--dockerfile='$(dockerfile-dir)' \
+			--version='$(dockerfile-ver)' \
+		> $(dockerfile-dir)/Dockerfile
+	@rm -rf $(dockerfile-dir)/rootfs
+	cp -rf rootfs $(dockerfile-dir)/
+	git add $(dockerfile-dir)/rootfs
 
 
 
@@ -164,9 +175,9 @@ dockerfile-all:
 	$(foreach img,$(ALL_IMAGES),$(call dockerfile-all.do,$(img)))
 define dockerfile-all.do
 	$(eval img := $(strip $(1)))
-	@make dockerfile DOCKERFILE=$(word 1,$(subst :, ,$(img))) \
-	                 VERSION=$(word 1,$(subst $(comma), ,\
-	                                  $(word 2,$(subst :, ,$(img)))))
+	@make dockerfile dir=$(word 1,$(subst :, ,$(img))) \
+	                 ROUNDCUBE_VER=$(word 1,$(subst $(comma), ,\
+	                                        $(word 2,$(subst :, ,$(img)))))
 endef
 
 
@@ -180,15 +191,18 @@ endef
 # http://windsock.io/automated-docker-image-builds-with-multiple-tags
 #
 # Usage:
-#	make post-push-hook [DOCKERFILE=<dockerfile-dir>]
-#	                    [TAGS=<docker-tag-1>[,<docker-tag-2>...]]
+#	make post-push-hook [dir=($(DOCKERFILE)|<dockerfile-dir>)]
+#	                    [tags=($(TAGS)|<docker-tag-1>[,<docker-tag-2>...])]
+
+post-push-hook-dir = $(if $(call eq,$(dir),),$(DOCKERFILE),$(dir))
+post-push-hook-tags = $(if $(call eq,$(tags),),$(TAGS),$(tags))
 
 post-push-hook:
-	@mkdir -p $(DOCKERFILE)/hooks/
+	@mkdir -p $(post-push-hook-dir)/hooks/
 	docker run --rm -v "$(PWD)/post_push.tmpl.php":/post_push.php:ro \
 		php:alpine php -f /post_push.php -- \
-			--image_tags='$(TAGS)' \
-		> $(DOCKERFILE)/hooks/post_push
+			--image_tags='$(post-push-hook-tags)' \
+		> $(post-push-hook-dir)/hooks/post_push
 
 
 
@@ -201,8 +215,8 @@ post-push-hook-all:
 	$(foreach img,$(ALL_IMAGES),$(call post-push-hook-all.do,$(img)))
 define post-push-hook-all.do
 	$(eval img := $(strip $(1)))
-	@make post-push-hook DOCKERFILE=$(word 1,$(subst :, ,$(img))) \
-	                     TAGS=$(word 2,$(subst :, ,$(img)))
+	@make post-push-hook dir=$(word 1,$(subst :, ,$(img))) \
+	                     tags=$(word 2,$(subst :, ,$(img)))
 endef
 
 
@@ -213,14 +227,18 @@ endef
 #	https://github.com/bats-core/bats-core
 #
 # Usage:
-#	make test [DOCKERFILE=<dockerfile-dir>] [VERSION=<image-version>]
+#	make test [tag=($(VERSION)|<docker-tag>)]
+#	          [dockerfile=($(DOCKERFILE)|<dockerfile-dir>)]
+
+test-tag = $(if $(call eq,$(tag),),$(VERSION),$(tag))
+test-dir = $(if $(call eq,$(dockerfile),),$(DOCKERFILE),$(dockerfile))
 
 test:
 ifeq ($(wildcard node_modules/.bin/bats),)
 	@make deps.bats
 endif
-	DOCKERFILE=$(DOCKERFILE) IMAGE=$(IMAGE_NAME):$(VERSION) \
-		node_modules/.bin/bats test/suite.bats
+	DOCKERFILE=$(test-dir) IMAGE=$(IMAGE_NAME):$(test-tag) \
+	node_modules/.bin/bats test/suite.bats
 
 
 
@@ -240,9 +258,8 @@ define test-all.do
 	$(eval act := $(strip $(1)))
 	$(eval img := $(strip $(2)))
 	@make $(act) \
-		DOCKERFILE=$(word 1,$(subst :, ,$(img))) \
-		VERSION=$(word 1,$(subst $(comma), ,\
-		                 $(word 2,$(subst :, ,$(img)))))
+		dockerfile=$(word 1,$(subst :, ,$(img))) \
+		tag=$(word 1,$(subst $(comma), ,$(word 2,$(subst :, ,$(img)))))
 endef
 
 
@@ -253,7 +270,7 @@ endef
 #	make deps.bats
 
 deps.bats:
-	docker run --rm -v "$(PWD)":/app -w /app \
+	docker run --rm --network=host -v "$(PWD)":/app -w /app \
 		node:alpine \
 			yarn install --non-interactive --no-progress
 

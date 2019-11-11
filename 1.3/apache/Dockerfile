@@ -4,8 +4,7 @@
 # https://hub.docker.com/_/php
 FROM php:7.3-apache
 
-MAINTAINER Instrumentisto Team <developer@instrumentisto.com>
-
+ARG roundcube_ver=1.3.10
 
 # Install s6-overlay
 RUN curl -fL -o /tmp/s6-overlay.tar.gz \
@@ -72,10 +71,10 @@ RUN apt-get update \
 
 # Install Roundcube
 RUN curl -fL -o /tmp/roundcube.tar.gz \
-         https://github.com/roundcube/roundcubemail/releases/download/1.3.10/roundcubemail-1.3.10.tar.gz \
+         https://github.com/roundcube/roundcubemail/releases/download/${roundcube_ver}/roundcubemail-${roundcube_ver}.tar.gz \
  && tar -xzf /tmp/roundcube.tar.gz -C /tmp/ \
  && rm -rf /app \
- && mv /tmp/roundcubemail-1.3.10 /app \
+ && mv /tmp/roundcubemail-${roundcube_ver} /app \
     \
  # Install Composer to resolve Roundcube dependencies
  && curl -fL -o /tmp/composer-setup.php \
@@ -96,7 +95,8 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
     \
  # Resolve Roudcube Composer dependencies
  && mv /app/composer.json-dist /app/composer.json \
- && cd /app \
+ && cd /app/ \
+ && (/tmp/composer suggests | xargs -i /tmp/composer require {}) \
  && /tmp/composer install --no-dev --optimize-autoloader --no-progress \
     \
  # Resolve Roudcube JS dependencies
@@ -113,7 +113,7 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
         /app/.htaccess \
     \
  # Setup serve directories
- && cd /app \
+ && cd /app/ \
  && ln -sn ./public_html /app/html \
  && rm -rf /var/www \
  && ln -s /app /var/www \

@@ -6,17 +6,17 @@ services:
   - docker
 
 env:
+  - Dockerfile=1.4/apache
+  - Dockerfile=1.4/fpm
   - Dockerfile=1.3/apache
   - Dockerfile=1.3/fpm
-  - Dockerfile=1.2/apache
-  - Dockerfile=1.2/fpm
 
 before_script:
-  - make image DOCKERFILE=$Dockerfile VERSION=test
+  - make image dockerfile=$Dockerfile tag=test
   - make deps.bats
 
 script:
-  - make test DOCKERFILE=$Dockerfile VERSION=test
+  - make test dockerfile=$Dockerfile tag=test
 
 notifications:
   email:
