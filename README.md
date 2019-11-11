@@ -123,9 +123,13 @@ Concrete `vX.Y.Z` version of Roundcube Webmail.
 
 ## License
 
-Roundcube Webmail is licensed under [GPL-3.0 license][91].
+Roundcube Webmail is licensed under [GPL-3.0-or-later license][90].
 
-Roundcube Webmail Docker image is licensed under [MIT license][90].
+As with all Docker images, these likely also contain other software which may be under other licenses (such as Bash, etc from the base distribution, along with any direct or indirect dependencies of the primary software being contained).
+
+As for any pre-built image usage, it is the image user's responsibility to ensure that any use of this image complies with any relevant licenses for all software contained within.
+
+The [sources][92] for producing `instrumentisto/roundcube` Docker images are licensed under [Blue Oak Model License 1.0.0][91].
 
 
 
@@ -153,8 +157,11 @@ If you have any problems with or questions about this image, please contact us t
 [11]: https://hub.docker.com/_/nginx
 [12]: https://hub.docker.com/_/httpd
 [13]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/examples
-[90]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/LICENSE.md
-[91]: https://github.com/roundcube/roundcubemail/blob/master/LICENSE
+
+[90]: https://github.com/roundcube/roundcubemail/blob/master/LICENSE
+[91]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/LICENSE.md
+[92]: https://github.com/instrumentisto/roundcube-docker-image
+
 [101]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.3/apache/Dockerfile
 [102]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.3/fpm/Dockerfile
 [103]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.2/apache/Dockerfile
