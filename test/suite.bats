@@ -322,7 +322,7 @@ ROUNDCUBE_MINOR_VER=$(echo "$DOCKERFILE" | cut -d '/' -f 1 | tr -d ' ')
 
 @test "Roundcube .htaccess uses correct 'mod_php'" {
   [ "$IMAGE_TYPE" != "apache" ] && skip "no .htaccess used"
-  [ "$ROUNDCUBE_MINOR_VER" == "1.4" ] && skip "no mod_php is configure"
+  [ "$ROUNDCUBE_MINOR_VER" == "1.4" ] && skip "no mod_php is configured"
   run docker run --rm --entrypoint sh $IMAGE -c \
     'cat /var/www/.htaccess | grep -F mod_php7'
   [ "$status" -eq 0 ]
@@ -334,7 +334,7 @@ ROUNDCUBE_MINOR_VER=$(echo "$DOCKERFILE" | cut -d '/' -f 1 | tr -d ' ')
 
 @test "Roundcube .htaccess has unexistent PHP options being commented" {
   [ "$IMAGE_TYPE" != "apache" ] && skip "no .htaccess used"
-  [ "$ROUNDCUBE_MINOR_VER" == "1.4" ] && skip "no mod_php is configure"
+  [ "$ROUNDCUBE_MINOR_VER" == "1.4" ] && skip "no mod_php is configured"
   run docker run --rm --entrypoint sh $IMAGE -c \
     'cat /var/www/.htaccess | grep -F suhosin.session.encrypt | head -c 1'
   [ "$status" -eq 0 ]
