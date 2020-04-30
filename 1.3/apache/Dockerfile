@@ -4,7 +4,7 @@
 # https://hub.docker.com/_/php
 FROM php:7.3-apache
 
-ARG roundcube_ver=1.3.10
+ARG roundcube_ver=1.3.11
 
 # Install s6-overlay
 RUN curl -fL -o /tmp/s6-overlay.tar.gz \
