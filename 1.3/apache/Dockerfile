@@ -93,6 +93,10 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
  && apt-get install -y --no-install-recommends --no-install-suggests \
             $toolDeps \
     \
+ # Temporary disable Git TLS verification for dependencies resolution,
+ # as some of them have problems with outdated CAs
+ && git config --global http.sslVerify false \
+    \
  # Resolve Roudcube Composer dependencies
  && mv /app/composer.json-dist /app/composer.json \
  && cd /app/ \
@@ -101,6 +105,9 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
     \
  # Resolve Roudcube JS dependencies
  && /app/bin/install-jsdeps.sh \
+    \
+ # Enable Git TLS verification back again
+ && git config --global http.sslVerify true \
     \
  # Make default Roudcube configuration log to syslog
  && sed -i -r 's/^([^\s]{9}log_driver[^\s]{2} =) [^\s]+$/\1 "syslog";/g' \
