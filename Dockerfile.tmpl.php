@@ -20,7 +20,7 @@ ARG roundcube_ver=<?= $RoundcubeVer; ?>
 
 # Install s6-overlay
 RUN curl -fL -o /tmp/s6-overlay.tar.gz \
-         https://github.com/just-containers/s6-overlay/releases/download/v2.0.0.0/s6-overlay-amd64.tar.gz \
+         https://github.com/just-containers/s6-overlay/releases/download/v2.0.0.1/s6-overlay-amd64.tar.gz \
  && tar -xzf /tmp/s6-overlay.tar.gz -C / \
  && rm -rf /tmp/*
 
