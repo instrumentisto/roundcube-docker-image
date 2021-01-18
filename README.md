@@ -10,8 +10,8 @@ Roundcube Webmail Docker Image
 
 - [`1.4.9-apache`, `1.4-apache`, `1-apache`, `apache`, `latest`][101]
 - [`1.4.9-fpm`, `1.4-fpm`, `1-fpm`, `fpm`][102]
-- [`1.3.15-apache`, `1.3-apache`][103]
-- [`1.3.15-fpm`, `1.3-fpm`][104]
+- [`1.3.16-apache`, `1.3-apache`][103]
+- [`1.3.16-fpm`, `1.3-fpm`][104]
 
 
 

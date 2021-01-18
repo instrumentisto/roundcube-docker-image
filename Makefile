@@ -20,8 +20,8 @@ IMAGE_NAME := instrumentisto/roundcube
 ALL_IMAGES := \
 	1.4/apache:1.4.9-apache,1.4-apache,1-apache,apache,latest \
 	1.4/fpm:1.4.9-fpm,1.4-fpm,1-fpm,fpm \
-	1.3/apache:1.3.15-apache,1.3-apache \
-	1.3/fpm:1.3.15-fpm,1.3-fpm
+	1.3/apache:1.3.16-apache,1.3-apache \
+	1.3/fpm:1.3.16-fpm,1.3-fpm
 #	<Dockerfile>:<version>,<tag1>,<tag2>,...
 
 # Default is first image from ALL_IMAGES list.
