@@ -96,7 +96,7 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
  # Resolve Roudcube Composer dependencies
  && mv /app/composer.json-dist /app/composer.json \
  && cd /app/ \
- && (/tmp/composer suggests | xargs -i /tmp/composer require {}) \
+ && (/tmp/composer suggests --list | xargs -i /tmp/composer require {}) \
  && /tmp/composer install --no-dev --optimize-autoloader --no-progress \
     \
  # Resolve Roudcube JS dependencies
