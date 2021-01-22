@@ -14,6 +14,7 @@ All user visible changes to this project will be documented in this file. This p
 ### Upgraded
 
 - Roundcube 1.4.10: <https://github.com/roundcube/roundcubemail/releases/tag/1.4.10>
+- s6-overlay 2.2.0.0: <https://github.com/just-containers/s6-overlay/releases/tag/v2.2.0.0>
 
 ### Fixed
 
@@ -30,6 +31,7 @@ All user visible changes to this project will be documented in this file. This p
 ### Upgraded
 
 - Roundcube 1.3.16: <https://github.com/roundcube/roundcubemail/releases/tag/1.3.16>
+- s6-overlay 2.2.0.0: <https://github.com/just-containers/s6-overlay/releases/tag/v2.2.0.0>
 
 ### Fixed
 
