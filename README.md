@@ -1,17 +1,26 @@
-Roundcube Webmail Docker Image
+Roundcube Webmail Docker image
 ==============================
 
-[![Build Status](https://travis-ci.org/instrumentisto/roundcube-docker-image.svg?branch=master)](https://travis-ci.org/instrumentisto/roundcube-docker-image) [![Docker Pulls](https://img.shields.io/docker/pulls/instrumentisto/roundcube.svg)](https://hub.docker.com/r/instrumentisto/roundcube) [![Uses](https://img.shields.io/badge/uses-s6--overlay-blue.svg)](https://github.com/just-containers/s6-overlay)
+[![Release](https://img.shields.io/github/v/release/instrumentisto/roundcube-docker-image "Release")](https://github.com/instrumentisto/roundcube-docker-image/releases)
+[![CI](https://github.com/instrumentisto/roundcube-docker-image/workflows/CI/badge.svg?branch=master "CI")](https://github.com/instrumentisto/roundcube-docker-image/actions?query=workflow%3ACI+branch%3Amaster)
+[![Docker Hub](https://img.shields.io/docker/pulls/instrumentisto/roundcube?label=Docker%20Hub%20pulls "Docker Hub pulls")](https://hub.docker.com/r/instrumentisto/roundcube)
+[![Uses](https://img.shields.io/badge/uses-s6--overlay-blue.svg "Uses s6-overlay")](https://github.com/just-containers/s6-overlay)
+
+[Docker Hub](https://hub.docker.com/r/instrumentisto/roundcube)
+| [GitHub Container Registry](https://github.com/orgs/instrumentisto/packages/container/package/roundcube)
+| [Quay.io](https://quay.io/repository/instrumentisto/roundcube)
+
+[Changelog](https://github.com/instrumentisto/roundcube-docker-image/blob/master/CHANGELOG.md)
 
 
 
 
 ## Supported tags and respective `Dockerfile` links
 
-- [`1.4.10-apache`, `1.4-apache`, `1-apache`, `apache`, `latest`][101]
-- [`1.4.10-fpm`, `1.4-fpm`, `1-fpm`, `fpm`][102]
-- [`1.3.16-apache`, `1.3-apache`][103]
-- [`1.3.16-fpm`, `1.3-fpm`][104]
+- [`1.4.10-r0-apache`, `1.4.10-apache`, `1.4-apache`, `1-apache`, `apache`, `latest`][101]
+- [`1.4.10-r0-fpm`, `1.4.10-fpm`, `1.4-fpm`, `1-fpm`, `fpm`][102]
+- [`1.3.16-r0-apache`, `1.3.16-apache`, `1.3-apache`][103]
+- [`1.3.16-r0-fpm`, `1.3.16-fpm`, `1.3-fpm`][104]
 
 
 
@@ -109,14 +118,26 @@ It cannot be used alone and is intended to be used in conjunction with some othe
 This image is based on the popular [Alpine Linux project][1], available in [the alpine official image][2]. Alpine Linux is much smaller than most distribution base images (~5MB), and thus leads to much slimmer images in general.
 
 
+### `X`
+
+Latest tag of `X` Roundcube Webmail's major version.
+
+
 ### `X.Y`
 
-Latest version of `X.Y` Roundcube Webmail branch.
+Latest tag of `X.Y` Roundcube Webmail's minor version.
 
 
 ### `X.Y.Z`
 
-Concrete `vX.Y.Z` version of Roundcube Webmail.
+Latest tag version of a concrete `vX.Y.Z` version of Roundcube Webmail.
+
+
+### `X.Y.Z-rN`
+
+Concrete `N` image revision tag of a Roundcube Webmail's concrete `X.Y.Z` version.
+
+Once build, it's never updated.
 
 
 
@@ -136,13 +157,15 @@ The [sources][92] for producing `instrumentisto/roundcube` Docker images are lic
 
 ## Issues
 
-We can't notice comments in the DockerHub so don't use them for reporting issue or asking question.
+We can't notice comments in the [DockerHub] (or other container registries) so don't use them for reporting issue or asking question.
 
 If you have any problems with or questions about this image, please contact us through a [GitHub issue][3].
 
 
 
 
+
+[DockerHub]: https://hub.docker.com
 
 [1]: http://alpinelinux.org
 [2]: https://hub.docker.com/_/alpine

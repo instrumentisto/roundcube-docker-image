@@ -1,7 +1,7 @@
 <?php
 $var = getopt('', ['version:', 'dockerfile:']);
-$isApacheImage = (end(explode('/', $var['dockerfile'])) === 'apache');
-$RoundcubeVer = reset(explode('-', $var['version']));
+$isApacheImage = explode('/', $var['dockerfile'])[1] === 'apache';
+$RoundcubeVer = explode('-', $var['version'])[0];
 $isMinorVerLt4 = (intval(explode('.', $RoundcubeVer)[1]) < 4);
 $phpVer = '7.4';
 ?>
@@ -16,6 +16,9 @@ FROM php:<?= $phpVer; ?>-fpm-alpine
 <? } ?>
 
 ARG roundcube_ver=<?= $RoundcubeVer; ?>
+
+LABEL org.opencontainers.image.source="\
+    https://github.com/instrumentisto/roundcube-docker-image"
 
 
 # Install s6-overlay
