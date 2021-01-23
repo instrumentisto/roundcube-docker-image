@@ -15,7 +15,8 @@ FROM php:<?= $phpVer; ?>-apache
 FROM php:<?= $phpVer; ?>-fpm-alpine
 <? } ?>
 
-ARG roundcube_ver=<?= $RoundcubeVer; ?>
+ARG roundcube_ver=<?= $RoundcubeVer."\n"; ?>
+ARG s6_overlay_ver=2.2.0.1
 
 LABEL org.opencontainers.image.source="\
     https://github.com/instrumentisto/roundcube-docker-image"
@@ -23,7 +24,7 @@ LABEL org.opencontainers.image.source="\
 
 # Install s6-overlay
 RUN curl -fL -o /tmp/s6-overlay.tar.gz \
-         https://github.com/just-containers/s6-overlay/releases/download/v2.2.0.0/s6-overlay-amd64.tar.gz \
+         https://github.com/just-containers/s6-overlay/releases/download/v${s6_overlay_ver}/s6-overlay-amd64.tar.gz \
  && tar -xzf /tmp/s6-overlay.tar.gz -C / \
  && rm -rf /tmp/*
 
