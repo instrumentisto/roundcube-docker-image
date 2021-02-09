@@ -6,6 +6,18 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## [1.4.11-r0] · 2021-02-09
+[1.4.11-r0]: /../../tree/1.4.11-r0
+
+[Diff](/../../compare/1.4.10-r1...1.4.11-r0)
+
+### Upgraded
+
+- Roundcube 1.4.11: <https://github.com/roundcube/roundcubemail/releases/tag/1.4.11>
+
+
+
+
 ## [1.4.10-r1] · 2021-01-23
 [1.4.10-r1]: /../../tree/1.4.10-r1
 

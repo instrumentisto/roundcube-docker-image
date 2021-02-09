@@ -22,8 +22,8 @@ NAMESPACES := instrumentisto \
               quay.io/instrumentisto
 NAME := roundcube
 ALL_IMAGES := \
-	1.4/apache:1.4.10-r1-apache,1.4.10-apache,1.4-apache,1-apache,apache,latest \
-	1.4/fpm:1.4.10-r1-fpm,1.4.10-fpm,1.4-fpm,1-fpm,fpm \
+	1.4/apache:1.4.11-r0-apache,1.4.11-apache,1.4-apache,1-apache,apache,latest \
+	1.4/fpm:1.4.11-r0-fpm,1.4.11-fpm,1.4-fpm,1-fpm,fpm \
 	1.3/apache:1.3.16-r1-apache,1.3.16-apache,1.3-apache \
 	1.3/fpm:1.3.16-r1-fpm,1.3.16-fpm,1.3-fpm
 #	<Dockerfile>:<version>,<tag1>,<tag2>,...
@@ -178,7 +178,8 @@ test.docker:
 ifeq ($(wildcard node_modules/.bin/bats),)
 	@make npm.install
 endif
-	DOCKERFILE=$(DOCKERFILE) IMAGE=instrumentisto/$(NAME):$(tag) \
+	DOCKERFILE=$(DOCKERFILE) \
+	IMAGE=instrumentisto/$(NAME):$(if $(call eq,$(tag),),$(VERSION),$(tag)) \
 	node_modules/.bin/bats \
 		--timing $(if $(call eq,$(CI),),--pretty,--formatter tap) \
 		tests/main.bats
@@ -198,7 +199,7 @@ endif
 npm.install:
 ifeq ($(dockerized),yes)
 	docker run --rm --network=host -v "$(PWD)":/app/ -w /app/ \
-		node:$(NODE_VER) \
+		node \
 			make npm.install dockerized=no
 else
 	npm install
