@@ -6,6 +6,30 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## [1.4.11-r1] · 2021-02-18
+[1.4.11-r1]: /../../tree/1.4.11-r1
+
+[Diff](/../../compare/1.4.11-r0...1.4.11-r1)
+
+### Upgraded
+
+- [Alpine Linux] 3.13.2: <https://github.com/docker-library/official-images/commit/629ce2163a502c16b78064eb3ea3c74b095b6745>
+
+
+
+
+## [1.3.16-r2] · 2021-02-18
+[1.3.16-r2]: /../../tree/1.3.16-r2
+
+[Diff](/../../compare/1.3.16-r1...1.3.16-r2)
+
+### Upgraded
+
+- [Alpine Linux] 3.13.2: <https://github.com/docker-library/official-images/commit/629ce2163a502c16b78064eb3ea3c74b095b6745>
+
+
+
+
 ## [1.4.11-r0] · 2021-02-09
 [1.4.11-r0]: /../../tree/1.4.11-r0
 
@@ -13,7 +37,7 @@ All user visible changes to this project will be documented in this file. This p
 
 ### Upgraded
 
-- Roundcube 1.4.11: <https://github.com/roundcube/roundcubemail/releases/tag/1.4.11>
+- [Roundcube] 1.4.11: <https://github.com/roundcube/roundcubemail/releases/tag/1.4.11>
 
 
 
@@ -25,7 +49,7 @@ All user visible changes to this project will be documented in this file. This p
 
 ### Upgraded
 
-- s6-overlay 2.2.0.1: <https://github.com/just-containers/s6-overlay/releases/tag/v2.2.0.1>
+- [s6-overlay] 2.2.0.1: <https://github.com/just-containers/s6-overlay/releases/tag/v2.2.0.1>
 
 
 
@@ -37,7 +61,7 @@ All user visible changes to this project will be documented in this file. This p
 
 ### Upgraded
 
-- s6-overlay 2.2.0.1: <https://github.com/just-containers/s6-overlay/releases/tag/v2.2.0.1>
+- [s6-overlay] 2.2.0.1: <https://github.com/just-containers/s6-overlay/releases/tag/v2.2.0.1>
 
 
 
@@ -49,8 +73,8 @@ All user visible changes to this project will be documented in this file. This p
 
 ### Upgraded
 
-- Roundcube 1.4.10: <https://github.com/roundcube/roundcubemail/releases/tag/1.4.10>
-- s6-overlay 2.2.0.0: <https://github.com/just-containers/s6-overlay/releases/tag/v2.2.0.0>
+- [Roundcube] 1.4.10: <https://github.com/roundcube/roundcubemail/releases/tag/1.4.10>
+- [s6-overlay] 2.2.0.0: <https://github.com/just-containers/s6-overlay/releases/tag/v2.2.0.0>
 
 ### Fixed
 
@@ -66,8 +90,8 @@ All user visible changes to this project will be documented in this file. This p
 
 ### Upgraded
 
-- Roundcube 1.3.16: <https://github.com/roundcube/roundcubemail/releases/tag/1.3.16>
-- s6-overlay 2.2.0.0: <https://github.com/just-containers/s6-overlay/releases/tag/v2.2.0.0>
+- [Roundcube] 1.3.16: <https://github.com/roundcube/roundcubemail/releases/tag/1.3.16>
+- [s6-overlay] 2.2.0.0: <https://github.com/just-containers/s6-overlay/releases/tag/v2.2.0.0>
 
 ### Fixed
 
@@ -86,4 +110,7 @@ See [GitHub commits](/../../commits?after=640c0c10b7b9699aea08263277e429c0d9fafd
 
 
 
+[Alpine Linux]: https://www.alpinelinux.org
+[Roundcube]: https://roundcube.net
+[s6-overlay]: https://github.com/just-containers/s6-overlay
 [Semantic Versioning 2.0.0]: https://semver.org
