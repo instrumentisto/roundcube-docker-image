@@ -16,7 +16,7 @@ FROM php:<?= $phpVer; ?>-fpm-alpine
 <? } ?>
 
 ARG roundcube_ver=<?= $RoundcubeVer."\n"; ?>
-ARG s6_overlay_ver=2.2.0.1
+ARG s6_overlay_ver=2.2.0.3
 
 LABEL org.opencontainers.image.source="\
     https://github.com/instrumentisto/roundcube-docker-image"
