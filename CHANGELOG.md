@@ -15,6 +15,10 @@ All user visible changes to this project will be documented in this file. This p
 
 - [s6-overlay] 2.2.0.3: <https://github.com/just-containers/s6-overlay/releases/tag/v2.2.0.3>
 
+### Security updated
+
+- [Alpine Linux] 3.13.3: <https://github.com/docker-library/official-images/commit/108c1e0b9f27e708f04fc3e577c6129248067927>
+
 
 
 
@@ -27,6 +31,10 @@ All user visible changes to this project will be documented in this file. This p
 
 - [s6-overlay] 2.2.0.3: <https://github.com/just-containers/s6-overlay/releases/tag/v2.2.0.3>
 
+### Security updated
+
+- [Alpine Linux] 3.13.3: <https://github.com/docker-library/official-images/commit/108c1e0b9f27e708f04fc3e577c6129248067927>
+
 
 
 
@@ -35,7 +43,7 @@ All user visible changes to this project will be documented in this file. This p
 
 [Diff](/../../compare/1.4.11-r0...1.4.11-r1)
 
-### Upgraded
+### Security updated
 
 - [Alpine Linux] 3.13.2: <https://github.com/docker-library/official-images/commit/629ce2163a502c16b78064eb3ea3c74b095b6745>
 
@@ -47,7 +55,7 @@ All user visible changes to this project will be documented in this file. This p
 
 [Diff](/../../compare/1.3.16-r1...1.3.16-r2)
 
-### Upgraded
+### Security updated
 
 - [Alpine Linux] 3.13.2: <https://github.com/docker-library/official-images/commit/629ce2163a502c16b78064eb3ea3c74b095b6745>
 
