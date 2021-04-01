@@ -13,7 +13,7 @@ All user visible changes to this project will be documented in this file. This p
 
 ### Security updated
 
-- [Alpine Linux] 3.13.3: <https://github.com/docker-library/official-images/commit/18cbc2e17bec1e909e6284960af2499403e79322>
+- [Alpine Linux] 3.13.4: <https://github.com/docker-library/official-images/commit/18cbc2e17bec1e909e6284960af2499403e79322>
 
 
 
@@ -25,7 +25,7 @@ All user visible changes to this project will be documented in this file. This p
 
 ### Security updated
 
-- [Alpine Linux] 3.13.3: <https://github.com/docker-library/official-images/commit/18cbc2e17bec1e909e6284960af2499403e79322>
+- [Alpine Linux] 3.13.4: <https://github.com/docker-library/official-images/commit/18cbc2e17bec1e909e6284960af2499403e79322>
 
 
 
