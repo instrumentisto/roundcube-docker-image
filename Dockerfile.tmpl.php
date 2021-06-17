@@ -12,7 +12,7 @@ $phpVer = '7.4';
 <? if ($isApacheImage) { ?>
 FROM php:<?= $phpVer; ?>-apache
 <? } else { ?>
-FROM php:<?= $phpVer; ?>-fpm-alpine3.13
+FROM php:<?= $phpVer; ?>-fpm-alpine3.14
 <? } ?>
 
 ARG roundcube_ver=<?= $RoundcubeVer."\n"; ?>
