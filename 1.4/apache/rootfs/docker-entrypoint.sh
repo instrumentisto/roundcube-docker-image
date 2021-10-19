@@ -13,6 +13,15 @@ if [ "$PHP_OPCACHE_REVALIDATION" == "1" ]; then
   logMsg "STARTUP: PHP OPcache revalidation is enabled"
 fi
 
+rm -f /usr/local/etc/php/conf.d/zz-opcache-jit.ini
+if [ ! -z "$PHP_OPCACHE_JIT_BUFFER_SIZE" ] ; then
+  echo "opcache.jit_buffer_size = $PHP_OPCACHE_JIT_BUFFER_SIZE" \
+    > /usr/local/etc/php/conf.d/zz-opcache-jit.ini
+if [ "$PHP_OPCACHE_JIT_BUFFER_SIZE" != "0" ] ; then
+  logMsg "STARTUP: PHP OPcache JIT is enabled of $PHP_OPCACHE_JIT_BUFFER_SIZE"
+fi
+fi
+
 
 appDir=/app
 if [ "$SHARE_APP" == "1" ]; then

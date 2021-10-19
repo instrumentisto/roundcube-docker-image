@@ -17,10 +17,12 @@ Roundcube Webmail Docker image
 
 ## Supported tags and respective `Dockerfile` links
 
-- [`1.4.11-r6-apache`, `1.4.11-apache`, `1.4-apache`, `1-apache`, `apache`, `latest`][101]
-- [`1.4.11-r6-fpm`, `1.4.11-fpm`, `1.4-fpm`, `1-fpm`, `fpm`][102]
-- [`1.3.16-r7-apache`, `1.3.16-apache`, `1.3-apache`][103]
-- [`1.3.16-r7-fpm`, `1.3.16-fpm`, `1.3-fpm`][104]
+- [`1.5.0-r0-apache`, `1.5.0-apache`, `1.5-apache`, `1-apache`, `apache`, `latest`][101]
+- [`1.5.0-r0-fpm`, `1.5.0-fpm`, `1.5-fpm`, `1-fpm`, `fpm`][102]
+- [`1.4.11-r6-apache`, `1.4.11-apache`, `1.4-apache`][103]
+- [`1.4.11-r6-fpm`, `1.4.11-fpm`, `1.4-fpm`][104]
+- [`1.3.16-r7-apache`, `1.3.16-apache`, `1.3-apache`][105]
+- [`1.3.16-r7-fpm`, `1.3.16-fpm`, `1.3-fpm`][106]
 
 
 
@@ -88,9 +90,16 @@ Check out [examples][13] for more details.
 
 ### `PHP_OPCACHE_REVALIDATION`
 
-The image contains [PHP OPcache][4] enabled. By default cache revalidation is disabled for performance purposes, so once PHP script runs - it is cached forever and no changes to it have effect.
+The image contains [PHP OPcache][4] enabled. By default, cache revalidation is disabled for performance purposes, so once PHP script runs - it is cached forever and no changes to it have effect.
 
-To disable this behavior specify `PHP_OPCACHE_REVALIDATION=1` environment variable on container start. This will turn on OPcache revalidation, so any changes to PHP scripts will have desired effect.
+To disable this behavior, specify `PHP_OPCACHE_REVALIDATION=1` environment variable on container start. This will turn on OPcache revalidation, so any changes to PHP scripts will have desired effect. In this case it's also recommended disabling [PHP OPcache JIT][14], as described below.
+
+
+### `PHP_OPCACHE_JIT_BUFFER_SIZE` (>= 1.5 only)
+
+By default, the image contains `tracing` [PHP OPcache JIT][14] enabled of `100M` buffer size, for performance purposes.
+
+To disable this behavior, specify `PHP_OPCACHE_JIT_BUFFER_SIZE=0` environment variable on container start. This will turn off [OPcache JIT][14] completely.
 
 
 ### `SHARE_APP`
@@ -180,12 +189,15 @@ If you have any problems with or questions about this image, please contact us t
 [11]: https://hub.docker.com/_/nginx
 [12]: https://hub.docker.com/_/httpd
 [13]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/examples
+[14]: https://wiki.php.net/rfc/jit
 
 [90]: https://github.com/roundcube/roundcubemail/blob/master/LICENSE
 [91]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/LICENSE.md
 [92]: https://github.com/instrumentisto/roundcube-docker-image
 
-[101]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.4/apache/Dockerfile
-[102]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.4/fpm/Dockerfile
-[103]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.3/apache/Dockerfile
-[104]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.3/fpm/Dockerfile
+[101]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.5/apache/Dockerfile
+[102]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.5/fpm/Dockerfile
+[103]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.4/apache/Dockerfile
+[104]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.4/fpm/Dockerfile
+[105]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.3/apache/Dockerfile
+[106]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.3/fpm/Dockerfile

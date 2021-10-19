@@ -6,6 +6,23 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## [1.5.0-r0] · 2021-10-19
+[1.5.0-r0]: /../../tree/1.5.0-r0
+
+[Diff](/../../compare/1.4.11-r6...1.5.0-r0)
+
+### Upgraded
+
+- [Roundcube] 1.5.0: <https://github.com/roundcube/roundcubemail/releases/tag/1.5.0>
+- [PHP] 8.0: <https://www.php.net/releases/8.0>
+
+### Added
+
+- `PHP_OPCACHE_JIT_BUFFER_SIZE` env var to configure [PHP OPcache JIT buffer size](https://www.php.net/manual/en/opcache.configuration.php#ini.opcache.jit-buffer-size).
+
+
+
+
 ## [1.4.11-r6] · 2021-08-30
 [1.4.11-r6]: /../../tree/1.4.11-r6
 
@@ -239,6 +256,7 @@ See [GitHub commits](/../../commits?after=640c0c10b7b9699aea08263277e429c0d9fafd
 
 
 [Alpine Linux]: https://www.alpinelinux.org
+[PHP]: https://www.php.net
 [Roundcube]: https://roundcube.net
 [s6-overlay]: https://github.com/just-containers/s6-overlay
 [Semantic Versioning 2.0.0]: https://semver.org

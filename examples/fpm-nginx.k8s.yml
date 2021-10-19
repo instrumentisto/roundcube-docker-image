@@ -32,7 +32,7 @@ data:
         'zipdownload',
     ];
 
-  nginx.vh.conf:
+  nginx.vh.conf: |
     server {
         listen   80;
         root     /var/www/html;
@@ -76,7 +76,7 @@ data:
 ---
 
 kind: Deployment
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 metadata:
   name: roundcube
   labels:
