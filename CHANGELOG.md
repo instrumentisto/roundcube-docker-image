@@ -6,6 +6,18 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## [1.5.0-r1] · 2021-11-15
+[1.5.0-r1]: /../../tree/1.5.0-r1
+
+[Diff](/../../compare/1.5.0-r0...1.5.0-r1)
+
+### Security updated
+
+- [Alpine Linux] 3.14.3: <https://github.com/docker-library/official-images/commit/89298ea1c14b4241dcf3bad1b3092d178ca1ecbc>
+
+
+
+
 ## [1.4.12-r0] · 2021-11-15
 [1.4.12-r0]: /../../tree/1.4.12-r0
 
@@ -14,6 +26,10 @@ All user visible changes to this project will be documented in this file. This p
 ### Upgraded
 
 - [Roundcube] 1.4.12: <https://github.com/roundcube/roundcubemail/releases/tag/1.4.12>
+
+### Security updated
+
+- [Alpine Linux] 3.14.3: <https://github.com/docker-library/official-images/commit/89298ea1c14b4241dcf3bad1b3092d178ca1ecbc>
 
 
 
@@ -26,6 +42,10 @@ All user visible changes to this project will be documented in this file. This p
 ### Upgraded
 
 - [Roundcube] 1.3.17: <https://github.com/roundcube/roundcubemail/releases/tag/1.3.17>
+
+### Security updated
+
+- [Alpine Linux] 3.14.3: <https://github.com/docker-library/official-images/commit/89298ea1c14b4241dcf3bad1b3092d178ca1ecbc>
 
 
 
