@@ -12,7 +12,7 @@ $phpVer = (intval(explode('.', $RoundcubeVer)[1]) < 5) ? '7.4' : '8.0';
 <? if ($isApacheImage) { ?>
 FROM php:<?= $phpVer; ?>-apache
 <? } else { ?>
-FROM php:<?= $phpVer; ?>-fpm-alpine3.14
+FROM php:<?= $phpVer; ?>-fpm-alpine3.15
 <? } ?>
 
 ARG roundcube_ver=<?= $RoundcubeVer."\n"; ?>
