@@ -24,8 +24,8 @@ NAME := roundcube
 ALL_IMAGES := \
 	1.5/apache:1.5.1-r1-apache,1.5.1-apache,1.5-apache,1-apache,apache,latest \
 	1.5/fpm:1.5.1-r1-fpm,1.5.1-fpm,1.5-fpm,1-fpm,fpm \
-	1.4/apache:1.4.12-r1-apache,1.4.12-apache,1.4-apache \
-	1.4/fpm:1.4.12-r1-fpm,1.4.12-fpm,1.4-fpm \
+	1.4/apache:1.4.13-r0-apache,1.4.13-apache,1.4-apache \
+	1.4/fpm:1.4.13-r0-fpm,1.4.13-fpm,1.4-fpm \
 	1.3/apache:1.3.17-r1-apache,1.3.17-apache,1.3-apache \
 	1.3/fpm:1.3.17-r1-fpm,1.3.17-fpm,1.3-fpm
 #	<Dockerfile>:<version>,<tag1>,<tag2>,...

@@ -4,7 +4,7 @@
 # https://hub.docker.com/_/php
 FROM php:7.4-fpm-alpine3.15
 
-ARG roundcube_ver=1.4.12
+ARG roundcube_ver=1.4.13
 ARG s6_overlay_ver=2.2.0.3
 
 LABEL org.opencontainers.image.source="\
