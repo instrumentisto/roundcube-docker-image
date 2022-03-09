@@ -31,7 +31,7 @@ jobs:
                          && startsWith(github.ref, 'refs/tags/1.3.') }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Verify Dockerfile is up-to-date
         run: |
           make codegen.dockerfile dir=${{ matrix.dockerfile }}
@@ -89,7 +89,7 @@ jobs:
             && startsWith(github.ref, 'refs/tags/1.') }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       # On GitHub Container Registry README is automatically updated on pushes.
       - name: Update README on Quay.io
