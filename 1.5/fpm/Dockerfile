@@ -5,19 +5,23 @@
 FROM php:8.1-fpm-alpine3.15
 
 ARG roundcube_ver=1.5.2
-ARG s6_overlay_ver=2.2.0.3
+ARG s6_overlay_ver=3.1.0.1
 
 LABEL org.opencontainers.image.source="\
     https://github.com/instrumentisto/roundcube-docker-image"
 
 
 # Install s6-overlay
-RUN curl -fL -o /tmp/s6-overlay.tar.gz \
-         https://github.com/just-containers/s6-overlay/releases/download/v${s6_overlay_ver}/s6-overlay-amd64.tar.gz \
- && tar -xzf /tmp/s6-overlay.tar.gz -C / \
+RUN curl -fL -o /tmp/s6-overlay-noarch.tar.xz \
+         https://github.com/just-containers/s6-overlay/releases/download/v${s6_overlay_ver}/s6-overlay-noarch.tar.xz \
+ && curl -fL -o /tmp/s6-overlay-bin.tar.xz \
+         https://github.com/just-containers/s6-overlay/releases/download/v${s6_overlay_ver}/s6-overlay-x86_64.tar.xz \
+ && tar -xf /tmp/s6-overlay-noarch.tar.xz -C / \
+ && tar -xf /tmp/s6-overlay-bin.tar.xz -C / \
  && rm -rf /tmp/*
 
 ENV S6_KEEP_ENV=1 \
+    S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
     S6_CMD_WAIT_FOR_SERVICES=1
 
 
@@ -124,7 +128,7 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
 COPY rootfs /
 
 # Fix executable rights
-RUN chmod +x /etc/services.d/*/run \
+RUN chmod +x /etc/s6-overlay/s6-rc.d/*/run \
              /docker-entrypoint.sh \
     \
  # Prepare directory for SQLite database
