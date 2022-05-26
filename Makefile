@@ -22,12 +22,12 @@ NAMESPACES := instrumentisto \
               quay.io/instrumentisto
 NAME := roundcube
 ALL_IMAGES := \
-	1.5/apache:1.5.2-r5-apache,1.5.2-apache,1.5-apache,1-apache,apache,latest \
-	1.5/fpm:1.5.2-r5-fpm,1.5.2-fpm,1.5-fpm,1-fpm,fpm \
-	1.4/apache:1.4.13-r5-apache,1.4.13-apache,1.4-apache \
-	1.4/fpm:1.4.13-r5-fpm,1.4.13-fpm,1.4-fpm \
-	1.3/apache:1.3.17-r6-apache,1.3.17-apache,1.3-apache \
-	1.3/fpm:1.3.17-r6-fpm,1.3.17-fpm,1.3-fpm
+	1.5/apache:1.5.2-r6-apache,1.5.2-apache,1.5-apache,1-apache,apache,latest \
+	1.5/fpm:1.5.2-r6-fpm,1.5.2-fpm,1.5-fpm,1-fpm,fpm \
+	1.4/apache:1.4.13-r6-apache,1.4.13-apache,1.4-apache \
+	1.4/fpm:1.4.13-r6-fpm,1.4.13-fpm,1.4-fpm \
+	1.3/apache:1.3.17-r7-apache,1.3.17-apache,1.3-apache \
+	1.3/fpm:1.3.17-r7-fpm,1.3.17-fpm,1.3-fpm
 #	<Dockerfile>:<version>,<tag1>,<tag2>,...
 
 # Default is first image from ALL_IMAGES list.

@@ -6,6 +6,42 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## [1.5.2-r6] · 2022-05-26
+[1.5.2-r6]: /../../tree/1.5.2-r6
+
+[Diff](/../../compare/1.5.2-r5...1.5.2-r6)
+
+### Upgraded
+
+- [Alpine Linux] 3.16: <https://www.alpinelinux.org/posts/Alpine-3.16.0-released.html>
+
+
+
+
+## [1.4.13-r6] · 2022-05-26
+[1.4.13-r6]: /../../tree/1.4.13-r6
+
+[Diff](/../../compare/1.4.13-r5...1.4.13-r6)
+
+### Upgraded
+
+- [Alpine Linux] 3.16: <https://www.alpinelinux.org/posts/Alpine-3.16.0-released.html>
+
+
+
+
+## [1.3.17-r7] · 2022-05-26
+[1.3.17-r7]: /../../tree/1.3.17-r7
+
+[Diff](/../../compare/1.3.17-r6...1.3.17-r7)
+
+### Upgraded
+
+- [Alpine Linux] 3.16: <https://www.alpinelinux.org/posts/Alpine-3.16.0-released.html>
+
+
+
+
 ## [1.5.2-r5] · 2022-04-06
 [1.5.2-r5]: /../../tree/1.5.2-r5
 
