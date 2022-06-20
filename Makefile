@@ -85,7 +85,8 @@ docker.image:
 		--label org.opencontainers.image.revision=$(strip \
 			$(shell git show --pretty=format:%H --no-patch)) \
 		--label org.opencontainers.image.version=$(strip \
-			$(shell git describe --tags --match=$(VERSION) --dirty)) \
+			$(shell git describe --tags --dirty \
+			            --match='$(word 1,$(subst /, ,$(DOCKERFILE)))*')) \
 		-t instrumentisto/$(NAME):$(or $(tag),$(VERSION)) \
 		$(DOCKERFILE)/
 
