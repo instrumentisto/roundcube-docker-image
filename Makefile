@@ -74,10 +74,19 @@ docker-tags = $(strip $(if $(call eq,$(tags),),\
 # Usage:
 #	make docker.image [tag=($(VERSION)|<docker-tag>)]] [no-cache=(no|yes)]
 
+github_url := $(strip $(or $(GITHUB_SERVER_URL),https://github.com))
+github_repo := $(strip $(or $(GITHUB_REPOSITORY),\
+                            instrumentisto/opendmarc-docker-image))
+
 docker.image:
 	docker build --network=host --force-rm \
 		$(if $(call eq,$(no-cache),yes),--no-cache --pull,) \
-		-t instrumentisto/$(NAME):$(if $(call eq,$(tag),),$(VERSION),$(tag)) \
+		--label org.opencontainers.image.source=$(github_url)/$(github_repo) \
+		--label org.opencontainers.image.revision=$(strip \
+			$(shell git show --pretty=format:%H --no-patch)) \
+		--label org.opencontainers.image.version=$(strip \
+			$(shell git describe --tags --match=$(VERSION) --dirty)) \
+		-t instrumentisto/$(NAME):$(or $(tag),$(VERSION)) \
 		$(DOCKERFILE)/
 
 
@@ -105,12 +114,10 @@ endef
 #	                 [tags=($(TAGS)|<docker-tag-1>[,<docker-tag-2>...])]
 #	                 [namespaces=($(NAMESPACES)|<prefix-1>[,<prefix-2>...])]
 
-docker-tags-of = $(if $(call eq,$(of),),$(VERSION),$(of))
-
 docker.tags:
 	$(foreach tag,$(subst $(comma), ,$(docker-tags)),\
 		$(foreach namespace,$(subst $(comma), ,$(docker-namespaces)),\
-			$(call docker.tags.do,$(docker-tags-of),$(namespace),$(tag))))
+			$(call docker.tags.do,$(or $(of),$(VERSION)),$(namespace),$(tag))))
 define docker.tags.do
 	$(eval from := $(strip $(1)))
 	$(eval repo := $(strip $(2)))
@@ -133,7 +140,7 @@ docker.test: test.docker
 # Usage:
 #	make dockerfile [dir=(@all|<dockerfile-dir>)]
 
-codegen-dockerfile-dir = $(if $(call eq,$(dir),),@all,$(dir))
+codegen-dockerfile-dir = $(or $(dir),@all)
 
 codegen.dockerfile:
 ifeq ($(codegen-dockerfile-dir),@all)
@@ -181,7 +188,7 @@ ifeq ($(wildcard node_modules/.bin/bats),)
 	@make npm.install
 endif
 	DOCKERFILE=$(DOCKERFILE) \
-	IMAGE=instrumentisto/$(NAME):$(if $(call eq,$(tag),),$(VERSION),$(tag)) \
+	IMAGE=instrumentisto/$(NAME):$(or $(tag),$(VERSION)) \
 	node_modules/.bin/bats \
 		--timing $(if $(call eq,$(CI),),--pretty,--formatter tap) \
 		tests/main.bats
@@ -219,7 +226,7 @@ endif
 # Usage:
 #	make git.release [ver=($(VERSION)|<proj-ver>)]
 
-git-release-tag = $(strip $(if $(call eq,$(ver),),$(VERSION),$(ver)))
+git-release-tag = $(strip $(or $(ver),$(VERSION)))
 
 git.release:
 ifeq ($(shell git rev-parse $(git-release-tag) >/dev/null 2>&1 && echo "ok"),ok)

@@ -18,9 +18,6 @@ FROM php:<?= $phpVer; ?>-fpm-alpine3.16
 ARG roundcube_ver=<?= $RoundcubeVer."\n"; ?>
 ARG s6_overlay_ver=3.1.0.1
 
-LABEL org.opencontainers.image.source="\
-    https://github.com/instrumentisto/roundcube-docker-image"
-
 
 # Install s6-overlay
 RUN curl -fL -o /tmp/s6-overlay-noarch.tar.xz \

@@ -7,9 +7,6 @@ FROM php:7.4-fpm-alpine3.16
 ARG roundcube_ver=1.3.17
 ARG s6_overlay_ver=3.1.0.1
 
-LABEL org.opencontainers.image.source="\
-    https://github.com/instrumentisto/roundcube-docker-image"
-
 
 # Install s6-overlay
 RUN curl -fL -o /tmp/s6-overlay-noarch.tar.xz \
