@@ -6,6 +6,42 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## [1.5.2-r7] · 2022-06-20
+[1.5.2-r7]: /../../tree/1.5.2-r7
+
+[Diff](/../../compare/1.5.2-r6...1.5.2-r7)
+
+### Upgraded
+
+- [s6-overlay] 3.1.1.0: <https://github.com/just-containers/s6-overlay/releases/tag/v3.1.1.0>
+
+
+
+
+## [1.4.13-r7] · 2022-06-20
+[1.4.13-r7]: /../../tree/1.4.13-r7
+
+[Diff](/../../compare/1.4.13-r6...1.4.13-r7)
+
+### Upgraded
+
+- [s6-overlay] 3.1.1.0: <https://github.com/just-containers/s6-overlay/releases/tag/v3.1.1.0>
+
+
+
+
+## [1.3.17-r8] · 2022-06-20
+[1.3.17-r8]: /../../tree/1.3.17-r8
+
+[Diff](/../../compare/1.3.17-r7...1.3.17-r8)
+
+### Upgraded
+
+- [s6-overlay] 3.1.1.0: <https://github.com/just-containers/s6-overlay/releases/tag/v3.1.1.0>
+
+
+
+
 ## [1.5.2-r6] · 2022-05-26
 [1.5.2-r6]: /../../tree/1.5.2-r6
 
