@@ -18,7 +18,7 @@ eq = $(if $(or $(1),$(2)),$(and $(findstring $(1),$(2)),\
 ######################
 
 NAME := roundcube
-OWNER := instrumentisto
+OWNER := $(or $(GITHUB_REPOSITORY_OWNER),instrumentisto)
 NAMESPACES := $(OWNER) \
               ghcr.io/$(OWNER) \
               quay.io/$(OWNER)
