@@ -2,7 +2,7 @@ Roundcube Webmail Docker image
 ==============================
 
 [![Release](https://img.shields.io/github/v/release/instrumentisto/roundcube-docker-image "Release")](https://github.com/instrumentisto/roundcube-docker-image/releases)
-[![CI](https://github.com/instrumentisto/roundcube-docker-image/workflows/CI/badge.svg?branch=master "CI")](https://github.com/instrumentisto/roundcube-docker-image/actions?query=workflow%3ACI+branch%3Amaster)
+[![CI](https://github.com/instrumentisto/roundcube-docker-image/workflows/CI/badge.svg?branch=main "CI")](https://github.com/instrumentisto/roundcube-docker-image/actions?query=workflow%3ACI+branch%3Amain)
 [![Docker Hub](https://img.shields.io/docker/pulls/instrumentisto/roundcube?label=Docker%20Hub%20pulls "Docker Hub pulls")](https://hub.docker.com/r/instrumentisto/roundcube)
 [![Uses](https://img.shields.io/badge/uses-s6--overlay-blue.svg "Uses s6-overlay")](https://github.com/just-containers/s6-overlay)
 
@@ -10,7 +10,7 @@ Roundcube Webmail Docker image
 | [GitHub Container Registry](https://github.com/orgs/instrumentisto/packages/container/package/roundcube)
 | [Quay.io](https://quay.io/repository/instrumentisto/roundcube)
 
-[Changelog](https://github.com/instrumentisto/roundcube-docker-image/blob/master/CHANGELOG.md)
+[Changelog](https://github.com/instrumentisto/roundcube-docker-image/blob/main/CHANGELOG.md)
 
 
 
@@ -180,24 +180,24 @@ If you have any problems with or questions about this image, please contact us t
 [2]: https://hub.docker.com/_/alpine
 [3]: https://github.com/instrumentisto/roundcube-docker-image/issues
 [4]: http://php.net/manual/en/book.opcache.php
-[5]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/examples/fpm-nginx.k8s.yml
-[6]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/examples/fpm-nginx.docker-compose.yml
-[7]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/examples/apache.docker-compose.yml
+[5]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/examples/fpm-nginx.k8s.yml
+[6]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/examples/fpm-nginx.docker-compose.yml
+[7]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/examples/apache.docker-compose.yml
 [8]: https://docs.docker.com/compose
 [9]: https://php-fpm.org
 [10]: https://www.nginx.com
 [11]: https://hub.docker.com/_/nginx
 [12]: https://hub.docker.com/_/httpd
-[13]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/examples
+[13]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/examples
 [14]: https://wiki.php.net/rfc/jit
 
-[90]: https://github.com/roundcube/roundcubemail/blob/master/LICENSE
-[91]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/LICENSE.md
+[90]: https://github.com/roundcube/roundcubemail/blob/main/LICENSE
+[91]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/LICENSE.md
 [92]: https://github.com/instrumentisto/roundcube-docker-image
 
-[101]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.5/apache/Dockerfile
-[102]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.5/fpm/Dockerfile
-[103]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.4/apache/Dockerfile
-[104]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.4/fpm/Dockerfile
-[105]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.3/apache/Dockerfile
-[106]: https://github.com/instrumentisto/roundcube-docker-image/blob/master/1.3/fpm/Dockerfile
+[101]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/1.5/apache/Dockerfile
+[102]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/1.5/fpm/Dockerfile
+[103]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/1.4/apache/Dockerfile
+[104]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/1.4/fpm/Dockerfile
+[105]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/1.3/apache/Dockerfile
+[106]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/1.3/fpm/Dockerfile
