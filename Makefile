@@ -19,9 +19,9 @@ eq = $(if $(or $(1),$(2)),$(and $(findstring $(1),$(2)),\
 
 NAME := roundcube
 OWNER := $(or $(GITHUB_REPOSITORY_OWNER),instrumentisto)
-NAMESPACES := $(OWNER) \
-              ghcr.io/$(OWNER) \
-              quay.io/$(OWNER)
+REGISTRIES := $(strip $(subst $(comma), ,\
+	$(shell grep -m1 'registry: \["' .github/workflows/ci.yml \
+	        | cut -d':' -f2 | tr -d '"][')))
 ALL_IMAGES := \
 	1.5/apache:1.5.2-r8-apache,1.5.2-apache,1.5-apache,1-apache,apache,latest \
 	1.5/fpm:1.5.2-r8-fpm,1.5.2-fpm,1.5-fpm,1-fpm,fpm \
@@ -64,8 +64,8 @@ test: test.docker
 # Docker commands #
 ###################
 
-docker-namespaces = $(strip $(if $(call eq,$(namespaces),),\
-                            $(NAMESPACES),$(subst $(comma), ,$(namespaces))))
+docker-registries = $(strip $(if $(call eq,$(registries),),\
+                            $(REGISTRIES),$(subst $(comma), ,$(registries))))
 docker-tags = $(strip $(if $(call eq,$(tags),),\
                       $(TAGS),$(subst $(comma), ,$(tags))))
 
@@ -94,16 +94,16 @@ docker.image:
 #
 # Usage:
 #	make docker.push [tags=($(TAGS)|<docker-tag-1>[,<docker-tag-2>...])]
-#	                 [namespaces=($(NAMESPACES)|<prefix-1>[,<prefix-2>...])]
+#	                 [registries=($(REGISTRIES)|<prefix-1>[,<prefix-2>...])]
 
 docker.push:
 	$(foreach tag,$(subst $(comma), ,$(docker-tags)),\
-		$(foreach namespace,$(subst $(comma), ,$(docker-namespaces)),\
-			$(call docker.push.do,$(namespace),$(tag))))
+		$(foreach registry,$(subst $(comma), ,$(docker-registries)),\
+			$(call docker.push.do,$(registry),$(tag))))
 define docker.push.do
 	$(eval repo := $(strip $(1)))
 	$(eval tag := $(strip $(2)))
-	docker push $(repo)/$(NAME):$(tag)
+	docker push $(repo)/$(OWNER)/$(NAME):$(tag)
 endef
 
 
@@ -112,21 +112,45 @@ endef
 # Usage:
 #	make docker.tags [of=($(VERSION)|<docker-tag>)]
 #	                 [tags=($(TAGS)|<docker-tag-1>[,<docker-tag-2>...])]
-#	                 [namespaces=($(NAMESPACES)|<prefix-1>[,<prefix-2>...])]
+#	                 [registries=($(REGISTRIES)|<prefix-1>[,<prefix-2>...])]
 
 docker.tags:
 	$(foreach tag,$(subst $(comma), ,$(docker-tags)),\
-		$(foreach namespace,$(subst $(comma), ,$(docker-namespaces)),\
-			$(call docker.tags.do,$(or $(of),$(VERSION)),$(namespace),$(tag))))
+		$(foreach registry,$(subst $(comma), ,$(docker-registries)),\
+			$(call docker.tags.do,$(or $(of),$(VERSION)),$(registry),$(tag))))
 define docker.tags.do
 	$(eval from := $(strip $(1)))
 	$(eval repo := $(strip $(2)))
 	$(eval to := $(strip $(3)))
-	docker tag $(OWNER)/$(NAME):$(from) $(repo)/$(NAME):$(to)
+	docker tag $(OWNER)/$(NAME):$(from) $(repo)/$(OWNER)/$(NAME):$(to)
 endef
 
 
+# Save Docker images to a tarball file.
+#
+# Usage:
+#	make docker.tar [to-file=(.cache/image.tar|<file-path>)]
+#	                [tags=($(VERSION)|<docker-tag-1>[,<docker-tag-2>...])]
+
+docker-tar-file = $(or $(to-file),.cache/image.tar)
+
+docker.tar:
+	@mkdir -p $(dir $(docker-tar-file))
+	docker save -o $(docker-tar-file) \
+		$(foreach tag,$(subst $(comma), ,$(or $(tags),$(VERSION))),\
+			$(OWNER)/$(NAME):$(tag))
+
+
 docker.test: test.docker
+
+
+# Load Docker images from a tarball file.
+#
+# Usage:
+#	make docker.untar [from-file=(.cache/image.tar|<file-path>)]
+
+docker.untar:
+	docker load -i $(or $(from-file),.cache/image.tar)
 
 
 
@@ -181,7 +205,7 @@ endef
 #	https://github.com/bats-core/bats-core
 #
 # Usage:
-#	make test.docker [tag=($(VERSION)|<tag>)]
+#	make test.docker [tag=($(VERSION)|<docker-tag>)]
 
 test.docker:
 ifeq ($(wildcard node_modules/.bin/bats),)
@@ -244,7 +268,8 @@ endif
 
 .PHONY: dockerfile image push release tags test \
         codegen.dockerfile \
-        docker.image docker.push docker.tags docker.test \
+        docker.image docker.push docker.tags docker.tar docker.test \
+        docker.untar \
         git.release \
         npm.install \
         test.docker
