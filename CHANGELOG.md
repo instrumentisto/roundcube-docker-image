@@ -6,6 +6,18 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## [1.5.3-r0] · 2022-06-27
+[1.5.3-r0]: /../../tree/1.5.3-r0
+
+[Diff](/../../compare/1.5.2-r8...1.5.3-r0)
+
+### Upgraded
+
+- [Roundcube] 1.5.3: <https://github.com/roundcube/roundcubemail/releases/tag/1.5.3>
+
+
+
+
 ## [1.5.2-r8] · 2022-06-24
 [1.5.2-r8]: /../../tree/1.5.2-r8
 

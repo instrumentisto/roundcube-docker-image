@@ -23,8 +23,8 @@ REGISTRIES := $(strip $(subst $(comma), ,\
 	$(shell grep -m1 'registry: \["' .github/workflows/ci.yml \
 	        | cut -d':' -f2 | tr -d '"][')))
 ALL_IMAGES := \
-	1.5/apache:1.5.2-r8-apache,1.5.2-apache,1.5-apache,1-apache,apache,latest \
-	1.5/fpm:1.5.2-r8-fpm,1.5.2-fpm,1.5-fpm,1-fpm,fpm \
+	1.5/apache:1.5.3-r0-apache,1.5.3-apache,1.5-apache,1-apache,apache,latest \
+	1.5/fpm:1.5.3-r0-fpm,1.5.3-fpm,1.5-fpm,1-fpm,fpm \
 	1.4/apache:1.4.13-r8-apache,1.4.13-apache,1.4-apache \
 	1.4/fpm:1.4.13-r8-fpm,1.4.13-fpm,1.4-fpm \
 	1.3/apache:1.3.17-r9-apache,1.3.17-apache,1.3-apache \
