@@ -110,7 +110,7 @@ jobs:
              ) }}
 
       - uses: actions/checkout@v3
-        if: ${{ steps.skip.outputs.no }}
+        if: ${{ steps.skip.outputs.no == 'true' }}
 
       - name: Parse semver versions from Git tag
         id: semver
@@ -128,9 +128,9 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: ${{ matrix.dist }}-${{ steps.semver.outputs.group2 }}-${{ github.run_number }}
-        if: ${{ steps.skip.outputs.no }}
+        if: ${{ steps.skip.outputs.no == 'true' }}
       - run: make docker.untar from-file=image.tar
-        if: ${{ steps.skip.outputs.no }}
+        if: ${{ steps.skip.outputs.no == 'true' }}
 
       - name: Login to ${{ matrix.registry }} container registry
         uses: docker/login-action@v2
@@ -146,17 +146,17 @@ jobs:
                      || (matrix.registry == 'quay.io'
                          && secrets.QUAYIO_ROBOT_TOKEN)
                      || secrets.GITHUB_TOKEN }}
-        if: ${{ steps.skip.outputs.no }}
+        if: ${{ steps.skip.outputs.no == 'true' }}
 
       - run: make docker.tags
                   DOCKERFILE=${{ steps.semver.outputs.group2 }}/${{ matrix.dist }}
                   registries=${{ matrix.registry }}
                   of=build-${{ github.run_number }}
-        if: ${{ steps.skip.outputs.no }}
+        if: ${{ steps.skip.outputs.no == 'true' }}
       - run: make docker.push
                   DOCKERFILE=${{ steps.semver.outputs.group2 }}/${{ matrix.dist }}
                   registries=${{ matrix.registry }}
-        if: ${{ steps.skip.outputs.no }}
+        if: ${{ steps.skip.outputs.no == 'true' }}
 
       # On GitHub Container Registry README is automatically updated on pushes.
       - name: Update README on Docker Hub
@@ -168,7 +168,8 @@ jobs:
         env:
           DOCKER_USER: ${{ secrets.DOCKERHUB_BOT_USER }}
           DOCKER_PASS: ${{ secrets.DOCKERHUB_BOT_PASS }}
-        if: ${{ steps.skip.outputs.no && matrix.registry == 'docker.io' }}
+        if: ${{ steps.skip.outputs.no == 'true'
+                && matrix.registry == 'docker.io' }}
       - name: Update README on Quay.io
         uses: christian-korneck/update-container-description-action@v1
         with:
@@ -177,7 +178,8 @@ jobs:
           readme_file: README.md
         env:
           DOCKER_APIKEY: ${{ secrets.QUAYIO_API_TOKEN }}
-        if: ${{ steps.skip.outputs.no && matrix.registry == 'quay.io' }}
+        if: ${{ steps.skip.outputs.no == 'true'
+                && matrix.registry == 'quay.io' }}
 
   release-github:
     name: Release on GitHub
