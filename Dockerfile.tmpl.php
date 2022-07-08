@@ -3,6 +3,7 @@ $var = getopt('', ['version:', 'dockerfile:']);
 $isApacheImage = explode('/', $var['dockerfile'])[1] === 'apache';
 $RoundcubeVer = explode('-', $var['version'])[0];
 $isMinorVerLt4 = (intval(explode('.', $RoundcubeVer)[1]) < 4);
+$isMinorVerLt5 = (intval(explode('.', $RoundcubeVer)[1]) < 5);
 $phpVer = (intval(explode('.', $RoundcubeVer)[1]) < 5) ? '7.4' : '8.1';
 ?>
 # AUTOMATICALLY GENERATED
@@ -170,6 +171,9 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
  # Resolve Roudcube Composer dependencies
  && mv /app/composer.json-dist /app/composer.json \
  && cd /app/ \
+<? if ($isMinorVerLt5) { ?>
+ && /tmp/composer config allow-plugins.roundcube/plugin-installer true \
+<? } ?>
  && (/tmp/composer suggests --list | xargs -i /tmp/composer require {}) \
  && /tmp/composer install --no-dev --optimize-autoloader --no-progress \
     \
