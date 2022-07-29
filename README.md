@@ -17,12 +17,12 @@ Roundcube Webmail Docker image
 
 ## Supported tags and respective `Dockerfile` links
 
-- [`1.5.3-r2-apache`, `1.5.3-apache`, `1.5-apache`, `1-apache`, `apache`, `latest`][101]
-- [`1.5.3-r2-fpm`, `1.5.3-fpm`, `1.5-fpm`, `1-fpm`, `fpm`][102]
-- [`1.4.13-r10-apache`, `1.4.13-apache`, `1.4-apache`][103]
-- [`1.4.13-r10-fpm`, `1.4.13-fpm`, `1.4-fpm`][104]
-- [`1.3.17-r11-apache`, `1.3.17-apache`, `1.3-apache`][105]
-- [`1.3.17-r11-fpm`, `1.3.17-fpm`, `1.3-fpm`][106]
+- [`1.6.0-r0-apache`, `1.6.0-apache`, `1.6-apache`, `1-apache`, `apache`, `latest`][101]
+- [`1.6.0-r0-fpm`, `1.6.0-fpm`, `1.6-fpm`, `1-fpm`, `fpm`][102]
+- [`1.5.3-r2-apache`, `1.5.3-apache`, `1.5-apache`][103]
+- [`1.5.3-r2-fpm`, `1.5.3-fpm`, `1.5-fpm`][104]
+- [`1.4.13-r10-apache`, `1.4.13-apache`, `1.4-apache`][105]
+- [`1.4.13-r10-fpm`, `1.4.13-fpm`, `1.4-fpm`][106]
 
 
 
@@ -195,9 +195,9 @@ If you have any problems with or questions about this image, please contact us t
 [91]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/LICENSE.md
 [92]: https://github.com/instrumentisto/roundcube-docker-image
 
-[101]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/1.5/apache/Dockerfile
-[102]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/1.5/fpm/Dockerfile
-[103]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/1.4/apache/Dockerfile
-[104]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/1.4/fpm/Dockerfile
-[105]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/1.3/apache/Dockerfile
-[106]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/1.3/fpm/Dockerfile
+[101]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/1.6/apache/Dockerfile
+[102]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/1.6/fpm/Dockerfile
+[103]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/1.5/apache/Dockerfile
+[104]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/1.5/fpm/Dockerfile
+[105]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/1.4/apache/Dockerfile
+[106]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/1.4/fpm/Dockerfile

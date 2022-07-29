@@ -169,7 +169,7 @@ ROUNDCUBE_MINOR_VER=$(echo "$DOCKERFILE" | cut -d '/' -f 1 | tr -d ' ')
 }
 
 @test "PHP mbstring.func_overload disabled" {
-  [ "$ROUNDCUBE_MINOR_VER" == "1.5" ] && skip "no mbstring.func_overload exists"
+  [ "$ROUNDCUBE_MINOR_VER" != "1.4" ] && skip "no mbstring.func_overload exists"
   run docker run --rm --entrypoint sh $IMAGE -c \
     'php -i | grep -Fx "mbstring.func_overload => 0 => 0"'
   [ "$status" -eq 0 ]
@@ -228,14 +228,14 @@ ROUNDCUBE_MINOR_VER=$(echo "$DOCKERFILE" | cut -d '/' -f 1 | tr -d ' ')
 
 
 @test "PHP_OPCACHE_JIT_BUFFER_SIZE enables OPcache JIT by default" {
-  [ "$ROUNDCUBE_MINOR_VER" != "1.5" ] && skip "no OPcache JIT exists"
+  [ "$ROUNDCUBE_MINOR_VER" == "1.4" ] && skip "no OPcache JIT exists"
   run docker run --rm --entrypoint /docker-entrypoint.sh $IMAGE sh -c \
     'php -i | grep -Fx "opcache.jit_buffer_size => 100M => 100M"'
   [ "$status" -eq 0 ]
 }
 
 @test "PHP_OPCACHE_JIT_BUFFER_SIZE=0 disables OPcache JIT" {
-  [ "$ROUNDCUBE_MINOR_VER" != "1.5" ] && skip "no OPcache JIT exists"
+  [ "$ROUNDCUBE_MINOR_VER" == "1.4" ] && skip "no OPcache JIT exists"
   run docker run --rm -e PHP_OPCACHE_JIT_BUFFER_SIZE=0 \
                       --entrypoint /docker-entrypoint.sh $IMAGE sh -c \
     'php -i | grep -Fx "opcache.jit_buffer_size => 0 => 0"'
@@ -243,7 +243,7 @@ ROUNDCUBE_MINOR_VER=$(echo "$DOCKERFILE" | cut -d '/' -f 1 | tr -d ' ')
 }
 
 @test "PHP_OPCACHE_JIT_BUFFER_SIZE=50 enables OPcache JIT of 50 buffer size" {
-  [ "$ROUNDCUBE_MINOR_VER" != "1.5" ] && skip "no OPcache JIT exists"
+  [ "$ROUNDCUBE_MINOR_VER" == "1.4" ] && skip "no OPcache JIT exists"
   run docker run --rm -e PHP_OPCACHE_JIT_BUFFER_SIZE=50 \
                       --entrypoint /docker-entrypoint.sh $IMAGE sh -c \
     'php -i | grep -Fx "opcache.jit_buffer_size => 50 => 50"'
@@ -321,7 +321,7 @@ ROUNDCUBE_MINOR_VER=$(echo "$DOCKERFILE" | cut -d '/' -f 1 | tr -d ' ')
 
 @test "Apache 'php' module is loaded" {
   [ "$IMAGE_TYPE" != "apache" ] && skip "no Apache"
-  [ "$ROUNDCUBE_MINOR_VER" != "1.5" ] && skip "no 'php' Apache module exists"
+  [ "$ROUNDCUBE_MINOR_VER" == "1.4" ] && skip "no 'php' Apache module exists"
   run docker run --rm --entrypoint sh $IMAGE -c \
     'apache2ctl -M | grep -F php_module'
   [ "$status" -eq 0 ]
@@ -329,7 +329,7 @@ ROUNDCUBE_MINOR_VER=$(echo "$DOCKERFILE" | cut -d '/' -f 1 | tr -d ' ')
 
 @test "Apache 'php7' module is loaded" {
   [ "$IMAGE_TYPE" != "apache" ] && skip "no Apache"
-  [ "$ROUNDCUBE_MINOR_VER" == "1.5" ] && skip "no 'php7' Apache module exists"
+  [ "$ROUNDCUBE_MINOR_VER" != "1.4" ] && skip "no 'php7' Apache module exists"
   run docker run --rm --entrypoint sh $IMAGE -c \
     'apache2ctl -M | grep -F php7_module'
   [ "$status" -eq 0 ]
@@ -340,28 +340,6 @@ ROUNDCUBE_MINOR_VER=$(echo "$DOCKERFILE" | cut -d '/' -f 1 | tr -d ' ')
   run docker run --rm --entrypoint sh $IMAGE -c \
     'apache2ctl -M | grep -F rewrite_module'
   [ "$status" -eq 0 ]
-}
-
-
-@test "Roundcube .htaccess uses correct 'mod_php'" {
-  [ "$IMAGE_TYPE" != "apache" ] && skip "no .htaccess used"
-  [ "$ROUNDCUBE_MINOR_VER" != "1.3" ] && skip "no mod_php is configured"
-  run docker run --rm --entrypoint sh $IMAGE -c \
-    'cat /var/www/.htaccess | grep -F mod_php7'
-  [ "$status" -eq 0 ]
-  run docker run --rm --entrypoint sh $IMAGE -c \
-    'cat /var/www/.htaccess | grep -F mod_php5 | wc -l'
-  [ "$status" -eq 0 ]
-  [ "$output" == "0" ]
-}
-
-@test "Roundcube .htaccess has unexistent PHP options being commented" {
-  [ "$IMAGE_TYPE" != "apache" ] && skip "no .htaccess used"
-  [ "$ROUNDCUBE_MINOR_VER" != "1.3" ] && skip "no mod_php is configured"
-  run docker run --rm --entrypoint sh $IMAGE -c \
-    'cat /var/www/.htaccess | grep -F suhosin.session.encrypt | head -c 1'
-  [ "$status" -eq 0 ]
-  [ "$output"  == "#" ]
 }
 
 

@@ -99,16 +99,16 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
  && apt-get install -y --no-install-recommends --no-install-suggests \
             $toolDeps \
     \
- # Resolve Roudcube Composer dependencies
+ # Resolve Roundcube Composer dependencies
  && mv /app/composer.json-dist /app/composer.json \
  && cd /app/ \
  && (/tmp/composer suggests --list | xargs -i /tmp/composer require {}) \
  && /tmp/composer install --no-dev --optimize-autoloader --no-progress \
     \
- # Resolve Roudcube JS dependencies
+ # Resolve Roundcube JS dependencies
  && /app/bin/install-jsdeps.sh \
     \
- # Make default Roudcube configuration log to syslog
+ # Make default Roundcube configuration log to syslog
  && sed -i -r 's/^([^\s]{9}log_driver[^\s]{2} =) [^\s]+$/\1 "syslog";/g' \
         /app/config/defaults.inc.php \
     \
@@ -127,6 +127,8 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
  && (find /app/ -name .gitignore -type f -prune | \
         while read d; do rm -rf $d; done) \
  && (find /app/ -name .git -type d -prune | \
+        while read d; do rm -rf $d; done) \
+ && (find /app/ -name .github -type d -prune | \
         while read d; do rm -rf $d; done) \
  && apt-get purge -y --auto-remove \
                   -o APT::AutoRemove::RecommendsImportant=false \
