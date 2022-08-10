@@ -6,6 +6,42 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## [1.6.0-r1] · 2022-08-10
+[1.6.0-r1]: /../../tree/1.6.0-r1
+
+[Diff](/../../compare/1.6.0-r0...1.6.0-r1)
+
+### Security updated
+
+- [Alpine Linux] 3.16.2: <https://github.com/docker-library/official-images/commit/00214788d0150e2bcf2b2f51f786f92addef2478>
+
+
+
+
+## [1.5.3-r3] · 2022-08-10
+[1.5.3-r3]: /../../tree/1.5.3-r3
+
+[Diff](/../../compare/1.5.3-r2...1.5.3-r3)
+
+### Security updated
+
+- [Alpine Linux] 3.16.2: <https://github.com/docker-library/official-images/commit/00214788d0150e2bcf2b2f51f786f92addef2478>
+
+
+
+
+## [1.4.13-r11] · 2022-08-10
+[1.4.13-r11]: /../../tree/1.4.13-r11
+
+[Diff](/../../compare/1.4.13-r10...1.4.13-r11)
+
+### Security updated
+
+- [Alpine Linux] 3.16.2: <https://github.com/docker-library/official-images/commit/00214788d0150e2bcf2b2f51f786f92addef2478>
+
+
+
+
 ## [1.6.0-r0] · 2022-07-29
 [1.6.0-r0]: /../../tree/1.6.0-r0
 
