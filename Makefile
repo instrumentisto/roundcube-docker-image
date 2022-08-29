@@ -23,12 +23,12 @@ REGISTRIES := $(strip $(subst $(comma), ,\
 	$(shell grep -m1 'registry: \["' .github/workflows/ci.yml \
 	        | cut -d':' -f2 | tr -d '"][')))
 ALL_IMAGES := \
-	1.6/apache:1.6.0-r1-apache,1.6.0-apache,1.6-apache,1-apache,apache,latest \
-	1.6/fpm:1.6.0-r1-fpm,1.6.0-fpm,1.6-fpm,1-fpm,fpm \
-	1.5/apache:1.5.3-r3-apache,1.5.3-apache,1.5-apache \
-	1.5/fpm:1.5.3-r3-fpm,1.5.3-fpm,1.5-fpm \
-	1.4/apache:1.4.13-r11-apache,1.4.13-apache,1.4-apache \
-	1.4/fpm:1.4.13-r11-fpm,1.4.13-fpm,1.4-fpm
+	1.6/apache:1.6.0-r2-apache,1.6.0-apache,1.6-apache,1-apache,apache,latest \
+	1.6/fpm:1.6.0-r2-fpm,1.6.0-fpm,1.6-fpm,1-fpm,fpm \
+	1.5/apache:1.5.3-r4-apache,1.5.3-apache,1.5-apache \
+	1.5/fpm:1.5.3-r4-fpm,1.5.3-fpm,1.5-fpm \
+	1.4/apache:1.4.13-r12-apache,1.4.13-apache,1.4-apache \
+	1.4/fpm:1.4.13-r12-fpm,1.4.13-fpm,1.4-fpm
 #	<Dockerfile>:<version>,<tag1>,<tag2>,...
 
 # Default is first image from ALL_IMAGES list.
