@@ -352,3 +352,9 @@ ROUNDCUBE_MINOR_VER=$(echo "$DOCKERFILE" | cut -d '/' -f 1 | tr -d ' ')
   run docker run --rm --entrypoint sh $IMAGE -c 'gpg --help'
   [ "$status" -eq 0 ]
 }
+
+
+@test "syslogd runs ok" {
+  run docker run --rm --entrypoint sh $IMAGE -c 'syslogd --help'
+  [ "$status" -eq 0 ]
+}
