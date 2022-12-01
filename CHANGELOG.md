@@ -6,6 +6,30 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## [1.6.0-r4] · 2022-12-01
+[1.6.0-r4]: /../../tree/1.6.0-r4
+
+[Diff](/../../compare/1.6.0-r3...1.6.0-r4)
+
+### Upgraded
+
+- [Alpine Linux] 3.17: <https://www.alpinelinux.org/posts/Alpine-3.17.0-released.html>
+
+
+
+
+## [1.5.3-r6] · 2022-12-01
+[1.5.3-r6]: /../../tree/1.5.3-r6
+
+[Diff](/../../compare/1.5.3-r5...1.5.3-r6)
+
+### Upgraded
+
+- [Alpine Linux] 3.17: <https://www.alpinelinux.org/posts/Alpine-3.17.0-released.html>
+
+
+
+
 ## [1.6.0-r3] · 2022-08-30
 [1.6.0-r3]: /../../tree/1.6.0-r3
 
