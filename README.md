@@ -124,29 +124,29 @@ The image with Roundcube Webmail served by [Apache HTTP server](http://httpd.apa
 The image with Roundcube Webmail served by [PHP-FPM][9].  
 It cannot be used alone and is intended to be used in conjunction with some other web server image (like [Nginx][11], [Apache][12], etc).
 
-This image is based on the popular [Alpine Linux project][1], available in [the alpine official image][2]. Alpine Linux is much smaller than most distribution base images (~5MB), and thus leads to much slimmer images in general.
+This image is based on the popular [Alpine Linux project][1], available in [the alpine official image][2]. [Alpine Linux][1] is much smaller than most distribution base images (~5MB), and thus leads to much slimmer images in general.
 
 
-### `X`
+### `<X>`
 
-Latest tag of `X` Roundcube Webmail's major version.
-
-
-### `X.Y`
-
-Latest tag of `X.Y` Roundcube Webmail's minor version.
+Latest tag of the latest major `X` Roundcube Webmail version.
 
 
-### `X.Y.Z`
+### `<X.Y>`
 
-Latest tag of a concrete `vX.Y.Z` version of Roundcube Webmail.
+Latest tag of the latest minor `X.Y` Roundcube Webmail version.
 
 
-### `X.Y.Z-rN`
+### `<X.Y.Z>`
 
-Concrete `N` image revision tag of a Roundcube Webmail's concrete `X.Y.Z` version.
+Latest tag of the concrete `X.Y.Z` Roundcube Webmail version.
 
-Once build, it's never updated.
+
+### `<X.Y.Z>-r<N>`
+
+Concrete `N` image revision tag of the concrete `X.Y.Z` Roundcube Webmail version.
+
+Once built, it's never updated.
 
 
 
@@ -169,7 +169,6 @@ The [sources][92] for producing `instrumentisto/roundcube` Docker images are lic
 We can't notice comments in the [DockerHub] (or other container registries) so don't use them for reporting issue or asking question.
 
 If you have any problems with or questions about this image, please contact us through a [GitHub issue][3].
-
 
 
 
