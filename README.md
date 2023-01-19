@@ -17,12 +17,12 @@ Roundcube Webmail Docker image
 
 ## Supported tags and respective `Dockerfile` links
 
-- [`1.6.0-r5-apache`, `1.6.0-apache`, `1.6-apache`, `1-apache`, `apache`, `latest`][101]
-- [`1.6.0-r5-fpm`, `1.6.0-fpm`, `1.6-fpm`, `1-fpm`, `fpm`][102]
-- [`1.5.3-r7-apache`, `1.5.3-apache`, `1.5-apache`][103]
-- [`1.5.3-r7-fpm`, `1.5.3-fpm`, `1.5-fpm`][104]
-- [`1.4.13-r13-apache`, `1.4.13-apache`, `1.4-apache`][105]
-- [`1.4.13-r13-fpm`, `1.4.13-fpm`, `1.4-fpm`][106]
+- [`1.6.0-r6-apache`, `1.6.0-apache`, `1.6-apache`, `1-apache`, `apache`, `latest`][101]
+- [`1.6.0-r6-fpm`, `1.6.0-fpm`, `1.6-fpm`, `1-fpm`, `fpm`][102]
+- [`1.5.3-r8-apache`, `1.5.3-apache`, `1.5-apache`][103]
+- [`1.5.3-r8-fpm`, `1.5.3-fpm`, `1.5-fpm`][104]
+- [`1.4.13-r14-apache`, `1.4.13-apache`, `1.4-apache`][105]
+- [`1.4.13-r14-fpm`, `1.4.13-fpm`, `1.4-fpm`][106]
 
 
 
@@ -111,7 +111,7 @@ With providing `SHARE_APP=1` environment variable you have this behavior out-of-
 
 
 
-## Image versions
+## Image tags
 
 
 ### `apache`, `latest`
