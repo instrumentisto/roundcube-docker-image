@@ -6,6 +6,32 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## [1.6.1-r1] · 2023-02-13
+[1.6.1-r1]: /../../tree/1.6.1-r1
+
+[Diff](/../../compare/1.6.1-r0...1.6.1-r1)
+
+### Security updated
+
+- [Alpine Linux] 3.17.2: <https://github.com/docker-library/official-images/commit/5819aa56167e9874ef65e35da8277dc71b3ecee6>
+- [Debian Linux] "bullseye" 20230208: <https://github.com/docker-library/official-images/commit/0a379d1f4d38dee47df84b07afcf5c26d03cc5a5>
+
+
+
+
+## [1.5.3-r9] · 2023-02-13
+[1.5.3-r9]: /../../tree/1.5.3-r9
+
+[Diff](/../../compare/1.5.3-r8...1.5.3-r9)
+
+### Security updated
+
+- [Alpine Linux] 3.17.2: <https://github.com/docker-library/official-images/commit/5819aa56167e9874ef65e35da8277dc71b3ecee6>
+- [Debian Linux] "bullseye" 20230208: <https://github.com/docker-library/official-images/commit/0a379d1f4d38dee47df84b07afcf5c26d03cc5a5>
+
+
+
+
 ## [1.6.1-r0] · 2023-01-24
 [1.6.1-r0]: /../../tree/1.6.1-r0
 
