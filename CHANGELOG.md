@@ -6,6 +6,44 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## [1.6.1-r4] · 2023-03-31
+[1.6.1-r4]: /../../tree/1.6.1-r4
+
+[Diff](/../../compare/1.6.1-r3...1.6.1-r4)
+
+### Security updated
+
+- [Alpine Linux] 3.17.3: <https://github.com/docker-library/official-images/commit/3f1217773efac2f535ec54e17c574ae3f762ff7c>
+- [Debian Linux] "bullseye" 20230320: <https://github.com/docker-library/official-images/commit/066bc3b863f98325ff211a27301fe1b5a5d51721>
+
+
+
+
+## [1.5.3-r12] · 2023-03-31
+[1.5.3-r12]: /../../tree/1.5.3-r12
+
+[Diff](/../../compare/1.5.3-r11...1.5.3-r12)
+
+### Security updated
+
+- [Alpine Linux] 3.17.3: <https://github.com/docker-library/official-images/commit/3f1217773efac2f535ec54e17c574ae3f762ff7c>
+- [Debian Linux] "bullseye" 20230320: <https://github.com/docker-library/official-images/commit/066bc3b863f98325ff211a27301fe1b5a5d51721>
+
+
+
+
+## [1.4.13-r17] · 2023-03-31
+[1.4.13-r17]: /../../tree/1.4.13-r17
+
+[Diff](/../../compare/1.4.13-r16...1.4.13-r17)
+
+### Upgraded
+
+- [Alpine Linux] 3.16.5: <https://github.com/docker-library/official-images/commit/d5e1db947991b391f375ef1e8686b884538c1917>
+
+
+
+
 ## [1.6.1-r3] · 2023-02-21
 [1.6.1-r3]: /../../tree/1.6.1-r3
 
