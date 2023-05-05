@@ -6,6 +6,50 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## [1.6.1-r6] · 2023-05-05
+[1.6.1-r6]: /../../tree/1.6.1-r6
+
+[Diff](/../../compare/1.6.1-r5...1.6.1-r6)
+
+### Upgraded
+
+- [s6-overlay] 3.1.5.0: <https://github.com/just-containers/s6-overlay/releases/tag/v3.1.5.0>
+
+### Security updated
+
+- [Debian Linux] "bullseye" 20230502: <https://github.com/docker-library/official-images/commit/e4358612aca01fd8aa393e7b3d590d45ae72e9af>
+
+
+
+
+## [1.5.3-r14] · 2023-05-05
+[1.5.3-r14]: /../../tree/1.5.3-r14
+
+[Diff](/../../compare/1.5.3-r13...1.5.3-r14)
+
+### Upgraded
+
+- [s6-overlay] 3.1.5.0: <https://github.com/just-containers/s6-overlay/releases/tag/v3.1.5.0>
+
+### Security updated
+
+- [Debian Linux] "bullseye" 20230502: <https://github.com/docker-library/official-images/commit/e4358612aca01fd8aa393e7b3d590d45ae72e9af>
+
+
+
+
+## [1.4.13-r19] · 2023-05-05
+[1.4.13-r19]: /../../tree/1.4.13-r19
+
+[Diff](/../../compare/1.4.13-r18...1.4.13-r19)
+
+### Upgraded
+
+- [s6-overlay] 3.1.5.0: <https://github.com/just-containers/s6-overlay/releases/tag/v3.1.5.0>
+
+
+
+
 ## [1.6.1-r5] · 2023-04-05
 [1.6.1-r5]: /../../tree/1.6.1-r5
 

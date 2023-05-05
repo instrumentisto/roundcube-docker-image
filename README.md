@@ -17,12 +17,12 @@ Roundcube Webmail Docker image
 
 ## Supported tags and respective `Dockerfile` links
 
-- [`1.6.1-r5-apache`, `1.6.1-apache`, `1.6-apache`, `1-apache`, `apache`, `latest`][101]
-- [`1.6.1-r5-fpm`, `1.6.1-fpm`, `1.6-fpm`, `1-fpm`, `fpm`][102]
-- [`1.5.3-r13-apache`, `1.5.3-apache`, `1.5-apache`][103]
-- [`1.5.3-r13-fpm`, `1.5.3-fpm`, `1.5-fpm`][104]
-- [`1.4.13-r18-apache`, `1.4.13-apache`, `1.4-apache`][105]
-- [`1.4.13-r18-fpm`, `1.4.13-fpm`, `1.4-fpm`][106]
+- [`1.6.1-r6-apache`, `1.6.1-apache`, `1.6-apache`, `1-apache`, `apache`, `latest`][101]
+- [`1.6.1-r6-fpm`, `1.6.1-fpm`, `1.6-fpm`, `1-fpm`, `fpm`][102]
+- [`1.5.3-r14-apache`, `1.5.3-apache`, `1.5-apache`][103]
+- [`1.5.3-r14-fpm`, `1.5.3-fpm`, `1.5-fpm`][104]
+- [`1.4.13-r19-apache`, `1.4.13-apache`, `1.4-apache`][105]
+- [`1.4.13-r19-fpm`, `1.4.13-fpm`, `1.4-fpm`][106]
 
 
 
