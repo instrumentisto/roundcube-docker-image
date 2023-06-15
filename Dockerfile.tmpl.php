@@ -4,7 +4,7 @@ $isApacheImage = explode('/', $var['dockerfile'])[1] === 'apache';
 $RoundcubeVer = explode('-', $var['version'])[0];
 $isMinorVerLt5 = (intval(explode('.', $RoundcubeVer)[1]) < 5);
 $isMinorVerGt5 = (intval(explode('.', $RoundcubeVer)[1]) > 5);
-$phpVer = $isMinorVerLt5 ? '7.4' : '8.1';
+$phpVer = $isMinorVerLt5 ? '7.4' : '8.2';
 $alpineVer = $isMinorVerLt5 ? '3.16' : '3.18';
 ?>
 # AUTOMATICALLY GENERATED
@@ -81,6 +81,9 @@ RUN apk update \
             $buildDeps \
 <? } else { ?>
  && apk add --no-cache --virtual .build-deps \
+<? if ($phpVer === '8.2') { ?>
+        linux-headers \
+<? } ?>
         postgresql-dev unixodbc-dev freetds-dev \
         aspell-dev \
         icu-dev \

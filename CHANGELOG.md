@@ -13,6 +13,7 @@ All user visible changes to this project will be documented in this file. This p
 
 ### Upgraded
 
+- [PHP] 8.2: <https://www.php.net/releases/8.2>
 - [Debian Linux] "bookworm": <https://www.debian.org/releases/bookworm>
 
 ### Security updated
@@ -29,6 +30,7 @@ All user visible changes to this project will be documented in this file. This p
 
 ### Upgraded
 
+- [PHP] 8.2: <https://www.php.net/releases/8.2>
 - [Debian Linux] "bookworm": <https://www.debian.org/releases/bookworm>
 
 ### Security updated
