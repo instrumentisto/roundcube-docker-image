@@ -11,6 +11,10 @@ All user visible changes to this project will be documented in this file. This p
 
 [Diff](/../../compare/1.6.1-r7...1.6.1-r8)
 
+### Upgraded
+
+- [Debian Linux] "bookworm": <https://www.debian.org/releases/bookworm>
+
 ### Security updated
 
 - [Alpine Linux] 3.18.2: <https://github.com/docker-library/official-images/commit/b187a3b64f4b23f4de4aef23b98cef0a128aa8f1>
@@ -22,6 +26,10 @@ All user visible changes to this project will be documented in this file. This p
 [1.5.3-r16]: /../../tree/1.5.3-r16
 
 [Diff](/../../compare/1.5.3-r15...1.5.3-r16)
+
+### Upgraded
+
+- [Debian Linux] "bookworm": <https://www.debian.org/releases/bookworm>
 
 ### Security updated
 

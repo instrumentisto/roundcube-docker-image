@@ -32,8 +32,8 @@ RUN apt-get update \
  && apt-get install -y --no-install-recommends --no-install-suggests \
             libpq5 libodbc1 libsybdb5 \
             libaspell15 \
-            libicu67 \
-            libldap-2.4-2 libsasl2-2 \
+            libicu72 \
+            libldap-2.5-0 libsasl2-2 \
             libjpeg62-turbo libpng16-16 libfreetype6 \
             libzip4 \
     \
