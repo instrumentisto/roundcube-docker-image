@@ -6,18 +6,6 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## [1.4.14-r0] · 2023-09-18
-[1.4.14-r0]: /../../tree/1.4.14-r0
-
-[Diff](/../../compare/1.4.13-r19...1.4.14-r0)
-
-### Upgraded
-
-- [Roundcube] 1.4.14: <https://github.com/roundcube/roundcubemail/releases/tag/1.4.14>
-
-
-
-
 ## [1.6.2-r1] · 2023-08-??
 [1.6.2-r1]: /../../tree/1.6.2-r1
 
@@ -30,14 +18,30 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## [1.5.3-r17] · 2023-08-??
-[1.5.3-r17]: /../../tree/1.5.3-r17
+## [1.5.4-r0] · 2023-09-18
+[1.5.4-r0]: /../../tree/1.5.4-r0
 
-[Diff](/../../compare/1.5.3-r17...)
+[Diff](/../../compare/1.5.3-r17...1.5.4-r0)
+
+### Upgraded
+
+- [Roundcube] 1.5.14: <https://github.com/roundcube/roundcubemail/releases/tag/1.5.4>
 
 ### Security updated
 
 - [Debian Linux] "bookworm" 20230814: <https://github.com/docker-library/official-images/commit/41698123990194f4e14436e3caff748bf16455a9>
+
+
+
+
+## [1.4.14-r0] · 2023-09-18
+[1.4.14-r0]: /../../tree/1.4.14-r0
+
+[Diff](/../../compare/1.4.13-r19...1.4.14-r0)
+
+### Upgraded
+
+- [Roundcube] 1.4.14: <https://github.com/roundcube/roundcubemail/releases/tag/1.4.14>
 
 
 
