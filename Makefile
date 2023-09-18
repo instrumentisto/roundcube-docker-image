@@ -27,8 +27,8 @@ ALL_IMAGES := \
 	1.6/fpm:1.6.2-r1-fpm,1.6.2-fpm,1.6-fpm,1-fpm,fpm \
 	1.5/apache:1.5.3-r17-apache,1.5.3-apache,1.5-apache \
 	1.5/fpm:1.5.3-r17-fpm,1.5.3-fpm,1.5-fpm \
-	1.4/apache:1.4.13-r19-apache,1.4.13-apache,1.4-apache \
-	1.4/fpm:1.4.13-r19-fpm,1.4.13-fpm,1.4-fpm
+	1.4/apache:1.4.14-r0-apache,1.4.14-apache,1.4-apache \
+	1.4/fpm:1.4.14-r0-fpm,1.4.14-fpm,1.4-fpm
 #	<Dockerfile>:<version>,<tag1>,<tag2>,...
 
 # Default is first image from ALL_IMAGES list.
