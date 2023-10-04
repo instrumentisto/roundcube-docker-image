@@ -6,25 +6,27 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## [1.6.3-r0] · 2023-09-??
-[1.6.3-r0]: /../../tree/1.6.3-r0
+## [1.6.3-r1] · 2023-10-04
+[1.6.3-r1]: /../../tree/1.6.3-r1
 
-[Diff](/../../compare/1.6.3-r0...)
+[Diff](/../../compare/1.6.3-r0...1.6.3-r1)
 
 ### Security updated
 
+- [Alpine Linux] 3.18.4: <https://github.com/docker-library/official-images/commit/2f22914dcf488bd066771452d2c694ad4f7e88c4>
 - [Debian Linux] "bookworm" 20230919: <https://github.com/docker-library/official-images/commit/8b469263a1fab3a17b9f520bcf8ef53f3c828e27>
 
 
 
 
-## [1.5.4-r0] · 2023-09-??
-[1.5.4-r0]: /../../tree/1.5.4-r0
+## [1.5.4-r1] · 2023-10-04
+[1.5.4-r1]: /../../tree/1.5.4-r1
 
-[Diff](/../../compare/1.5.4-r0...)
+[Diff](/../../compare/1.5.4-r0...1.5.4-r1)
 
 ### Security updated
 
+- [Alpine Linux] 3.18.4: <https://github.com/docker-library/official-images/commit/2f22914dcf488bd066771452d2c694ad4f7e88c4>
 - [Debian Linux] "bookworm" 20230919: <https://github.com/docker-library/official-images/commit/8b469263a1fab3a17b9f520bcf8ef53f3c828e27>
 
 
