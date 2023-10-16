@@ -30,6 +30,18 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## [1.4.15-r0] · 2023-10-16
+[1.4.15-r0]: /../../tree/1.4.15-r0
+
+[Diff](/../../compare/1.4.14-r0...1.4.15-r0)
+
+### Upgraded
+
+- [Roundcube] 1.4.15: <https://github.com/roundcube/roundcubemail/releases/tag/1.4.15>
+
+
+
+
 ## [1.6.3-r1] · 2023-10-04
 [1.6.3-r1]: /../../tree/1.6.3-r1
 
