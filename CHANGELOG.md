@@ -6,6 +6,30 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## [1.6.5-r2] · 2023-??-??
+[1.6.5-r2]: /../../tree/1.6.5-r2
+
+[Diff](/../../compare/1.6.5-r2...)
+
+### Security updated
+
+- [Debian Linux] "bookworm" 20231120: <https://github.com/docker-library/official-images/commit/bc9070c6b145c707a27d9e5c7db792139e36c2b6>
+
+
+
+
+## [1.5.6-r2] · 2023-??-??
+[1.5.6-r2]: /../../tree/1.5.6-r2
+
+[Diff](/../../compare/1.5.6-r2...)
+
+### Security updated
+
+- [Debian Linux] "bookworm" 20231120: <https://github.com/docker-library/official-images/commit/bc9070c6b145c707a27d9e5c7db792139e36c2b6>
+
+
+
+
 ## [1.6.5-r2] · 2023-11-20
 [1.6.5-r2]: /../../tree/1.6.5-r2
 
