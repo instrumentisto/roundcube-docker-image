@@ -5,7 +5,7 @@
 FROM php:7.4-fpm-alpine3.16
 
 ARG roundcube_ver=1.4.15
-ARG s6_overlay_ver=3.1.6.1
+ARG s6_overlay_ver=3.1.6.2
 
 
 # Install s6-overlay

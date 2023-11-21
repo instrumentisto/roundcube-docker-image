@@ -6,10 +6,30 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## [1.6.5-r2] · 2023-??-??
-[1.6.5-r2]: /../../tree/1.6.5-r2
+## [1.6.5-r3] · 2023-11-21
+[1.6.5-r3]: /../../tree/1.6.5-r3
 
-[Diff](/../../compare/1.6.5-r2...)
+[Diff](/../../compare/1.6.5-r2...1.6.5-r3)
+
+### Upgraded
+
+- [s6-overlay] 3.1.6.2: <https://github.com/just-containers/s6-overlay/releases/tag/v3.1.6.2>
+
+### Security updated
+
+- [Debian Linux] "bookworm" 20231120: <https://github.com/docker-library/official-images/commit/bc9070c6b145c707a27d9e5c7db792139e36c2b6>
+
+
+
+
+## [1.5.6-r3] · 2023-11-21
+[1.5.6-r3]: /../../tree/1.5.6-r3
+
+[Diff](/../../compare/1.5.6-r2...1.5.6-r3)
+
+### Upgraded
+
+- [s6-overlay] 3.1.6.2: <https://github.com/just-containers/s6-overlay/releases/tag/v3.1.6.2>
 
 ### Security updated
 
@@ -18,14 +38,14 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## [1.5.6-r2] · 2023-??-??
-[1.5.6-r2]: /../../tree/1.5.6-r2
+## [1.4.15-r3] · 2023-11-21
+[1.4.15-r3]: /../../tree/1.4.15-r3
 
-[Diff](/../../compare/1.5.6-r2...)
+[Diff](/../../compare/1.4.15-r2...1.4.15-r3)
 
-### Security updated
+### Upgraded
 
-- [Debian Linux] "bookworm" 20231120: <https://github.com/docker-library/official-images/commit/bc9070c6b145c707a27d9e5c7db792139e36c2b6>
+- [s6-overlay] 3.1.6.2: <https://github.com/just-containers/s6-overlay/releases/tag/v3.1.6.2>
 
 
 
