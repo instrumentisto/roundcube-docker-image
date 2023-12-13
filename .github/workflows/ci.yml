@@ -23,7 +23,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ver: ["1.6", "1.5", "1.4"]
+        ver: ["1.6", "1.5"]
         dist: ["apache", "fpm"]
     runs-on: ubuntu-latest
     steps:
@@ -63,7 +63,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ver: ["1.6", "1.5", "1.4"]
+        ver: ["1.6", "1.5"]
         dist: ["apache", "fpm"]
     runs-on: ubuntu-latest
     steps:

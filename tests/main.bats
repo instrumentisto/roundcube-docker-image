@@ -191,13 +191,6 @@ ROUNDCUBE_MINOR_VER=$(echo "$DOCKERFILE" | cut -d '/' -f 1 | tr -d ' ')
   [ "$status" -eq 0 ]
 }
 
-@test "PHP mbstring.func_overload disabled" {
-  [ "$ROUNDCUBE_MINOR_VER" != "1.4" ] && skip "no mbstring.func_overload exists"
-  run docker run --rm --pull never --entrypoint sh $IMAGE -c \
-    'php -i | grep -Fx "mbstring.func_overload => 0 => 0"'
-  [ "$status" -eq 0 ]
-}
-
 @test "PHP session.auto_start disabled" {
   run docker run --rm --pull never --entrypoint sh $IMAGE -c \
     'php -i | grep -Fx "session.auto_start => Off => Off"'
@@ -253,7 +246,6 @@ ROUNDCUBE_MINOR_VER=$(echo "$DOCKERFILE" | cut -d '/' -f 1 | tr -d ' ')
 
 
 @test "PHP_OPCACHE_JIT_BUFFER_SIZE enables OPcache JIT by default" {
-  [ "$ROUNDCUBE_MINOR_VER" == "1.4" ] && skip "no OPcache JIT exists"
   run docker run --rm --pull never \
                  --entrypoint /docker-entrypoint.sh $IMAGE sh -c \
     'php -i | grep -Fx "opcache.jit_buffer_size => 100M => 100M"'
@@ -261,7 +253,6 @@ ROUNDCUBE_MINOR_VER=$(echo "$DOCKERFILE" | cut -d '/' -f 1 | tr -d ' ')
 }
 
 @test "PHP_OPCACHE_JIT_BUFFER_SIZE=0 disables OPcache JIT" {
-  [ "$ROUNDCUBE_MINOR_VER" == "1.4" ] && skip "no OPcache JIT exists"
   run docker run --rm --pull never \
                  -e PHP_OPCACHE_JIT_BUFFER_SIZE=0 \
                  --entrypoint /docker-entrypoint.sh $IMAGE sh -c \
@@ -270,7 +261,6 @@ ROUNDCUBE_MINOR_VER=$(echo "$DOCKERFILE" | cut -d '/' -f 1 | tr -d ' ')
 }
 
 @test "PHP_OPCACHE_JIT_BUFFER_SIZE=50 enables OPcache JIT of 50 buffer size" {
-  [ "$ROUNDCUBE_MINOR_VER" == "1.4" ] && skip "no OPcache JIT exists"
   run docker run --rm --pull never \
                  -e PHP_OPCACHE_JIT_BUFFER_SIZE=50 \
                  --entrypoint /docker-entrypoint.sh $IMAGE sh -c \
@@ -354,17 +344,8 @@ ROUNDCUBE_MINOR_VER=$(echo "$DOCKERFILE" | cut -d '/' -f 1 | tr -d ' ')
 
 @test "Apache 'php' module is loaded" {
   [ "$IMAGE_TYPE" != "apache" ] && skip "no Apache"
-  [ "$ROUNDCUBE_MINOR_VER" == "1.4" ] && skip "no 'php' Apache module exists"
   run docker run --rm --pull never --entrypoint sh $IMAGE -c \
     'apache2ctl -M | grep -F php_module'
-  [ "$status" -eq 0 ]
-}
-
-@test "Apache 'php7' module is loaded" {
-  [ "$IMAGE_TYPE" != "apache" ] && skip "no Apache"
-  [ "$ROUNDCUBE_MINOR_VER" != "1.4" ] && skip "no 'php7' Apache module exists"
-  run docker run --rm --pull never --entrypoint sh $IMAGE -c \
-    'apache2ctl -M | grep -F php7_module'
   [ "$status" -eq 0 ]
 }
 

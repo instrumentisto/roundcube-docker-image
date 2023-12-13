@@ -21,8 +21,6 @@ Roundcube Webmail Docker image
 - [`1.6.5-r4-fpm`, `1.6.5-fpm`, `1.6-fpm`, `1-fpm`, `fpm`][102]
 - [`1.5.6-r4-apache`, `1.5.6-apache`, `1.5-apache`][103]
 - [`1.5.6-r4-fpm`, `1.5.6-fpm`, `1.5-fpm`][104]
-- [`1.4.15-r3-apache`, `1.4.15-apache`, `1.4-apache`][105]
-- [`1.4.15-r3-fpm`, `1.4.15-fpm`, `1.4-fpm`][106]
 
 
 
@@ -198,5 +196,3 @@ If you have any problems with or questions about this image, please contact us t
 [102]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/1.6/fpm/Dockerfile
 [103]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/1.5/apache/Dockerfile
 [104]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/1.5/fpm/Dockerfile
-[105]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/1.4/apache/Dockerfile
-[106]: https://github.com/instrumentisto/roundcube-docker-image/blob/main/1.4/fpm/Dockerfile
