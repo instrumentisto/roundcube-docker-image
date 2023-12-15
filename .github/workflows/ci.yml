@@ -45,7 +45,7 @@ jobs:
 
       - run: make docker.tar to-file=.cache/image.tar
                   tags=build-${{ github.run_number }}
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.dist }}-${{ matrix.ver }}-${{ github.run_number }}
           path: .cache/image.tar
@@ -70,7 +70,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: make npm.install
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: ${{ matrix.dist }}-${{ matrix.ver }}-${{ github.run_number }}
           path: .cache/
@@ -125,7 +125,7 @@ jobs:
           text: ${{ github.repository }}
           regex: '^${{ github.repository_owner }}/(.+)-docker-image$'
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: ${{ matrix.dist }}-${{ steps.semver.outputs.group2 }}-${{ github.run_number }}
           path: .cache/
