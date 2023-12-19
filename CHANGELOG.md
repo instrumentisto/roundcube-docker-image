@@ -6,7 +6,7 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## [1.6.5-r5] · 2023-12-13
+## [1.6.5-r5] · 2023-12-19
 [1.6.5-r5]: /../../tree/1.6.5-r5
 
 [Diff](/../../compare/1.6.5-r4...1.6.5-r5)
@@ -15,10 +15,14 @@ All user visible changes to this project will be documented in this file. This p
 
 - [Alpine Linux] 3.19: <https://www.alpinelinux.org/posts/Alpine-3.19.0-released.html>
 
+### Security updated
+
+- [Debian Linux] "bookworm" 20231218 (12.4): <https://github.com/docker-library/official-images/commit/b74fc005ee75c4609302221e135b07b5a29f9894>
 
 
 
-## [1.5.6-r5] · 2023-12-13
+
+## [1.5.6-r5] · 2023-12-19
 [1.5.6-r5]: /../../tree/1.5.6-r5
 
 [Diff](/../../compare/1.5.6-r4...1.5.6-r5)
@@ -26,6 +30,10 @@ All user visible changes to this project will be documented in this file. This p
 ### Upgraded
 
 - [Alpine Linux] 3.19: <https://www.alpinelinux.org/posts/Alpine-3.19.0-released.html>
+
+### Security updated
+
+- [Debian Linux] "bookworm" 20231218 (12.4): <https://github.com/docker-library/official-images/commit/b74fc005ee75c4609302221e135b07b5a29f9894>
 
 
 
