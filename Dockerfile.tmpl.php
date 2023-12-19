@@ -80,9 +80,7 @@ RUN apk update \
             $buildDeps \
 <? } else { ?>
  && apk add --no-cache --virtual .build-deps \
-<? if ($phpVer === '8.2') { ?>
         linux-headers \
-<? } ?>
         postgresql-dev unixodbc-dev freetds-dev \
         aspell-dev \
         icu-dev \
@@ -229,9 +227,7 @@ RUN chmod +x /etc/s6-overlay/s6-rc.d/*/run \
  && chown -R www-data:www-data /var/db
 
 ENV PHP_OPCACHE_REVALIDATION=0 \
-<? if (intval(explode('.', $phpVer)[0]) >= 8) { ?>
     PHP_OPCACHE_JIT_BUFFER_SIZE=100M \
-<? } ?>
     SHARE_APP=0
 
 
