@@ -6,10 +6,10 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## [1.6.5-r5] · 2023-??-?? (unreleased)
-[1.6.5-r5]: /../../tree/1.6.5-r5
+## [1.5.6-r5] · 2024-??-?? (unreleased)
+[1.5.6-r5]: /../../tree/1.5.6-r5
 
-[Diff](/../../compare/1.6.5-r5...)
+[Diff](/../../compare/1.5.6-r5...)
 
 ### Security updated
 
@@ -18,10 +18,14 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## [1.5.6-r5] · 2024-??-?? (unreleased)
-[1.5.6-r5]: /../../tree/1.5.6-r5
+## [1.6.6-r0] · 2024-01-23
+[1.6.6-r0]: /../../tree/1.6.6-r0
 
-[Diff](/../../compare/1.5.6-r5...)
+[Diff](/../../compare/1.6.5-r5...1.6.6-r0)
+
+### Upgraded
+
+- [Roundcube] 1.6.6: <https://github.com/roundcube/roundcubemail/releases/tag/1.6.6>
 
 ### Security updated
 
