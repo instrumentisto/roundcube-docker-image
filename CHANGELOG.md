@@ -6,13 +6,26 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## [1.5.6-r5] · 2024-??-?? (unreleased)
-[1.5.6-r5]: /../../tree/1.5.6-r5
+## [1.6.6-r1] · 2024-01-29
+[1.6.6-r1]: /../../tree/1.6.6-r1
 
-[Diff](/../../compare/1.5.6-r5...)
+[Diff](/../../compare/1.6.6-r0...1.6.6-r1)
 
 ### Security updated
 
+- [Alpine Linux] 3.19.1: <https://github.com/docker-library/official-images/commit/a5a02e00e489cfaa9dc8056755cd00abe7d0f646>
+
+
+
+
+## [1.5.6-r6] · 2024-01-29
+[1.5.6-r6]: /../../tree/1.5.6-r6
+
+[Diff](/../../compare/1.5.6-r5...1.5.6-r6)
+
+### Security updated
+
+- [Alpine Linux] 3.19.1: <https://github.com/docker-library/official-images/commit/a5a02e00e489cfaa9dc8056755cd00abe7d0f646>
 - [Debian Linux] "bookworm" 20240110 (12.4): <https://github.com/docker-library/official-images/commit/06237a1cf18ad130b442a864854804c1a534ff29>
 
 
