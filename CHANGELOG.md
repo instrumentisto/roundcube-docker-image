@@ -6,10 +6,14 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## [1.6.6-r1] · 2024-??-?? (unreleased)
-[1.6.6-r1]: /../../tree/1.6.6-r1
+## [1.6.7-r0] · 2024-05-20
+[1.6.7-r0]: /../../tree/1.6.7-r0
 
-[Diff](/../../compare/1.6.6-r1...)
+[Diff](/../../compare/1.6.6-r1...1.6.7-r0)
+
+### Upgraded
+
+- [Roundcube] 1.6.7: <https://github.com/roundcube/roundcubemail/releases/tag/1.6.7>
 
 ### Security updated
 
