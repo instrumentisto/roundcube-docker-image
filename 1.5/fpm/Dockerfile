@@ -5,7 +5,7 @@
 FROM php:8.2-fpm-alpine3.20
 
 ARG roundcube_ver=1.5.7
-ARG s6_overlay_ver=3.1.6.2
+ARG s6_overlay_ver=3.2.0.0
 
 
 # Install s6-overlay
@@ -19,7 +19,8 @@ RUN curl -fL -o /tmp/s6-overlay-noarch.tar.xz \
 
 ENV S6_KEEP_ENV=1 \
     S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
-    S6_CMD_WAIT_FOR_SERVICES=1
+    S6_CMD_WAIT_FOR_SERVICES=1 \
+    S6_CMD_WAIT_FOR_SERVICES_MAXTIME=5000
 
 
 # Install required libraries and PHP extensions
