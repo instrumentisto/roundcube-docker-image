@@ -13,7 +13,7 @@ All user visible changes to this project will be documented in this file. This p
 
 ### Security updated
 
-- [Debian Linux] "bookworm" 20240701 (12.6): <https://github.com/docker-library/official-images/commit/6ad90d9eb2949d40e88fce34944ccd97752674c8>
+- [Debian Linux] "bookworm" 20240722 (12.6): <https://github.com/docker-library/official-images/commit/62a03fd2a8fd79c245b11fb01e3e9d1be4214566>
 
 
 
@@ -25,7 +25,7 @@ All user visible changes to this project will be documented in this file. This p
 
 ### Security updated
 
-- [Debian Linux] "bookworm" 20240701 (12.6): <https://github.com/docker-library/official-images/commit/6ad90d9eb2949d40e88fce34944ccd97752674c8>
+- [Debian Linux] "bookworm" 20240722 (12.6): <https://github.com/docker-library/official-images/commit/62a03fd2a8fd79c245b11fb01e3e9d1be4214566>
 
 
 
