@@ -6,25 +6,27 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## [1.6.7-r3] · 2024-??-?? (unreleased)
-[1.6.7-r3]: /../../tree/1.6.7-r3
+## [1.6.7-r4] · 2024-07-26
+[1.6.7-r4]: /../../tree/1.6.7-r4
 
-[Diff](/../../compare/1.6.7-r3...)
+[Diff](/../../compare/1.6.7-r3...1.6.7-r4)
 
 ### Security updated
 
+- [Alpine Linux] 3.20.2: <https://github.com/docker-library/official-images/commit/1a994d381a873e6f9579843dd1eebf64bc50e831>
 - [Debian Linux] "bookworm" 20240722 (12.6): <https://github.com/docker-library/official-images/commit/62a03fd2a8fd79c245b11fb01e3e9d1be4214566>
 
 
 
 
-## [1.5.7-r3] · 2024-??-?? (unreleased)
-[1.5.7-r3]: /../../tree/1.5.7-r3
+## [1.5.7-r4] · 2024-07-26
+[1.5.7-r4]: /../../tree/1.5.7-r4
 
-[Diff](/../../compare/1.5.7-r3...)
+[Diff](/../../compare/1.5.7-r3...1.5.7-r4)
 
 ### Security updated
 
+- [Alpine Linux] 3.20.2: <https://github.com/docker-library/official-images/commit/1a994d381a873e6f9579843dd1eebf64bc50e831>
 - [Debian Linux] "bookworm" 20240722 (12.6): <https://github.com/docker-library/official-images/commit/62a03fd2a8fd79c245b11fb01e3e9d1be4214566>
 
 
