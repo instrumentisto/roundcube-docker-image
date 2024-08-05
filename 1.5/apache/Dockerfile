@@ -4,7 +4,7 @@
 # https://hub.docker.com/_/php
 FROM php:8.2-apache
 
-ARG roundcube_ver=1.5.7
+ARG roundcube_ver=1.5.8
 ARG s6_overlay_ver=3.2.0.0
 
 
