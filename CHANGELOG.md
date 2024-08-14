@@ -6,6 +6,30 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## [1.6.8-r0] · 2024-??-?? (unreleased)
+[1.6.8-r0]: /../../tree/1.6.8-r0
+
+[Diff](/../../compare/1.6.8-r0...)
+
+### Security updated
+
+- [Debian Linux] "bookworm" 20240812 (12.6): <https://github.com/docker-library/official-images/commit/f0ae0a0c3e07d839cc496db825bc171f88739e8e>
+
+
+
+
+## [1.5.8-r0] · 2024-??-?? (unreleased)
+[1.5.8-r0]: /../../tree/1.5.8-r0
+
+[Diff](/../../compare/1.5.8-r0...)
+
+### Security updated
+
+- [Debian Linux] "bookworm" 20240812 (12.6): <https://github.com/docker-library/official-images/commit/f0ae0a0c3e07d839cc496db825bc171f88739e8e>
+
+
+
+
 ## [1.6.8-r0] · 2024-08-05
 [1.6.8-r0]: /../../tree/1.6.8-r0
 
