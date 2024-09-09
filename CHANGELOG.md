@@ -6,25 +6,27 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## [1.6.9-r0] · 2024-??-?? (unreleased)
-[1.6.9-r0]: /../../tree/1.6.9-r0
+## [1.6.9-r1] · 2024-09-09
+[1.6.9-r1]: /../../tree/1.6.9-r1
 
-[Diff](/../../compare/1.6.9-r0...)
+[Diff](/../../compare/1.6.9-r0...1.6.9-r1)
 
 ### Security updated
 
+- [Alpine Linux] 3.20.3: <https://github.com/docker-library/official-images/commit/94a433c3550a63993b4d7a2081ae87dfe1f7f6bf>
 - [Debian Linux] "bookworm" 20240904 (12.7): <https://github.com/docker-library/official-images/commit/c8fa319f742b43465f60dda8d67cdc8d66eb615d>
 
 
 
 
-## [1.5.9-r0] · 2024-??-?? (unreleased)
-[1.5.9-r0]: /../../tree/1.5.9-r0
+## [1.5.9-r1] · 2024-09-09
+[1.5.9-r1]: /../../tree/1.5.9-r1
 
-[Diff](/../../compare/1.5.9-r0...)
+[Diff](/../../compare/1.5.9-r0...1.5.9-r1)
 
 ### Security updated
 
+- [Alpine Linux] 3.20.3: <https://github.com/docker-library/official-images/commit/94a433c3550a63993b4d7a2081ae87dfe1f7f6bf>
 - [Debian Linux] "bookworm" 20240904 (12.7): <https://github.com/docker-library/official-images/commit/c8fa319f742b43465f60dda8d67cdc8d66eb615d>
 
 
