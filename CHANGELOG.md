@@ -6,10 +6,14 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## [main] · (unreleased)
-[main]: /../../tree/main
+## [1.6.9-r3] · 2024-12-11
+[1.6.9-r3]: /../../tree/1.6.9-r3
 
-[Diff](/../../compare/1.6.9-r2...main)
+[Diff](/../../compare/1.6.9-r2...1.6.9-r3)
+
+### Upgraded
+
+- [Alpine Linux] 3.21: <https://www.alpinelinux.org/posts/Alpine-3.21.0-released.html>
 
 ### Security updated
 
@@ -18,10 +22,14 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## [main] · (unreleased)
-[main]: /../../tree/main
+## [1.5.9-r2] · 2024-12-11
+[1.5.9-r2]: /../../tree/1.5.9-r2
 
-[Diff](/../../compare/1.5.9-r2...main)
+[Diff](/../../compare/1.5.9-r2...1.5.9-r2)
+
+### Upgraded
+
+- [Alpine Linux] 3.21: <https://www.alpinelinux.org/posts/Alpine-3.21.0-released.html>
 
 ### Security updated
 
