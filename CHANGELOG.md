@@ -6,7 +6,7 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## [1.6.9-r3] · 2024-12-11
+## [1.6.9-r3] · 2024-12-12
 [1.6.9-r3]: /../../tree/1.6.9-r3
 
 [Diff](/../../compare/1.6.9-r2...1.6.9-r3)
@@ -22,10 +22,10 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## [1.5.9-r2] · 2024-12-11
-[1.5.9-r2]: /../../tree/1.5.9-r2
+## [1.5.9-r3] · 2024-12-12
+[1.5.9-r3]: /../../tree/1.5.9-r3
 
-[Diff](/../../compare/1.5.9-r2...1.5.9-r2)
+[Diff](/../../compare/1.5.9-r2...1.5.9-r3)
 
 ### Upgraded
 
