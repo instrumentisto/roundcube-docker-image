@@ -9,7 +9,7 @@ All user visible changes to this project will be documented in this file. This p
 ## [main] · unreleased
 [main]: /../../tree/main
 
-[Diff](/../../compare/1.6.9-r5...main)
+[Diff](/../../compare/1.5.9-r5...main)
 
 ### Security updated
 
@@ -18,10 +18,14 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## [main] · unreleased
-[main]: /../../tree/main
+## [1.6.10-r0] · 2025-02-10
+[1.6.10-r0]: /../../tree/1.6.10-r0
 
-[Diff](/../../compare/1.5.9-r5...main)
+[Diff](/../../compare/1.6.9-r5...1.6.10-r0)
+
+### Upgraded
+
+- [Roundcube] 1.6.10: <https://github.com/roundcube/roundcubemail/releases/tag/1.6.10>
 
 ### Security updated
 
