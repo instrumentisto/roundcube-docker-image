@@ -2,7 +2,7 @@ Roundcube Webmail Docker image
 ==============================
 
 [![Release](https://img.shields.io/github/v/release/instrumentisto/roundcube-docker-image "Release")](https://github.com/instrumentisto/roundcube-docker-image/releases)
-[![CI](https://github.com/instrumentisto/roundcube-docker-image/workflows/CI/badge.svg?branch=main "CI")](https://github.com/instrumentisto/roundcube-docker-image/actions?query=workflow%3ACI+branch%3Amain)
+[![CI](https://github.com/instrumentisto/roundcube-docker-image/actions/workflows/ci.yml/badge.svg?branch=main "CI")](https://github.com/instrumentisto/roundcube-docker-image/actions?query=workflow%3ACI+branch%3Amain)
 [![Docker Hub](https://img.shields.io/docker/pulls/instrumentisto/roundcube?label=Docker%20Hub%20pulls "Docker Hub pulls")](https://hub.docker.com/r/instrumentisto/roundcube)
 [![Uses](https://img.shields.io/badge/uses-s6--overlay-blue.svg "Uses s6-overlay")](https://github.com/just-containers/s6-overlay)
 
@@ -17,10 +17,10 @@ Roundcube Webmail Docker image
 
 ## Supported tags and respective `Dockerfile` links
 
-- [`1.6.10-r0-apache`, `1.6.10-apache`, `1.6-apache`, `1-apache`, `apache`, `latest`][101]
-- [`1.6.10-r0-fpm`, `1.6.10-fpm`, `1.6-fpm`, `1-fpm`, `fpm`][102]
-- [`1.5.9-r5-apache`, `1.5.9-apache`, `1.5-apache`][103]
-- [`1.5.9-r5-fpm`, `1.5.9-fpm`, `1.5-fpm`][104]
+- [`1.6.10-r1-apache`, `1.6.10-apache`, `1.6-apache`, `1-apache`, `apache`, `latest`][101]
+- [`1.6.10-r1-fpm`, `1.6.10-fpm`, `1.6-fpm`, `1-fpm`, `fpm`][102]
+- [`1.5.9-r6-apache`, `1.5.9-apache`, `1.5-apache`][103]
+- [`1.5.9-r6-fpm`, `1.5.9-fpm`, `1.5-fpm`][104]
 
 
 
