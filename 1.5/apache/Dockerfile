@@ -5,7 +5,7 @@
 FROM php:8.2-apache
 
 ARG roundcube_ver=1.5.9
-ARG s6_overlay_ver=3.2.0.2
+ARG s6_overlay_ver=3.2.0.3
 
 
 # Install s6-overlay
