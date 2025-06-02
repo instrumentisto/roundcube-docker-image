@@ -6,9 +6,14 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## main
+## [1.6.10-r4] · 2025-06-02
+[1.6.10-r4]: /../../tree/1.6.10-r4
 
-[Diff](/../../compare/1.6.10-r3...main)
+[Diff](/../../compare/1.6.10-r3...1.6.10-r4)
+
+### Upgraded
+
+- [Alpine Linux] 3.22: <https://www.alpinelinux.org/posts/Alpine-3.22.0-released.html>
 
 ### Security updated
 
@@ -17,9 +22,14 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## main
+## [1.5.9-r9] · 2025-06-02
+[1.5.9-r9]: /../../tree/1.5.9-r9
 
-[Diff](/../../compare/1.5.9-r8...main)
+[Diff](/../../compare/1.5.9-r8...1.5.9-r9)
+
+### Upgraded
+
+- [Alpine Linux] 3.22: <https://www.alpinelinux.org/posts/Alpine-3.22.0-released.html>
 
 ### Security updated
 
