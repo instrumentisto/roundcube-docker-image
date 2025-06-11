@@ -4,7 +4,7 @@
 # https://hub.docker.com/_/php
 FROM php:8.2-fpm-alpine3.22
 
-ARG roundcube_ver=1.5.9
+ARG roundcube_ver=1.5.10
 ARG s6_overlay_ver=3.2.1.0
 
 
