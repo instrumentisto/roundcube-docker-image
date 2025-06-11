@@ -6,7 +6,7 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## [1.6.10-r4] · 2025-06-02
+## [1.6.10-r4] · unreleased
 [1.6.10-r4]: /../../tree/1.6.10-r4
 
 [Diff](/../../compare/1.6.10-r3...1.6.10-r4)
@@ -17,12 +17,12 @@ All user visible changes to this project will be documented in this file. This p
 
 ### Security updated
 
-- [Debian Linux] "bookworm" 20250520 (12.11): <https://github.com/docker-library/official-images/commit/6d7afdaec5dec1a0b4021b4e470853c3e9fba2bc>
+- [Debian Linux] "bookworm" 20250610 (12.11): <https://github.com/docker-library/official-images/commit/5b9d8958f88a1485f8edcaed4800fcfaac500b28>
 
 
 
 
-## [1.5.9-r9] · 2025-06-02
+## [1.5.9-r9] · unreleased
 [1.5.9-r9]: /../../tree/1.5.9-r9
 
 [Diff](/../../compare/1.5.9-r8...1.5.9-r9)
@@ -33,7 +33,7 @@ All user visible changes to this project will be documented in this file. This p
 
 ### Security updated
 
-- [Debian Linux] "bookworm" 20250520 (12.11): <https://github.com/docker-library/official-images/commit/6d7afdaec5dec1a0b4021b4e470853c3e9fba2bc>
+- [Debian Linux] "bookworm" 20250610 (12.11): <https://github.com/docker-library/official-images/commit/5b9d8958f88a1485f8edcaed4800fcfaac500b28>
 
 
 
