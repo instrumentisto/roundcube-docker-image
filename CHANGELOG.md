@@ -6,13 +6,14 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## [1.6.10-r4] · unreleased
-[1.6.10-r4]: /../../tree/1.6.10-r4
+## [1.6.11-r0] · 2025-06-11
+[1.6.11-r0]: /../../tree/1.6.11-r0
 
-[Diff](/../../compare/1.6.10-r3...1.6.10-r4)
+[Diff](/../../compare/1.6.10-r3...1.6.11-r0)
 
 ### Upgraded
 
+- [Roundcube] 1.6.11: <https://github.com/roundcube/roundcubemail/releases/tag/1.6.11>
 - [Alpine Linux] 3.22: <https://www.alpinelinux.org/posts/Alpine-3.22.0-released.html>
 
 ### Security updated
