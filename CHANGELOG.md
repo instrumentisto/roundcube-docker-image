@@ -6,6 +6,28 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## main
+
+[Diff](/../../compare/1.5.11-r0...main)
+
+### Security updated
+
+- [Debian Linux] "bookworm" 20250630 (12.11): <https://github.com/docker-library/official-images/commit/2568150630c10253d352ff0695b0dc73717230c1>
+
+
+
+
+## main
+
+[Diff](/../../compare/1.6.11-r0...main)
+
+### Security updated
+
+- [Debian Linux] "bookworm" 20250630 (12.11): <https://github.com/docker-library/official-images/commit/2568150630c10253d352ff0695b0dc73717230c1>
+
+
+
+
 ## [1.5.11-r0] · 2025-06-16
 [1.5.11-r0]: /../../tree/1.5.11-r0
 
