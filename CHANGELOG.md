@@ -6,24 +6,26 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## main
+## [1.6.11-r2] · 2025-08-13
+[1.6.11-r2]: /../../tree/1.6.11-r2
 
-[Diff](/../../compare/1.6.11-r1...main)
+[Diff](/../../compare/1.6.11-r1...1.6.11-r2)
 
-### Security updated
+### Upgraded
 
-- [Debian Linux] "bookworm" 20250811 (12.11): <https://github.com/docker-library/official-images/commit/9104ff62fc7a735b9646379f7b3246ab471fbae4>
-
-
+- [Debian Linux] "trixie": <https://www.debian.org/releases/trixie>
 
 
-## main
 
-[Diff](/../../compare/1.5.11-r1...main)
 
-### Security updated
+## [1.5.11-r2] · 2025-08-13
+[1.5.11-r2]: /../../tree/1.5.11-r2
 
-- [Debian Linux] "bookworm" 20250811 (12.11): <https://github.com/docker-library/official-images/commit/9104ff62fc7a735b9646379f7b3246ab471fbae4>
+[Diff](/../../compare/1.5.11-r1...1.5.11-r2)
+
+### Upgraded
+
+- [Debian Linux] "trixie": <https://www.debian.org/releases/trixie>
 
 
 

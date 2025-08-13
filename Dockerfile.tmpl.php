@@ -49,12 +49,12 @@ RUN apk update \
             inetutils-syslogd \
             gnupg \
  && apt-get install -y --no-install-recommends --no-install-suggests \
-            libpq5 libodbc1 libsybdb5 \
+            libpq5 libodbc2 libsybdb5 \
             libaspell15 \
-            libicu72 \
-            libldap-2.5-0 libsasl2-2 \
+            libicu76 \
+            libldap2 libsasl2-2 \
             libjpeg62-turbo libpng16-16 libfreetype6 \
-            libzip4 \
+            libzip5 \
 <? } else { ?>
  && apk add --no-cache --virtual .plugin-deps \
         gnupg \
