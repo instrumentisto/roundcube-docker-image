@@ -6,6 +6,28 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## main
+
+[Diff](/../../compare/1.6.11-r2...main)
+
+### Security updated
+
+- [Debian Linux] "trixie" 20250908 (13.1): <https://github.com/docker-library/official-images/commit/4c4536fafd07865578a0f2feab95a683eba7fa37>
+
+
+
+
+## main
+
+[Diff](/../../compare/1.5.11-r2...main)
+
+### Security updated
+
+- [Debian Linux] "trixie" 20250908 (13.1): <https://github.com/docker-library/official-images/commit/4c4536fafd07865578a0f2feab95a683eba7fa37>
+
+
+
+
 ## [1.6.11-r2] · 2025-08-13
 [1.6.11-r2]: /../../tree/1.6.11-r2
 
