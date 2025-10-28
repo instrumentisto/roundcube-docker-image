@@ -94,7 +94,7 @@ jobs:
       - uses: actions/checkout@v5
       - run: make npm.install
 
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v6
         with:
           name: ${{ matrix.dist }}-${{ matrix.ver }}-${{ github.run_number }}
           path: .cache/
@@ -149,7 +149,7 @@ jobs:
           text: ${{ github.repository }}
           regex: '^${{ github.repository_owner }}/(.+)-docker-image$'
 
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v6
         with:
           name: ${{ matrix.dist }}-${{ steps.semver.outputs.group2 }}-${{ github.run_number }}
           path: .cache/
