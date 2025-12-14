@@ -17,9 +17,14 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## main
+## [1.5.12-r0] · 2025-12-14
+[1.5.12-r0]: /../../tree/1.5.12-r0
 
-[Diff](/../../compare/1.5.11-r4...main)
+[Diff](/../../compare/1.5.11-r4...1.5.12-r0)
+
+### Upgraded
+
+- [Roundcube] 1.5.12: <https://github.com/roundcube/roundcubemail/releases/tag/1.5.12>
 
 ### Security updated
 

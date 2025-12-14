@@ -25,8 +25,8 @@ REGISTRIES := $(strip $(subst $(comma), ,\
 ALL_IMAGES := \
 	1.6/apache:1.6.11-r4-apache,1.6.11-apache,1.6-apache,1-apache,apache,latest \
 	1.6/fpm:1.6.11-r4-fpm,1.6.11-fpm,1.6-fpm,1-fpm,fpm \
-	1.5/apache:1.5.11-r4-apache,1.5.11-apache,1.5-apache \
-	1.5/fpm:1.5.11-r4-fpm,1.5.11-fpm,1.5-fpm
+	1.5/apache:1.5.12-r0-apache,1.5.12-apache,1.5-apache \
+	1.5/fpm:1.5.12-r0-fpm,1.5.12-fpm,1.5-fpm
 #	<Dockerfile>:<version>,<tag1>,<tag2>,...
 
 # Default is first image from ALL_IMAGES list.
