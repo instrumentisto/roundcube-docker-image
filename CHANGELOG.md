@@ -6,9 +6,14 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## main
+## [1.6.12-r2] · 2026-01-25
+[1.6.12-r2]: /../../tree/1.6.12-r2
 
-[Diff](/../../compare/1.6.12-r1...main)
+[Diff](/../../compare/1.6.12-r1...1.6.12-r2)
+
+### Upgraded
+
+- [s6-overlay] 3.2.2.0: <https://github.com/just-containers/s6-overlay/releases/tag/v3.2.2.0>
 
 ### Security updated
 
@@ -17,9 +22,14 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## main
+## [1.5.12-r2] · 2026-01-25
+[1.5.12-r2]: /../../tree/1.5.12-r2
 
-[Diff](/../../compare/1.5.12-r1...main)
+[Diff](/../../compare/1.5.12-r1...1.5.12-r2)
+
+### Upgraded
+
+- [s6-overlay] 3.2.2.0: <https://github.com/just-containers/s6-overlay/releases/tag/v3.2.2.0>
 
 ### Security updated
 
