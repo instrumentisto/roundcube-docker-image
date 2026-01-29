@@ -103,7 +103,9 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
  # Resolve Roundcube Composer dependencies
  && mv /app/composer.json-dist /app/composer.json \
  && cd /app/ \
- && (/tmp/composer suggests --list | xargs -i /tmp/composer require {}) \
+ && (/tmp/composer suggests --list \
+     | xargs -i /tmp/composer require --no-update {}) \
+ && /tmp/composer remove --dev --no-update phpunit/phpunit \
  && /tmp/composer install --no-dev --optimize-autoloader --no-progress \
     \
  # Resolve Roundcube JS dependencies
