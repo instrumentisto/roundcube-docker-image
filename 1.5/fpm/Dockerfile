@@ -4,7 +4,7 @@
 # https://hub.docker.com/_/php
 FROM php:8.2-fpm-alpine3.23
 
-ARG roundcube_ver=1.5.12
+ARG roundcube_ver=1.5.13
 ARG s6_overlay_ver=3.2.2.0
 
 
@@ -92,7 +92,6 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
  && cd /app/ \
  && (/tmp/composer suggests --list \
      | xargs -i /tmp/composer require --no-update {}) \
- && /tmp/composer remove --dev --no-update phpunit/phpunit \
  && /tmp/composer install --no-dev --optimize-autoloader --no-progress \
     \
  # Resolve Roundcube JS dependencies

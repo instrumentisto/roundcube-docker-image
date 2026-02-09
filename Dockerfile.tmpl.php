@@ -170,8 +170,6 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
 <? if ($isMinorVerGt5) { ?>
  && /tmp/composer require --no-update roundcube/classic \
  && /tmp/composer require --no-update roundcube/larry \
-<? } else { ?>
- && /tmp/composer remove --dev --no-update phpunit/phpunit \
 <? } ?>
  && /tmp/composer install --no-dev --optimize-autoloader --no-progress \
     \
