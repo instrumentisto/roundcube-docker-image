@@ -166,6 +166,9 @@ RUN curl -fL -o /tmp/roundcube.tar.gz \
  && mv /app/composer.json-dist /app/composer.json \
  && cd /app/ \
  && (/tmp/composer suggests --list \
+     # TODO: Remove once `kolab/net_ldap3` package is accessible again:
+     #       https://packagist.org/packages/kolab/net_ldap3
+     | grep -v kolab \
      | xargs -i /tmp/composer require --no-update {}) \
 <? if ($isMinorVerGt5) { ?>
  && /tmp/composer require --no-update roundcube/classic \
